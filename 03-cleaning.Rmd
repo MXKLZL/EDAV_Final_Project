@@ -12,7 +12,7 @@ library(tidyverse)
 library(dplyr)
 library(lubridate)
 library(chron)
-DATA <- read.csv("~/Desktop/EDAV_Final_Project/NYPD_Complaint_Data_Current__Year_To_Date_.csv",na.strings = "")
+DATA <- read.csv("NYPD_Complaint_Data_Current__Year_To_Date_.csv",na.strings = "")
 str(DATA)
 DATA <-DATA[!is.na(DATA$CMPLNT_FR_DT), ]
 DATA$CMPLNT_FR_DT <-as.Date(DATA$CMPLNT_FR_DT,format = "%m/%d/%Y")
