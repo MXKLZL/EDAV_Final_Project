@@ -1,1 +1,50 @@
 # Data transformation
+df <- read.csv("NYPD_Complaint_Data_Current__Year_To_Date_.csv", na.strings = "")
+
+levels(df$PD_DESC)
+summary(df$OFNS_DESC)
+
+
+
+```{r}
+library(dplyr)
+library(lubridate)
+library(chron)
+DATA <- read.csv("~/Desktop/EDAV_Final_Project/NYPD_Complaint_Data_Current__Year_To_Date_.csv",na.strings = "")
+str(DATA)
+DATA <-DATA[!is.na(DATA$CMPLNT_FR_DT), ]
+DATA$CMPLNT_FR_DT <-as.Date(DATA$CMPLNT_FR_DT,format = "%m/%d/%Y")
+
+for(i in 1:nrow(DATA)){
+  if(year(DATA[i,4]) =='1018'){year(DATA[i,4]) <-2018}
+  if(year(DATA[i,4]) =='1019'){year(DATA[i,4]) <-2019}
+  if(year(DATA[i,4]) =='1029'){year(DATA[i,4]) <-2019}
+}
+
+
+
+DATA$CMPLNT_FR_TM <-as.character(DATA$CMPLNT_FR_TM)
+DATA$CMPLNT_FR_TM <-chron(times=DATA$CMPLNT_FR_TM)
+
+FDATA <- DATA %>%
+  filter(CMPLNT_FR_DT >=as.Date('2018-01-01'))
+
+
+
+
+
+parse_date_time(DATA[1,5],"HMS")
+typeof(times(DATA[1,5]))
+
+
+
+FDATA <- DATA %>%
+  filter(CMPLNT_FR_DT >=as.Date('2018-01-01'))
+
+format(df1,"%Y")
+
+```
+
+
+
+
