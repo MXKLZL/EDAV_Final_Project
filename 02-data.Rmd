@@ -1,2 +1,8 @@
 # Data sources
 
+```{r}
+library(tidyr)
+df <- read.csv("NYPD_Complaint_Data_Current__Year_To_Date_.csv", na.strings = "")
+df <- df %>% drop_na(Lat_Lon, PD_DESC)
+```
+
