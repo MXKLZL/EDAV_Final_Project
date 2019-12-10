@@ -105,3 +105,33 @@ ggplot(cleveland,aes(Freq,reorder(BORO_NM,Freq),color = OFNS_DESC))+
   theme_dotplot
 ```
 
+
+```{r}
+picked_time <- c("7am - 11am", "15pm - 19pm", "19pm - 23pm")
+df_select <- df_select %>% drop_na(BORO_NM)
+df_select <- df_select %>% mutate(timerange = CMPLNT_FR_TM)
+df_select <- df_select %>% mutate(timerange = ifelse(CMPLNT_FR_TM >= chron(times="07:00:00") 
+                                                & CMPLNT_FR_TM <= chron(times="11:00:00"),
+                                                "7am - 11am", timerange) )
+df_select <- df_select %>% mutate(timerange = ifelse(CMPLNT_FR_TM >= chron(times="15:00:00") 
+                                                & CMPLNT_FR_TM <= chron(times="19:00:00"),
+                                                "15pm - 19pm", timerange) )
+df_select <- df_select %>% mutate(timerange = ifelse(CMPLNT_FR_TM >= chron(times="19:00:00") 
+                                                & CMPLNT_FR_TM <= chron(times="23:00:00"),
+                                                "19pm - 23pm", timerange) )
+
+df_select <- df_select %>% mutate(timerange = ifelse(timerange %in% picked_time, timerange, NA)) %>% drop_na(timerange)
+
+#df_select <- df_select %>% mutate(timerange = ifelse((CMPLNT_FR_TM > chron(times="22:00:00") 
+#                                                     & CMPLNT_FR_TM <= chron(times="23:59:59")) |
+#                                                     (CMPLNT_FR_TM >= chron(times="00:00:00")
+#                                                     & CMPLNT_FR_TM <= chron(times="07:00:00")),
+#                                                "22pm - 7am", timerange) )
+```
+
+```{r, fig.height = 7, fig.width = 6}
+ggplot(df_select, aes(x=OFNS_DESC, ..count.., fill=timerange)) + 
+  geom_bar(position="dodge") + 
+  facet_wrap(~BORO_NM, ncol=2) + 
+  scale_y_continuous(trans='log2') 
+```
