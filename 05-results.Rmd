@@ -13,4 +13,10 @@ ggplot(df1, aes(x = df_select...4., y = df1$Freq)) +
 
 ```
 
+```{r}
+dangerous <-c('BURGLARY','MURDER','OFFENSE','RAPE','ROBBERY','THIEF','WEAPON')
+df_select <- df_select %>% mutate(OFNS_DESC = ifelse(OFNS_DESC %in% dangerous, OFNS_DESC, NA)) %>% drop_na(OFNS_DESC)
+```
+
+
 
