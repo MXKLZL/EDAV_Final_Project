@@ -14,9 +14,21 @@ ggplot(df1, aes(x = df_select...4., y = df1$Freq)) +
 ```
 
 ```{r}
-dangerous <-c('BURGLARY','MURDER','OFFENSE','RAPE','ROBBERY','THIEF','WEAPON')
+dangerous <-c('BURGLARY','OFFENSE','RAPE','ROBBERY','THIEF','WEAPON')
 df_select <- df_select %>% mutate(OFNS_DESC = ifelse(OFNS_DESC %in% dangerous, OFNS_DESC, NA)) %>% drop_na(OFNS_DESC)
 ```
 
+```{r}
+library(chron)
+library(ggplot2)
+df_select <- drop_na(df_select, BORO_NM)
+ggplot(df_select, aes(factor(weekdays(CMPLNT_FR_DT,abbreviate =TRUE), levels=c("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"))))+
+  geom_bar(fill="lightblue")+
+  xlab("Weekdays")+
+  ggtitle("The Number of Crime Events in Weekdays by Borough in New York City")+
+  facet_wrap("BORO_NM", scale="free")
+  
+
+```
 
 
