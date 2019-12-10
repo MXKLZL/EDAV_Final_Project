@@ -1,1 +1,16 @@
 # Results
+```{r}
+df1 <- data.frame(df_select[,4])
+df1['count'] <- 1
+df1<- df1 %>%
+  group_by(df_select...4.) %>%
+  summarize(Freq = log(sum(count),2))
+
+ggplot(df1, aes(x = df_select...4., y = df1$Freq)) +
+  geom_bar(position = "dodge",stat = "identity") +
+  coord_flip() +
+  labs(x = "Crime Types", y = "log(Total amount)", title = "Major Crimes in NYC")
+
+```
+
+
