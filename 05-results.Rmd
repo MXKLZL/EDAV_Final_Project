@@ -31,4 +31,45 @@ ggplot(df_select, aes(factor(weekdays(CMPLNT_FR_DT,abbreviate =TRUE), levels=c("
 
 ```
 
+```{r}
+df2 <- data.frame(df_select[,1:2])
+df2['count'] <- 1
+df2<- df2 %>%
+  group_by(CMPLNT_FR_DT) %>%
+  summarize(Freq = sum(count))
 
+df2 <- df2 %>%
+  filter(CMPLNT_FR_DT >=as.Date('2019-01-01'))
+
+ggplot(df2, aes(as.Date(CMPLNT_FR_DT), y = Freq)) +
+  geom_line()+ 
+  ylim(0, 900) +
+  labs(x = "Time", y = "Total amount", title = "Time series pattern in 2019")
+
+```
+
+
+
+```{r}
+library(tidyverse)
+library(ggvis)
+df2 <- data.frame(df_select[,1:2])
+df2['count'] <- 1
+
+df2 <-df2[!is.na(df2$BORO_NM), ]
+df2<- df2 %>%
+  group_by(BORO_NM,CMPLNT_FR_DT) %>%
+  summarize(Freq = sum(count))
+
+
+df2 <- df2 %>%
+  filter(CMPLNT_FR_DT >=as.Date('2019-01-01'))
+
+
+ggplot(df2, aes(as.Date(CMPLNT_FR_DT), y = Freq)) +
+  geom_line() + 
+  facet_wrap(~BORO_NM, scales="free")+
+  labs(x = "Time", y = "Total amount", title = "Time series pattern in 2019 in different boroughs")
+
+
+```
