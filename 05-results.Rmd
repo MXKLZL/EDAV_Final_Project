@@ -52,7 +52,6 @@ ggplot(df2, aes(as.Date(CMPLNT_FR_DT), y = Freq)) +
 
 ```{r}
 library(tidyverse)
-library(ggvis)
 df2 <- data.frame(df_select[,1:2])
 df2['count'] <- 1
 
@@ -73,3 +72,36 @@ ggplot(df2, aes(as.Date(CMPLNT_FR_DT), y = Freq)) +
 
 
 ```
+
+
+```{r}
+#Cleveland dot plot
+library(tidyverse)
+cleveland <-df_select[,c('BORO_NM','OFNS_DESC')]
+
+cleveland['Freq'] = 1
+
+cleveland <- cleveland %>%
+  group_by(BORO_NM,OFNS_DESC) %>%
+  summarize(Freq = log(sum(Freq),2)) %>%
+  ungroup()
+
+
+theme_dotplot <- theme_bw(14) +
+    theme(axis.text.y = element_text(size = rel(.55)),
+          axis.text.x = element_text(size = rel(.70)),
+        axis.ticks.y = element_blank(),
+        axis.title.x = element_text(size = rel(.70)),
+        axis.title.y = element_text(size = rel(.70)),
+        panel.grid.major.x = element_blank(),
+        panel.grid.major.y = element_line(size = 0.5),
+        panel.grid.minor.x = element_blank())
+
+
+
+
+ggplot(cleveland,aes(Freq,reorder(BORO_NM,Freq),color = OFNS_DESC))+
+  geom_point()+
+  theme_dotplot
+```
+
