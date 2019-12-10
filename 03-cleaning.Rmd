@@ -46,7 +46,7 @@ kidnapping <- c("KIDNAPPING", "KIDNAPPING & RELATED OFFENSES", "KIDNAPPING AND R
 picked <- c('ROBBERY', "OFFENSE", "ARSON", "BURGLARY", "DRUG", "WEAPON", "RAPE", "FRAUD", "THIEF", "MURDER", "KIDNAPPING")
 df$OFNS_DESC <- as.character(df$OFNS_DESC)
 df <- df %>% mutate(OFNS_DESC = ifelse(OFNS_DESC %in% offense, "OFFENSE", OFNS_DESC))
-df <- df %>% mutate(OFNS_DESC = ifelse(OFNS_DESC %in% assult, "ASSAULT", OFNS_DESC))
+df <- df %>% mutate(OFNS_DESC = ifelse(OFNS_DESC %in% assault, "ASSAULT", OFNS_DESC))
 df <- df %>% mutate(OFNS_DESC = ifelse(OFNS_DESC %in% drug, "DRUG", OFNS_DESC))
 df <- df %>% mutate(OFNS_DESC = ifelse(OFNS_DESC %in% weapon, "WEAPON", OFNS_DESC))
 df <- df %>% mutate(OFNS_DESC = ifelse(OFNS_DESC %in% rape, "RAPE", OFNS_DESC))
