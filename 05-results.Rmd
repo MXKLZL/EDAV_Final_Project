@@ -107,12 +107,12 @@ ggplot(cleveland,aes(Freq,reorder(BORO_NM,Freq),color = OFNS_DESC))+
 
 
 ```{r}
-picked_time <- c("7am - 11am", "15pm - 19pm", "19pm - 23pm")
+picked_time <- c("07am - 11am", "15pm - 19pm", "19pm - 23pm")
 df_select <- df_select %>% drop_na(BORO_NM)
 df_select <- df_select %>% mutate(timerange = CMPLNT_FR_TM)
 df_select <- df_select %>% mutate(timerange = ifelse(CMPLNT_FR_TM >= chron(times="07:00:00") 
                                                 & CMPLNT_FR_TM <= chron(times="11:00:00"),
-                                                "7am - 11am", timerange) )
+                                                "07am - 11am", timerange) )
 df_select <- df_select %>% mutate(timerange = ifelse(CMPLNT_FR_TM >= chron(times="15:00:00") 
                                                 & CMPLNT_FR_TM <= chron(times="19:00:00"),
                                                 "15pm - 19pm", timerange) )
