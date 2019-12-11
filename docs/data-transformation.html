@@ -24,7 +24,7 @@
 <meta name="author" content="YOUR NAMES HERE" />
 
 
-<meta name="date" content="2019-12-09" />
+<meta name="date" content="2019-12-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -50,8 +50,83 @@
 
 
 
+<script src="libs/htmlwidgets-1.3/htmlwidgets.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/Proj4Leaflet-1.0.1/proj4-compressed.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.0.3/leaflet.js"></script>
+<link href="libs/leaflet-markercluster-1.0.5/MarkerCluster.css" rel="stylesheet" />
+<link href="libs/leaflet-markercluster-1.0.5/MarkerCluster.Default.css" rel="stylesheet" />
+<script src="libs/leaflet-markercluster-1.0.5/leaflet.markercluster.js"></script>
+<script src="libs/leaflet-markercluster-1.0.5/leaflet.markercluster.freezable.js"></script>
+<script src="libs/leaflet-markercluster-1.0.5/leaflet.markercluster.layersupport.js"></script>
 
 
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -76,6 +151,10 @@
 <li class="chapter" data-level="5" data-path="results.html"><a href="results.html"><i class="fa fa-check"></i><b>5</b> Results</a></li>
 <li class="chapter" data-level="6" data-path="interactive-component.html"><a href="interactive-component.html"><i class="fa fa-check"></i><b>6</b> Interactive component</a></li>
 <li class="chapter" data-level="7" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>7</b> Conclusion</a></li>
+<li class="chapter" data-level="8" data-path="leaflet.html"><a href="leaflet.html"><i class="fa fa-check"></i><b>8</b> Interactive Geographic Data</a><ul>
+<li class="chapter" data-level="8.1" data-path="leaflet.html"><a href="leaflet.html#overview"><i class="fa fa-check"></i><b>8.1</b> Overview</a></li>
+<li class="chapter" data-level="8.2" data-path="leaflet.html"><a href="leaflet.html#brief-description-about-dataset"><i class="fa fa-check"></i><b>8.2</b> Brief Description about Dataset</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 </ul>
@@ -97,6 +176,95 @@
             <section class="normal" id="section-">
 <div id="data-transformation" class="section level1">
 <h1><span class="header-section-number">Chapter 3</span> Data transformation</h1>
+<p>df &lt;- read.csv(“NYPD_Complaint_Data_Current_<em>Year_To_Date</em>.csv”, na.strings = &quot;&quot;)</p>
+<p>levels(df<span class="math inline">\(PD_DESC) summary(df\)</span>OFNS_DESC)</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">library</span>(tidyr)</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw">library</span>(tidyverse)</a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="kw">library</span>(dplyr)</a>
+<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="kw">library</span>(lubridate)</a>
+<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="kw">library</span>(chron)</a>
+<a class="sourceLine" id="cb3-6" data-line-number="6">DATA &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;NYPD_Complaint_Data_Current__Year_To_Date_.csv&quot;</span>,<span class="dt">na.strings =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="kw">str</span>(DATA)</a></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    347074 obs. of  35 variables:
+##  $ CMPLNT_NUM       : int  660160752 219394661 184671534 825219244 457673231 122768005 763747768 145250323 384835421 573837058 ...
+##  $ ADDR_PCT_CD      : int  103 40 18 48 32 67 60 68 77 105 ...
+##  $ BORO_NM          : Factor w/ 5 levels &quot;BRONX&quot;,&quot;BROOKLYN&quot;,..: 4 1 3 1 3 2 2 2 2 4 ...
+##  $ CMPLNT_FR_DT     : Factor w/ 1708 levels &quot;01/01/1965&quot;,&quot;01/01/1970&quot;,..: 1373 1373 1373 1373 1366 1366 1366 1366 1366 1366 ...
+##  $ CMPLNT_FR_TM     : Factor w/ 1440 levels &quot;00:00:00&quot;,&quot;00:01:00&quot;,..: 841 781 701 121 1231 961 1180 1131 120 71 ...
+##  $ CMPLNT_TO_DT     : Factor w/ 1131 levels &quot;01/01/1989&quot;,&quot;01/01/1996&quot;,..: 881 881 881 881 NA 871 NA 871 871 871 ...
+##  $ CMPLNT_TO_TM     : Factor w/ 1440 levels &quot;00:00:00&quot;,&quot;00:01:00&quot;,..: 842 841 706 211 NA 1081 NA 1136 252 81 ...
+##  $ CRM_ATPT_CPTD_CD : Factor w/ 2 levels &quot;ATTEMPTED&quot;,&quot;COMPLETED&quot;: 2 2 2 2 2 2 2 2 2 2 ...
+##  $ HADEVELOPT       : Factor w/ 259 levels &quot;1162-1176 WASHINGTON AVENUE&quot;,..: NA NA NA NA NA NA NA NA NA NA ...
+##  $ HOUSING_PSA      : int  NA 772 NA NA NA NA NA NA NA NA ...
+##  $ JURISDICTION_CODE: int  0 2 0 0 0 0 0 0 97 0 ...
+##  $ JURIS_DESC       : Factor w/ 18 levels &quot;AMTRACK&quot;,&quot;DEPT OF CORRECTIONS&quot;,..: 7 6 7 7 7 7 7 7 14 7 ...
+##  $ KY_CD            : int  578 114 233 104 109 341 347 578 114 344 ...
+##  $ LAW_CAT_CD       : Factor w/ 3 levels &quot;FELONY&quot;,&quot;MISDEMEANOR&quot;,..: 3 1 2 1 1 2 2 3 1 2 ...
+##  $ LOC_OF_OCCUR_DESC: Factor w/ 5 levels &quot;FRONT OF&quot;,&quot;INSIDE&quot;,..: NA 2 NA NA 1 NA NA 1 2 2 ...
+##  $ OFNS_DESC        : Factor w/ 62 levels &quot;ADMINISTRATIVE CODE&quot;,..: 25 5 57 55 23 51 28 25 5 6 ...
+##  $ PARKS_NM         : Factor w/ 568 levels &quot;\&quot;UNCLE\&quot; VITO E. MARANZANO GLENDALE PLAYGROUND&quot;,..: NA NA NA NA NA NA NA NA NA NA ...
+##  $ PATROL_BORO      : Factor w/ 8 levels &quot;PATROL BORO BKLYN NORTH&quot;,..: 7 3 5 3 4 2 2 2 1 7 ...
+##  $ PD_CD            : int  638 263 175 157 443 349 905 638 263 101 ...
+##  $ PD_DESC          : Factor w/ 346 levels &quot;A.B.C.,FALSE PROOF OF AGE&quot;,..: 113 15 303 255 171 195 126 113 15 18 ...
+##  $ PREM_TYP_DESC    : Factor w/ 74 levels &quot;ABANDONED BUILDING&quot;,..: 63 55 63 54 63 63 63 63 54 5 ...
+##  $ RPT_DT           : Factor w/ 273 levels &quot;01/01/2019&quot;,&quot;01/02/2019&quot;,..: 273 273 273 273 273 273 272 272 272 272 ...
+##  $ STATION_NAME     : Factor w/ 362 levels &quot;1 AVENUE&quot;,&quot;102 STREET&quot;,..: NA NA NA NA NA NA NA NA NA NA ...
+##  $ SUSP_AGE_GROUP   : Factor w/ 20 levels &quot;-1&quot;,&quot;-64&quot;,&quot;-80&quot;,..: 20 NA 12 20 20 NA 13 NA NA 20 ...
+##  $ SUSP_RACE        : Factor w/ 7 levels &quot;AMERICAN INDIAN/ALASKAN NATIVE&quot;,..: 6 NA 6 6 5 NA 6 NA NA 7 ...
+##  $ SUSP_SEX         : Factor w/ 3 levels &quot;F&quot;,&quot;M&quot;,&quot;U&quot;: 2 NA 2 3 3 NA 1 NA NA 2 ...
+##  $ TRANSIT_DISTRICT : int  NA NA NA NA NA NA NA NA NA NA ...
+##  $ VIC_AGE_GROUP    : Factor w/ 33 levels &quot;-2&quot;,&quot;-39&quot;,&quot;-50&quot;,..: 22 33 22 22 33 33 33 22 21 21 ...
+##  $ VIC_RACE         : Factor w/ 7 levels &quot;AMERICAN INDIAN/ALASKAN NATIVE&quot;,..: 5 5 6 6 5 5 5 6 3 7 ...
+##  $ VIC_SEX          : Factor w/ 4 levels &quot;D&quot;,&quot;E&quot;,&quot;F&quot;,&quot;M&quot;: 4 2 3 3 1 1 2 4 3 4 ...
+##  $ X_COORD_CD       : int  NA NA NA NA NA NA NA NA NA NA ...
+##  $ Y_COORD_CD       : int  NA NA NA NA NA NA NA NA NA NA ...
+##  $ Latitude         : num  NA NA NA NA NA NA NA NA NA NA ...
+##  $ Longitude        : num  NA NA NA NA NA NA NA NA NA NA ...
+##  $ Lat_Lon          : Factor w/ 14811 levels &quot;(40.499323600000025, -74.239740339)&quot;,..: NA NA NA NA NA NA NA NA NA NA ...</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">DATA &lt;-DATA[<span class="op">!</span><span class="kw">is.na</span>(DATA<span class="op">$</span>CMPLNT_FR_DT), ]</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">DATA<span class="op">$</span>CMPLNT_FR_DT &lt;-<span class="kw">as.Date</span>(DATA<span class="op">$</span>CMPLNT_FR_DT,<span class="dt">format =</span> <span class="st">&quot;%m/%d/%Y&quot;</span>)</a>
+<a class="sourceLine" id="cb5-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(DATA)){</a>
+<a class="sourceLine" id="cb5-5" data-line-number="5">  <span class="cf">if</span>(<span class="kw">year</span>(DATA[i,<span class="dv">4</span>]) <span class="op">==</span><span class="st">&#39;1018&#39;</span>){<span class="kw">year</span>(DATA[i,<span class="dv">4</span>]) &lt;-<span class="dv">2018</span>}</a>
+<a class="sourceLine" id="cb5-6" data-line-number="6">  <span class="cf">if</span>(<span class="kw">year</span>(DATA[i,<span class="dv">4</span>]) <span class="op">==</span><span class="st">&#39;1019&#39;</span>){<span class="kw">year</span>(DATA[i,<span class="dv">4</span>]) &lt;-<span class="dv">2019</span>}</a>
+<a class="sourceLine" id="cb5-7" data-line-number="7">  <span class="cf">if</span>(<span class="kw">year</span>(DATA[i,<span class="dv">4</span>]) <span class="op">==</span><span class="st">&#39;1029&#39;</span>){<span class="kw">year</span>(DATA[i,<span class="dv">4</span>]) &lt;-<span class="dv">2019</span>}</a>
+<a class="sourceLine" id="cb5-8" data-line-number="8">}</a>
+<a class="sourceLine" id="cb5-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb5-10" data-line-number="10"> </a>
+<a class="sourceLine" id="cb5-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb5-12" data-line-number="12">DATA<span class="op">$</span>CMPLNT_FR_TM &lt;-<span class="kw">as.character</span>(DATA<span class="op">$</span>CMPLNT_FR_TM)</a>
+<a class="sourceLine" id="cb5-13" data-line-number="13">DATA<span class="op">$</span>CMPLNT_FR_TM &lt;-<span class="kw">chron</span>(<span class="dt">times=</span>DATA<span class="op">$</span>CMPLNT_FR_TM)</a>
+<a class="sourceLine" id="cb5-14" data-line-number="14"></a>
+<a class="sourceLine" id="cb5-15" data-line-number="15">df &lt;-<span class="st"> </span>DATA <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb5-16" data-line-number="16"><span class="st">  </span><span class="kw">filter</span>(CMPLNT_FR_DT <span class="op">&gt;=</span><span class="kw">as.Date</span>(<span class="st">&#39;2018-01-01&#39;</span>))</a>
+<a class="sourceLine" id="cb5-17" data-line-number="17"></a>
+<a class="sourceLine" id="cb5-18" data-line-number="18"></a>
+<a class="sourceLine" id="cb5-19" data-line-number="19">offense &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;ANTICIPATORY OFFENSES&#39;</span>, <span class="st">&quot;OFF. AGNST PUB ORD SENSBLTY &amp;&quot;</span>, <span class="st">&quot;OFFENSES AGAINST MARRIAGE UNCL&quot;</span>, <span class="st">&quot;OFFENSES AGAINST PUBLIC ADMINI&quot;</span>, <span class="st">&quot;OFFENSES AGAINST PUBLIC SAFETY&quot;</span>, <span class="st">&quot;OFFENSES AGAINST THE PERSON&quot;</span>, <span class="st">&quot;OFFENSES INVOLVING FRAUD&quot;</span>, <span class="st">&quot;OFFENSES RELATED TO CHILDREN&quot;</span>, <span class="st">&quot;OTHER OFFENSES RELATED TO THEF&quot;</span>)</a>
+<a class="sourceLine" id="cb5-20" data-line-number="20">assault &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;ASSAULT 3 &amp; RELATED OFFENSES&#39;</span>, <span class="st">&#39;FELONY ASSAULT&#39;</span>, <span class="st">&quot;HARRASSMENT 2&quot;</span>)</a>
+<a class="sourceLine" id="cb5-21" data-line-number="21">burglary &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;BURGLARY&#39;</span>, <span class="st">&quot;BURGLAR&#39;S TOOLS&quot;</span>, <span class="st">&quot;CRIMINAL TRESPASS&quot;</span>)</a>
+<a class="sourceLine" id="cb5-22" data-line-number="22">drug &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;DANGEROUS DRUGS&quot;</span>)</a>
+<a class="sourceLine" id="cb5-23" data-line-number="23">weapon &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;DANGEROUS WEAPONS&quot;</span>, <span class="st">&quot;UNLAWFUL POSS. WEAP. ON SCHOOL&quot;</span> )</a>
+<a class="sourceLine" id="cb5-24" data-line-number="24">rape &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;FELONY SEX CRIMES&quot;</span>, <span class="st">&quot;RAPE&quot;</span>, <span class="st">&quot;SEX CRIMES&quot;</span>)</a>
+<a class="sourceLine" id="cb5-25" data-line-number="25">fraud &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;FRAUDS&quot;</span>, <span class="st">&quot;FORGERY&quot;</span>, <span class="st">&quot;FRAUDULENT ACCOSTING&quot;</span>, <span class="st">&quot;THEFT-FRAUD&quot;</span>)</a>
+<a class="sourceLine" id="cb5-26" data-line-number="26">thief &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;GRAND LARCENY&quot;</span>, <span class="st">&quot;GRAND LARCENY OF MOTOR VEHICLE&quot;</span>, <span class="st">&quot;OTHER OFFENSES RELATED TO THEF&quot;</span>, <span class="st">&quot;PETIT LARCENY&quot;</span>, <span class="st">&quot;PETIT LARCENY OF MOTOR VEHICLE&quot;</span>, <span class="st">&quot;POSSESSION OF STOLEN PROPERTY&quot;</span>, <span class="st">&quot;THEFT OF SERVICES&quot;</span>)</a>
+<a class="sourceLine" id="cb5-27" data-line-number="27">murder &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;MURDER &amp; NON-NEGL. MANSLAUGHTER&quot;</span>)</a>
+<a class="sourceLine" id="cb5-28" data-line-number="28">kidnapping &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;KIDNAPPING&quot;</span>, <span class="st">&quot;KIDNAPPING &amp; RELATED OFFENSES&quot;</span>, <span class="st">&quot;KIDNAPPING AND RELATED OFFENSES&quot;</span>)</a>
+<a class="sourceLine" id="cb5-29" data-line-number="29"></a>
+<a class="sourceLine" id="cb5-30" data-line-number="30">picked &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;ROBBERY&#39;</span>, <span class="st">&quot;OFFENSE&quot;</span>, <span class="st">&quot;ARSON&quot;</span>, <span class="st">&quot;BURGLARY&quot;</span>, <span class="st">&quot;DRUG&quot;</span>, <span class="st">&quot;WEAPON&quot;</span>, <span class="st">&quot;RAPE&quot;</span>, <span class="st">&quot;FRAUD&quot;</span>, <span class="st">&quot;THIEF&quot;</span>, <span class="st">&quot;MURDER&quot;</span>, <span class="st">&quot;KIDNAPPING&quot;</span>)</a>
+<a class="sourceLine" id="cb5-31" data-line-number="31">df<span class="op">$</span>OFNS_DESC &lt;-<span class="st"> </span><span class="kw">as.character</span>(df<span class="op">$</span>OFNS_DESC)</a>
+<a class="sourceLine" id="cb5-32" data-line-number="32">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">OFNS_DESC =</span> <span class="kw">ifelse</span>(OFNS_DESC <span class="op">%in%</span><span class="st"> </span>offense, <span class="st">&quot;OFFENSE&quot;</span>, OFNS_DESC))</a>
+<a class="sourceLine" id="cb5-33" data-line-number="33">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">OFNS_DESC =</span> <span class="kw">ifelse</span>(OFNS_DESC <span class="op">%in%</span><span class="st"> </span>assault, <span class="st">&quot;ASSAULT&quot;</span>, OFNS_DESC))</a>
+<a class="sourceLine" id="cb5-34" data-line-number="34">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">OFNS_DESC =</span> <span class="kw">ifelse</span>(OFNS_DESC <span class="op">%in%</span><span class="st"> </span>drug, <span class="st">&quot;DRUG&quot;</span>, OFNS_DESC))</a>
+<a class="sourceLine" id="cb5-35" data-line-number="35">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">OFNS_DESC =</span> <span class="kw">ifelse</span>(OFNS_DESC <span class="op">%in%</span><span class="st"> </span>weapon, <span class="st">&quot;WEAPON&quot;</span>, OFNS_DESC))</a>
+<a class="sourceLine" id="cb5-36" data-line-number="36">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">OFNS_DESC =</span> <span class="kw">ifelse</span>(OFNS_DESC <span class="op">%in%</span><span class="st"> </span>rape, <span class="st">&quot;RAPE&quot;</span>, OFNS_DESC))</a>
+<a class="sourceLine" id="cb5-37" data-line-number="37">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">OFNS_DESC =</span> <span class="kw">ifelse</span>(OFNS_DESC <span class="op">%in%</span><span class="st"> </span>fraud, <span class="st">&quot;FRAUD&quot;</span>, OFNS_DESC))</a>
+<a class="sourceLine" id="cb5-38" data-line-number="38">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">OFNS_DESC =</span> <span class="kw">ifelse</span>(OFNS_DESC <span class="op">%in%</span><span class="st"> </span>thief, <span class="st">&quot;THIEF&quot;</span>, OFNS_DESC))</a>
+<a class="sourceLine" id="cb5-39" data-line-number="39">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">OFNS_DESC =</span> <span class="kw">ifelse</span>(OFNS_DESC <span class="op">%in%</span><span class="st"> </span>murder, <span class="st">&quot;MURDER&quot;</span>, OFNS_DESC))</a>
+<a class="sourceLine" id="cb5-40" data-line-number="40">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">OFNS_DESC =</span> <span class="kw">ifelse</span>(OFNS_DESC <span class="op">%in%</span><span class="st"> </span>kidnapping, <span class="st">&quot;KIDNAPPING&quot;</span>, OFNS_DESC))</a>
+<a class="sourceLine" id="cb5-41" data-line-number="41"></a>
+<a class="sourceLine" id="cb5-42" data-line-number="42">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">OFNS_DESC =</span> <span class="kw">ifelse</span>(OFNS_DESC <span class="op">%in%</span><span class="st"> </span>picked, OFNS_DESC, <span class="ot">NA</span>)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">drop_na</span>(OFNS_DESC)</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">cols &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;BORO_NM&#39;</span>, <span class="st">&#39;CMPLNT_FR_DT&#39;</span>,<span class="st">&#39;CMPLNT_FR_TM&#39;</span>,<span class="st">&#39;OFNS_DESC&#39;</span>, <span class="st">&#39;SUSP_AGE_GROUP&#39;</span>, <span class="st">&#39;PREM_TYP_DESC&#39;</span>, <span class="st">&#39;SUSP_AGE_GROUP&#39;</span>, <span class="st">&#39;SUSP_SEX&#39;</span>, <span class="st">&#39;SUSP_RACE&#39;</span>, <span class="st">&#39;VIC_AGE_GROUP&#39;</span>, <span class="st">&#39;VIC_RACE&#39;</span>, <span class="st">&#39;VIC_SEX&#39;</span>, <span class="st">&#39;Latitude&#39;</span>, <span class="st">&#39;Longitude&#39;</span>)</a>
+<a class="sourceLine" id="cb6-2" data-line-number="2">df_select &lt;-<span class="st"> </span>df[, cols]</a></code></pre></div>
 
 </div>
             </section>
@@ -155,6 +323,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>
