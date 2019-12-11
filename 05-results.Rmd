@@ -223,6 +223,14 @@ for(i in 1:length(dangerous)){
 df_select <- df_select %>% mutate(timerange = ifelse(timerange %in% picked_time, timerange, NA)) %>% drop_na(timerange)
 ```
 
+As a student, we rent a place because we need to goto school or job. So it is very important to aviod the places that have a higher chance of crime when we are walking to school, or coming back to home. Therefore, we have broken down the the time that the crime happened into the ranges that we cared about the most. Which are the following:
+
+1. 7am - 11am (the time when we go to school or work)
+2. 15pm - 19pm (the time we go back to home )
+3. 19pm - 23pm (the time we go back to home when we have night class)
+
+So we have created an interactive spatial map so that the user could explore the area and avoid the location that are dangerous at those time period. 
+
 ```{r, fig.height = 7, fig.width = 6}
 ggplot(df_select, aes(x=OFNS_DESC, ..count.., fill=timerange)) + 
   geom_bar(position="dodge") + 
