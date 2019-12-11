@@ -12,142 +12,22 @@ df1 <- data.frame(df_select[,4])
 df1['count'] <- 1
 df1<- df1 %>%
   group_by(df_select...4.) %>%
-  summarize(Freq = log(sum(count),2))
+  summarize(Freq = sum(count))
 
-ggplot(df1, aes(x = df_select...4., y = df1$Freq)) +
-  geom_bar(position = "dodge",stat = "identity") +
+ggplot(df1, aes(reorder(df_select...4.,df1$Freq), y = df1$Freq)) +
+  geom_bar(position = "dodge",stat = "identity",fill="lightblue") +
+  scale_y_continuous(trans='log2')+
   coord_flip() +
-  labs(x = "Crime Types", y = "log(Total amount)", title = "Major Crimes in NYC")
+  labs(x = "Crime Types", y = "Total amount", title = "Major Crimes in NYC")
 
 ```
 
 ```{r}
 dangerous <-c('BURGLARY','OFFENSE','RAPE','ROBBERY','THIEF','WEAPON')
 df_select <- df_select %>% mutate(OFNS_DESC = ifelse(OFNS_DESC %in% dangerous, OFNS_DESC, NA)) %>% drop_na(OFNS_DESC)
-```
-
-```{r}
-library(chron)
-library(ggplot2)
 df_select <- drop_na(df_select, BORO_NM)
-ggplot(df_select, aes(factor(weekdays(CMPLNT_FR_DT,abbreviate =TRUE), levels=c("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"))))+
-  geom_bar(fill="lightblue")+
-  xlab("Weekdays")+
-  ggtitle("The Number of Crime Events in Weekdays by Borough in New York City")+
-  facet_wrap("BORO_NM", scale="free")
-  
 
 ```
-
-```{r}
-df2 <- data.frame(df_select[,1:2])
-df2['count'] <- 1
-df2<- df2 %>%
-  group_by(CMPLNT_FR_DT) %>%
-  summarize(Freq = sum(count))
-
-df2 <- df2 %>%
-  filter(CMPLNT_FR_DT >=as.Date('2019-01-01'))
-
-ggplot(df2, aes(as.Date(CMPLNT_FR_DT), y = Freq)) +
-  geom_line()+ 
-  ylim(0, 900) +
-  labs(x = "Time", y = "Total amount", title = "Time series pattern in 2019")
-
-```
-
-
-
-```{r}
-library(tidyverse)
-df2 <- data.frame(df_select[,1:2])
-df2['count'] <- 1
-
-df2 <-df2[!is.na(df2$BORO_NM), ]
-df2<- df2 %>%
-  group_by(BORO_NM,CMPLNT_FR_DT) %>%
-  summarize(Freq = sum(count))
-
-
-df2 <- df2 %>%
-  filter(CMPLNT_FR_DT >=as.Date('2019-01-01'))
-
-
-ggplot(df2, aes(as.Date(CMPLNT_FR_DT), y = Freq)) +
-  geom_line() + 
-  facet_wrap(~BORO_NM, scales="free")+
-  labs(x = "Time", y = "Total amount", title = "Time series pattern in 2019 in different boroughs")
-
-
-```
-
-
-```{r}
-#Cleveland dot plot
-library(tidyverse)
-cleveland <-df_select[,c('BORO_NM','OFNS_DESC')]
-
-cleveland['Freq'] = 1
-
-cleveland <- cleveland %>%
-  group_by(BORO_NM,OFNS_DESC) %>%
-  summarize(Freq = log(sum(Freq),2)) %>%
-  ungroup()
-
-
-theme_dotplot <- theme_bw(14) +
-    theme(axis.text.y = element_text(size = rel(.55)),
-          axis.text.x = element_text(size = rel(.70)),
-        axis.ticks.y = element_blank(),
-        axis.title.x = element_text(size = rel(.70)),
-        axis.title.y = element_text(size = rel(.70)),
-        panel.grid.major.x = element_blank(),
-        panel.grid.major.y = element_line(size = 0.5),
-        panel.grid.minor.x = element_blank())
-
-
-
-
-ggplot(cleveland,aes(Freq,reorder(BORO_NM,Freq),color = OFNS_DESC))+
-  geom_point()+
-  theme_dotplot
-```
-
-
-```{r}
-picked_time <- c("07am - 11am", "15pm - 19pm", "19pm - 23pm")
-df_select <- df_select %>% drop_na(BORO_NM)
-df_select <- df_select %>% mutate(timerange = CMPLNT_FR_TM)
-df_select <- df_select %>% mutate(timerange = ifelse(CMPLNT_FR_TM >= chron(times="07:00:00") 
-                                                & CMPLNT_FR_TM <= chron(times="11:00:00"),
-                                                "07am - 11am", timerange) )
-df_select <- df_select %>% mutate(timerange = ifelse(CMPLNT_FR_TM >= chron(times="15:00:00") 
-                                                & CMPLNT_FR_TM <= chron(times="19:00:00"),
-                                                "15pm - 19pm", timerange) )
-df_select <- df_select %>% mutate(timerange = ifelse(CMPLNT_FR_TM >= chron(times="19:00:00") 
-                                                & CMPLNT_FR_TM <= chron(times="23:00:00"),
-                                                "19pm - 23pm", timerange) )
-
-df_select <- df_select %>% mutate(color = timerange)
-df_select <- df_select %>% mutate( color = ifelse(timerange == picked_time[1], "red", color) )
-df_select <- df_select %>% mutate( color = ifelse(timerange == picked_time[2], "green", color) )
-df_select <- df_select %>% mutate( color = ifelse(timerange == picked_time[3], "blue", color) )
-df_select <- df_select %>% mutate(timerange = ifelse(timerange %in% picked_time, timerange, NA)) %>% drop_na(timerange)
-
-#df_select <- df_select %>% mutate(timerange = ifelse((CMPLNT_FR_TM > chron(times="22:00:00") 
-#                                                     & CMPLNT_FR_TM <= chron(times="23:59:59")) |
-#                                                     (CMPLNT_FR_TM >= chron(times="00:00:00")
-#                                                     & CMPLNT_FR_TM <= chron(times="07:00:00")),
-#                                                "22pm - 7am", timerange) )
-```
-
-```{r, fig.height = 7, fig.width = 6}
-ggplot(df_select, aes(x=OFNS_DESC, ..count.., fill=timerange)) + 
-  geom_bar(position="dodge") + 
-  facet_wrap(~BORO_NM, ncol=2) + 
-  scale_y_continuous(trans='log2') 
-```
-
 
 ```{r}
 
@@ -205,5 +85,136 @@ county_choropleth(ChorDF,
                   title = "Number of Selected Crime per 100000 Population for Five Borough",
                   legend = "Crime Rate",
                   county_zoom = nyc_county_fips$region)
+``` 
+
+
+```{r}
+
+library(chron)
+library(ggplot2)
+ggplot(df_select, aes(factor(weekdays(CMPLNT_FR_DT,abbreviate =TRUE), levels=c("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"))))+
+  geom_bar(fill="lightblue")+
+  xlab("Weekdays")+
+  ggtitle("The Number of Crime Events in Weekdays by Borough in New York City")+
+  facet_wrap("BORO_NM", scale="free")
+  
+
 ```
+
+```{r}
+df2 <- data.frame(df_select[,1:2])
+df2['count'] <- 1
+df2<- df2 %>%
+  group_by(CMPLNT_FR_DT) %>%
+  summarize(Freq = sum(count))
+
+df2 <- df2 %>%
+  filter(CMPLNT_FR_DT >=as.Date('2019-01-01'))
+
+ggplot(df2, aes(as.Date(CMPLNT_FR_DT), y = Freq)) +
+  geom_line(color="orange")+ 
+  ylim(0, 900) +
+  labs(x = "Time", y = "Total amount", title = "Time series pattern in 2019")
+
+```
+
+
+
+```{r fig.height = 5, fig.width = 5}
+library(tidyverse)
+df2 <- data.frame(df_select[,1:2])
+df2['count'] <- 1
+
+df2 <-df2[!is.na(df2$BORO_NM), ]
+df2<- df2 %>%
+  group_by(BORO_NM,CMPLNT_FR_DT) %>%
+  summarize(Freq = sum(count))
+
+
+df2 <- df2 %>%
+  filter(CMPLNT_FR_DT >=as.Date('2019-01-01'))
+
+
+ggplot(df2, aes(as.Date(CMPLNT_FR_DT), y = Freq)) +
+  geom_line(color="orange") + 
+  facet_wrap(~BORO_NM, scales="free_y",ncol = 2)+
+  labs(x = "Time", y = "Total amount", title = "Time series pattern in 2019 in different boroughs")
+
+
+```
+
+
+```{r}
+#Cleveland dot plot
+library(tidyverse)
+cleveland <-df_select[,c('BORO_NM','OFNS_DESC')]
+
+cleveland['Freq'] = 1
+
+cleveland <- cleveland %>%
+  group_by(BORO_NM,OFNS_DESC) %>%
+  summarize(Freq = log(sum(Freq),2)) %>%
+  ungroup()
+
+
+theme_dotplot <- theme_bw(14) +
+    theme(axis.text.y = element_text(size = rel(.55)),
+          axis.text.x = element_text(size = rel(.70)),
+        axis.ticks.y = element_blank(),
+        axis.title.x = element_text(size = rel(.70)),
+        axis.title.y = element_text(size = rel(.70)),
+        panel.grid.major.x = element_blank(),
+        panel.grid.major.y = element_line(size = 0.5),
+        panel.grid.minor.x = element_blank())
+
+
+
+
+ggplot(cleveland,aes(Freq,fct_reorder2(BORO_NM,
+   OFNS_DESC == 'THIEF',Freq, .desc = FALSE),color = OFNS_DESC))+
+  geom_point()+
+  ylab('Boroughs')+
+  xlab('Crime Rate')+
+  labs(title = 'Crime rate for each type by Boroughs ',color = "Crime Type")+
+  theme_dotplot
+```
+
+
+```{r}
+picked_time <- c("07am - 11am", "15pm - 19pm", "19pm - 23pm")
+df_select <- df_select %>% drop_na(BORO_NM)
+df_select <- df_select %>% mutate(timerange = CMPLNT_FR_TM)
+df_select <- df_select %>% mutate(timerange = ifelse(CMPLNT_FR_TM >= chron(times="07:00:00") 
+                                                & CMPLNT_FR_TM <= chron(times="11:00:00"),
+                                                "07am - 11am", timerange) )
+df_select <- df_select %>% mutate(timerange = ifelse(CMPLNT_FR_TM >= chron(times="15:00:00") 
+                                                & CMPLNT_FR_TM <= chron(times="19:00:00"),
+                                                "15pm - 19pm", timerange) )
+df_select <- df_select %>% mutate(timerange = ifelse(CMPLNT_FR_TM >= chron(times="19:00:00") 
+                                                & CMPLNT_FR_TM <= chron(times="23:00:00"),
+                                                "19pm - 23pm", timerange) )
+
+df_select <- df_select %>% mutate(color = timerange)
+df_select <- df_select %>% mutate( color = ifelse(timerange == picked_time[1], "red", color) )
+df_select <- df_select %>% mutate( color = ifelse(timerange == picked_time[2], "green", color) )
+df_select <- df_select %>% mutate( color = ifelse(timerange == picked_time[3], "blue", color) )
+df_select <- df_select %>% mutate(timerange = ifelse(timerange %in% picked_time, timerange, NA)) %>% drop_na(timerange)
+
+#df_select <- df_select %>% mutate(timerange = ifelse((CMPLNT_FR_TM > chron(times="22:00:00") 
+#                                                     & CMPLNT_FR_TM <= chron(times="23:59:59")) |
+#                                                     (CMPLNT_FR_TM >= chron(times="00:00:00")
+#                                                     & CMPLNT_FR_TM <= chron(times="07:00:00")),
+#                                                "22pm - 7am", timerange) )
+```
+
+```{r, fig.height = 7, fig.width = 6}
+ggplot(df_select, aes(x=OFNS_DESC, ..count.., fill=timerange)) + 
+  geom_bar(position="dodge") + 
+  facet_wrap(~BORO_NM, ncol=2,scales="free_x") + 
+  scale_y_continuous(trans='log2') 
+```
+
+
+
+
 
