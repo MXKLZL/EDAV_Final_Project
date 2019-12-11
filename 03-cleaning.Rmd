@@ -58,6 +58,12 @@ df_select <- df[, cols]
 ```
 
 ```{r}
+dangerous <-c('BURGLARY','OFFENSE','RAPE','ROBBERY','THIEF','WEAPON')
+df_select <- df_select %>% mutate(OFNS_DESC = ifelse(OFNS_DESC %in% dangerous, OFNS_DESC, NA)) %>% drop_na(OFNS_DESC)
+df_select <- drop_na(df_select, BORO_NM)
+```
+
+```{r}
 picked_time <- c("07am - 11am", "15pm - 19pm", "19pm - 23pm")
 crime_color <- c("#7851a9", "#800020", "#ef5927", "#0079c1", "#dac751", "#133a30")
 
@@ -84,10 +90,4 @@ for(i in 1:length(dangerous)){
 }
 
 df_select <- df_select %>% mutate(timerange = ifelse(timerange %in% picked_time, timerange, NA)) %>% drop_na(timerange)
-```
-
-```{r}
-dangerous <-c('BURGLARY','OFFENSE','RAPE','ROBBERY','THIEF','WEAPON')
-df_select <- df_select %>% mutate(OFNS_DESC = ifelse(OFNS_DESC %in% dangerous, OFNS_DESC, NA)) %>% drop_na(OFNS_DESC)
-df_select <- drop_na(df_select, BORO_NM)
 ```
