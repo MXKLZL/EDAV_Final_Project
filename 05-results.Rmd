@@ -221,11 +221,18 @@ ggplot(df_age, aes(VIC_AGE_GROUP))+
 
 ```{r}
 df_age2<-subset(df_age, as.character(VIC_AGE_GROUP)=="18-24")
-df_age2$BORO_NM <- fct_infreq(df_age2$BORO_NM)
-ggplot(df_age2, aes(BORO_NM))+
-  geom_bar(fill="lightblue")+
+#df_age2 <- df_age2$VIC_AGE_GROUP
+df_age2 <-df_age2%>%
+  group_by(df_age2$BORO_NM) %>%
+  summarise(count=n())%>%
+  ungroup()
+names(df_age2)[1] <- "Borough"
+df_age2$count <- df_age2$count/ChorDF$Population*100000
+names(df_age2)[2] <- "Rate"
+ggplot(df_age2, aes(x=reorder(Borough, -Rate), y=Rate))+
+  geom_bar(stat = "identity",fill="lightblue")+
   xlab("Boroughs")+
-  ggtitle("The Distribution of Victims in 18-24 Age Group by Borough in New York City")
+  ggtitle("The Number of Victims per 100000 People in 18-24 Age Group by Borough in New York City")
 ```
 
 ```{r}
