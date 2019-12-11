@@ -167,9 +167,6 @@ theme_dotplot <- theme_bw(14) +
         panel.grid.major.y = element_line(size = 0.5),
         panel.grid.minor.x = element_blank())
 
-
-
-
 ggplot(cleveland,aes(Freq,fct_reorder2(BORO_NM,
    OFNS_DESC == 'THIEF',Freq, .desc = FALSE),color = OFNS_DESC))+
   geom_point()+
@@ -182,6 +179,8 @@ ggplot(cleveland,aes(Freq,fct_reorder2(BORO_NM,
 
 ```{r}
 picked_time <- c("07am - 11am", "15pm - 19pm", "19pm - 23pm")
+crime_color <- c("#7851a9", "#800020", "#ef5927", "#0079c1", "#dac751", "#133a30")
+
 df_select <- df_select %>% drop_na(BORO_NM)
 df_select <- df_select %>% mutate(timerange = CMPLNT_FR_TM)
 df_select <- df_select %>% mutate(timerange = ifelse(CMPLNT_FR_TM >= chron(times="07:00:00") 
@@ -198,6 +197,12 @@ df_select <- df_select %>% mutate(color = timerange)
 df_select <- df_select %>% mutate( color = ifelse(timerange == picked_time[1], "red", color) )
 df_select <- df_select %>% mutate( color = ifelse(timerange == picked_time[2], "green", color) )
 df_select <- df_select %>% mutate( color = ifelse(timerange == picked_time[3], "blue", color) )
+
+df_select <- df_select %>% mutate(crimecolor = OFNS_DESC)
+for(i in 1:length(dangerous)){
+  df_select <- df_select %>% mutate( crimecolor = ifelse(OFNS_DESC == dangerous[i], crime_color[i], crimecolor) )   
+}
+
 df_select <- df_select %>% mutate(timerange = ifelse(timerange %in% picked_time, timerange, NA)) %>% drop_na(timerange)
 
 #df_select <- df_select %>% mutate(timerange = ifelse((CMPLNT_FR_TM > chron(times="22:00:00") 
@@ -254,8 +259,6 @@ ggplot(df_race, aes(x = OFNS_DESC, y = Freq))+
   theme(axis.text.x=element_text(size=6))+
   labs(x = "Crime Types", y = "log(Total amount)", title = "Major Crimes faced by different races in NYC")
 ```
-
-
 
 
 
