@@ -3,34 +3,5 @@
 ```{r}
 library(tidyr)
 library(tidyverse)
-df <- read.csv("NYPD_Complaint_Data_Current__Year_To_Date_.csv", na.strings = "")
-df <- df %>% drop_na(Lat_Lon, PD_DESC)
+DATA <- read.csv("NYPD_Complaint_Data_Current__Year_To_Date_.csv", na.strings = "")
 ```
-
-```{r}
-offense <- c('ANTICIPATORY OFFENSES', "OFF. AGNST PUB ORD SENSBLTY &", "OFFENSES AGAINST MARRIAGE UNCL", "OFFENSES AGAINST PUBLIC ADMINI", "OFFENSES AGAINST PUBLIC SAFETY", "OFFENSES AGAINST THE PERSON", "OFFENSES INVOLVING FRAUD", "OFFENSES RELATED TO CHILDREN", "OTHER OFFENSES RELATED TO THEF")
-assult <- c('ASSAULT 3 & RELATED OFFENSES', 'FELONY ASSAULT', "HARRASSMENT 2")
-burglary <- c('BURGLARY', "BURGLAR'S TOOLS", "CRIMINAL TRESPASS")
-drug <- c("DANGEROUS DRUGS")
-weapon <- c("DANGEROUS WEAPONS", "UNLAWFUL POSS. WEAP. ON SCHOOL" )
-rape <- c("FELONY SEX CRIMES", "RAPE", "SEX CRIMES")
-fraud <- c("FRAUDS", "FORGERY", "FRAUDULENT ACCOSTING", "THEFT-FRAUD")
-thief <- c("GRAND LARCENY", "GRAND LARCENY OF MOTOR VEHICLE", "OTHER OFFENSES RELATED TO THEF", "PETIT LARCENY", "PETIT LARCENY OF MOTOR VEHICLE", "POSSESSION OF STOLEN PROPERTY", "THEFT OF SERVICES")
-murder <- c("MURDER & NON-NEGL. MANSLAUGHTER")
-kidnapping <- c("KIDNAPPING", "KIDNAPPING & RELATED OFFENSES", "KIDNAPPING AND RELATED OFFENSES")
-
-picked <- c('ROBBERY', "OFFENSE", "ARSON", "BURGLARY", "DRUG", "WEAPON", "RAPE", "FRAUD", "THIEF", "MURDER", "KIDNAPPING")
-df$OFNS_DESC <- as.character(df$OFNS_DESC)
-df <- df %>% mutate(OFNS_DESC = ifelse(OFNS_DESC %in% offense, "OFFENSE", OFNS_DESC))
-df <- df %>% mutate(OFNS_DESC = ifelse(OFNS_DESC %in% assult, "ASSAULT", OFNS_DESC))
-df <- df %>% mutate(OFNS_DESC = ifelse(OFNS_DESC %in% drug, "DRUG", OFNS_DESC))
-df <- df %>% mutate(OFNS_DESC = ifelse(OFNS_DESC %in% weapon, "WEAPON", OFNS_DESC))
-df <- df %>% mutate(OFNS_DESC = ifelse(OFNS_DESC %in% rape, "RAPE", OFNS_DESC))
-df <- df %>% mutate(OFNS_DESC = ifelse(OFNS_DESC %in% fraud, "FRAUD", OFNS_DESC))
-df <- df %>% mutate(OFNS_DESC = ifelse(OFNS_DESC %in% thief, "THIEF", OFNS_DESC))
-df <- df %>% mutate(OFNS_DESC = ifelse(OFNS_DESC %in% murder, "MURDER", OFNS_DESC))
-df <- df %>% mutate(OFNS_DESC = ifelse(OFNS_DESC %in% kidnapping, "KIDNAPPING", OFNS_DESC))
-
-df <- df %>% mutate(OFNS_DESC = ifelse(OFNS_DESC %in% picked, OFNS_DESC, NA)) %>% drop_na(OFNS_DESC)
-```
-

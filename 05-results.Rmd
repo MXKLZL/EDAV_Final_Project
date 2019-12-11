@@ -5,6 +5,8 @@ library(choroplethrMaps)
 library(choroplethr)
 library(ggplot2)
 library(viridis)
+library(chron)
+library(tidyverse)
 ```
 
 ```{r}
@@ -26,7 +28,6 @@ ggplot(df1, aes(reorder(df_select...4.,df1$Freq), y = df1$Freq)) +
 dangerous <-c('BURGLARY','OFFENSE','RAPE','ROBBERY','THIEF','WEAPON')
 df_select <- df_select %>% mutate(OFNS_DESC = ifelse(OFNS_DESC %in% dangerous, OFNS_DESC, NA)) %>% drop_na(OFNS_DESC)
 df_select <- drop_na(df_select, BORO_NM)
-
 ```
 
 ```{r}
@@ -89,7 +90,6 @@ county_choropleth(ChorDF,
 
 
 ```{r}
-
 library(chron)
 library(ggplot2)
 ggplot(df_select, aes(factor(weekdays(CMPLNT_FR_DT,abbreviate =TRUE), levels=c("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"))))+
@@ -97,8 +97,6 @@ ggplot(df_select, aes(factor(weekdays(CMPLNT_FR_DT,abbreviate =TRUE), levels=c("
   xlab("Weekdays")+
   ggtitle("The Number of Crime Events in Weekdays by Borough in New York City")+
   facet_wrap("BORO_NM", scale="free")
-  
-
 ```
 
 ```{r}
@@ -115,13 +113,12 @@ ggplot(df2, aes(as.Date(CMPLNT_FR_DT), y = Freq)) +
   geom_line(color="orange")+ 
   ylim(0, 900) +
   labs(x = "Time", y = "Total amount", title = "Time series pattern in 2019")
-
 ```
 
 
 
 ```{r fig.height = 5, fig.width = 5}
-library(tidyverse)
+
 df2 <- data.frame(df_select[,1:2])
 df2['count'] <- 1
 
@@ -134,11 +131,20 @@ df2<- df2 %>%
 df2 <- df2 %>%
   filter(CMPLNT_FR_DT >=as.Date('2019-01-01'))
 
+df2["adjusted"] <- 0
+df3 <- data.frame(df2)
+DA <- data.frame(DATA2)
+DA$Population <-as.numeric((gsub("\\,", "", DA$Population)))
 
-ggplot(df2, aes(as.Date(CMPLNT_FR_DT), y = Freq)) +
+for(i in 1:1365){
+  states <- df3[i,1]
+  df3[i,'adjusted']<-100000*df3[i,3]/DA[states,"Population"]
+}
+
+ggplot(df3, aes(as.Date(CMPLNT_FR_DT), y = Freq)) +
   geom_line(color="orange") + 
   facet_wrap(~BORO_NM, scales="free_y",ncol = 2)+
-  labs(x = "Time", y = "Total amount", title = "Time series pattern in 2019 in different boroughs")
+  labs(x = "Time", y = "Crime Rate", title = "Time series pattern in 2019 in different boroughs")
 
 
 ```
@@ -204,12 +210,6 @@ for(i in 1:length(dangerous)){
 }
 
 df_select <- df_select %>% mutate(timerange = ifelse(timerange %in% picked_time, timerange, NA)) %>% drop_na(timerange)
-
-#df_select <- df_select %>% mutate(timerange = ifelse((CMPLNT_FR_TM > chron(times="22:00:00") 
-#                                                     & CMPLNT_FR_TM <= chron(times="23:59:59")) |
-#                                                     (CMPLNT_FR_TM >= chron(times="00:00:00")
-#                                                     & CMPLNT_FR_TM <= chron(times="07:00:00")),
-#                                                "22pm - 7am", timerange) )
 ```
 
 ```{r, fig.height = 7, fig.width = 6}
@@ -218,8 +218,6 @@ ggplot(df_select, aes(x=OFNS_DESC, ..count.., fill=timerange)) +
   facet_wrap(~BORO_NM, ncol=2,scales="free_x") + 
   scale_y_continuous(trans='log2') 
 ```
-
-
 
 
 
@@ -278,13 +276,21 @@ df_race['count'] <- 1
 
 df_race<- df_race %>%
   group_by(VIC_RACE,BORO_NM) %>%
-  summarize(Freq = log(sum(count)))
+  summarize(Freq = sum(count))
+
+df_race['adjusted'] <- 1
+df_race <- data.frame(df_race)
+
+for(i in 1:30){
+  state <- df_race[i,2]
+  df_race[i,'adjusted']<-100000*df3[i,3]/DA[state,"Population"]
+}
 
 
-ggplot(df_race, aes(x = BORO_NM, y = Freq))+
+ggplot(df_race, aes(x = BORO_NM, y = adjusted))+
   geom_bar(position = "dodge",stat = "identity",fill="lightblue") +
   facet_wrap(~VIC_RACE, scales="free", nrow = 3)+
   theme(axis.text.x=element_text(size=6))+
-  labs(x = "Crime Types", y = "log(Total amount)", title = "Major Crimes faced by different races in NYC")
+  labs(x = "Crime Types", y = "Crime Rate", title = "Crimes faced by different races in different Boroughs")
 ```
 
