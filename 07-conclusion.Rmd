@@ -129,3 +129,192 @@ leaf %>%
 
 ```
 
+
+
+
+
+```{r}
+
+df <- df_select %>% drop_na(Latitude, Longitude)
+
+map <- leaflet(df) %>% 
+  addTiles() %>% 
+  addCircles(~Longitude, ~Latitude, 10, group=~OFNS_DESC, color=~crime_color, opacity=1, label =  ~OFNS_DESC) %>% 
+  addLayersControl(
+    overlayGroups= c('BURGLARY'), 
+    options = layersControlOptions(collapsed = FALSE),
+    
+  )
+map
+```
+
+
+
+
+```{r}
+TYPE <- split(df, df$OFNS_DESC)
+
+leaftype <- leaflet() %>% addTiles()
+
+
+#paste (~VIC_AGE_GROUP, sep = " ", collapse = NULL)
+
+#TYPE[[1]]$VIC_AGE_GROUP
+#cat('a','b',sep = '\n')
+
+leaftype <- leaftype %>%
+      addMarkers(data=TYPE[[1]],
+                          lng=~Longitude, lat=~Latitude,
+                          label =~OFNS_DESC , 
+                          popup=paste(paste("Victim Age: ",TYPE[[1]]$VIC_AGE_GROUP),
+                                       paste(", Time: ",TYPE[[1]]$timerange),sep = '\n'),
+                          clusterOptions = markerClusterOptions(removeOutsideVisibleBounds = T),
+                          labelOptions = labelOptions(direction = 'auto'),
+                          group = "BURGLARY"
+                          )
+     
+leaftype <- leaftype %>%addMarkers(data=TYPE[[2]],
+                          lng=~Longitude, lat=~Latitude,
+                          label =~OFNS_DESC , 
+                          popup=paste(paste("Victim Age: ",TYPE[[2]]$VIC_AGE_GROUP),
+                                       paste(", Time: ",TYPE[[2]]$timerange),sep = '\n'),
+                          clusterOptions = markerClusterOptions(removeOutsideVisibleBounds = T),
+                          labelOptions = labelOptions(direction = 'auto'),
+                          group = "OFFENSE"
+
+                          )
+leaftype <- leaftype %>%
+     addMarkers(data=TYPE[[3]],
+                          lng=~Longitude, lat=~Latitude,
+                          label =~OFNS_DESC , 
+                          popup=paste(paste("Victim Age: ",TYPE[[3]]$VIC_AGE_GROUP),
+                                       paste(", Time: ",TYPE[[3]]$timerange),sep = '\n'),
+                          clusterOptions = markerClusterOptions(removeOutsideVisibleBounds = T),
+                          labelOptions = labelOptions(direction = 'auto'),
+                          group = "RAPE"
+                          )
+
+
+leaftype <- leaftype %>%
+     addMarkers(data=TYPE[[4]],
+                          lng=~Longitude, lat=~Latitude,
+                          label =~OFNS_DESC , 
+                          popup=paste(paste("Victim Age: ",TYPE[[4]]$VIC_AGE_GROUP),
+                                       paste(", Time: ",TYPE[[4]]$timerange),sep = '\n'),
+                          clusterOptions = markerClusterOptions(removeOutsideVisibleBounds = T),
+                          labelOptions = labelOptions(direction = 'auto'),
+                          group = "ROBBERY"
+                          )
+leaftype <- leaftype %>%
+     addMarkers(data=TYPE[[5]],
+                          lng=~Longitude, lat=~Latitude,
+                          label =~OFNS_DESC , 
+                          popup=paste(paste("Victim Age: ",TYPE[[5]]$VIC_AGE_GROUP),
+                                       paste(", Time: ",TYPE[[5]]$timerange),sep = '\n'),
+                          clusterOptions = markerClusterOptions(removeOutsideVisibleBounds = T),
+                          labelOptions = labelOptions(direction = 'auto'),
+                          group = "THIEF"
+                          )
+leaftype <- leaftype %>%
+     addMarkers(data=TYPE[[6]],
+                          lng=~Longitude, lat=~Latitude,
+                          label =~OFNS_DESC , 
+                          popup=paste(paste("Victim Age: ",TYPE[[6]]$VIC_AGE_GROUP),
+                                       paste(", Time: ",TYPE[[6]]$timerange),sep = '\n'),
+                          clusterOptions = markerClusterOptions(removeOutsideVisibleBounds = T),
+                          labelOptions = labelOptions(direction = 'auto'),
+                          group = "WEAPON"
+                          )
+
+leaftype %>%
+  addLayersControl(
+    overlayGroups = c("BURGLARY","OFFENSE","RAPE","ROBBERY","THIEF","WEAPON"),
+    options = layersControlOptions(collapsed = FALSE)
+  )
+```
+
+
+
+
+
+
+
+```{r}
+df <- df_select %>% drop_na(Latitude, Longitude)
+TYPE <- split(df, df$OFNS_DESC)
+TYPE[[1]]
+
+leaftype <- leaflet() %>% addTiles()
+
+
+#addCircles(~Longitude, ~Latitude, 10, group=~OFNS_DESC, color=~crime_color, opacity=1, label =  ~OFNS_DESC)
+
+
+leaftype <- leaftype %>%
+      addCircles(data=TYPE[[1]],
+                          lng=~Longitude, lat=~Latitude,
+                          label=~OFNS_DESC,
+                          weight = 10,
+                          opacity=1,
+                          color="red",
+                          group = "BURGLARY"
+                          )
+     
+leaftype <- leaftype %>%addCircles(data=TYPE[[2]],
+                          lng=~Longitude, lat=~Latitude,
+                          label=~OFNS_DESC,
+                          weight = 10,
+                          opacity=1,
+                          color="orange",
+                          group = "OFFENSE"
+
+                          )
+leaftype <- leaftype %>%
+     addCircles(data=TYPE[[3]],
+                          lng=~Longitude, lat=~Latitude,
+                          label=~OFNS_DESC,
+                          weight = 10,
+                          opacity=1,
+                          color="pink",
+                          group = "RAPE"
+                          )
+
+
+leaftype <- leaftype %>%
+     addCircles(data=TYPE[[4]],
+                          lng=~Longitude, lat=~Latitude,
+                          label=~OFNS_DESC,
+                          weight = 10,
+                          opacity=1,
+                          color="blue",
+                          group = "ROBBERY"
+                          )
+leaftype <- leaftype %>%
+     addCircles(data=TYPE[[5]],
+                          lng=~Longitude, lat=~Latitude,
+                          label=~OFNS_DESC,
+                          weight = 10,
+                          opacity=1,
+                          color="green",
+                          group = "THIEF"
+                          )
+leaftype <- leaftype %>%
+     addCircles(data=TYPE[[6]],
+                          lng=~Longitude, lat=~Latitude,
+                          label=~OFNS_DESC,
+                          weight = 10,
+                          opacity=1,
+                          color="white",
+                          group = "WEAPON"
+                          )
+
+leaftype %>%
+  addLayersControl(
+    overlayGroups = c("BURGLARY","OFFENSE","RAPE","ROBBERY","THIEF","WEAPON"),
+    options = layersControlOptions(collapsed = FALSE)
+  )
+```
+
+
+
+
