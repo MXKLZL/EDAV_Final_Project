@@ -21,7 +21,7 @@ library(leaflet)
 library(htmltools)
 library(leaflet.extras)
 library(viridis)
-schools <- read_csv('2016_school_explorer.csv')
+#schools <- read_csv('2016_school_explorer.csv')
 ```
 
 ```{r}
@@ -29,6 +29,7 @@ quakes
 ```
 
 ```{r}
+df <- df_select %>% drop_na(Latitude, Longitude)
 df.df <- split(df, df$timerange)
 
 l <- leaflet() %>% addTiles()

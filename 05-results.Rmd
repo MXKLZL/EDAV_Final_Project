@@ -1,5 +1,13 @@
 # Results
 ```{r}
+library(dplyr)
+library(choroplethrMaps)
+library(choroplethr)
+library(ggplot2)
+library(viridis)
+```
+
+```{r}
 df1 <- data.frame(df_select[,4])
 df1['count'] <- 1
 df1<- df1 %>%
@@ -139,3 +147,63 @@ ggplot(df_select, aes(x=OFNS_DESC, ..count.., fill=timerange)) +
   facet_wrap(~BORO_NM, ncol=2) + 
   scale_y_continuous(trans='log2') 
 ```
+
+
+```{r}
+
+DATA2 <- read.csv("QuickFacts.csv")
+
+DATA2 <-DATA2[, colSums(is.na(DATA2)) != nrow(DATA2)]
+DATA2 <-DATA2[,-c(2,8)]
+DATA2 <-as.data.frame(t(DATA2))
+names(DATA2) <- as.character(unlist(DATA2[1,]))
+DATA2 <- DATA2[-1,]
+
+DATA2 <-as.data.frame(DATA2[,1])
+
+names(DATA2)<-'Population'
+
+row.names(DATA2) <-c('MANHATTAN','BRONX','QUEENS','BROOKLYN','STATEN ISLAND')
+
+
+ChorDF <-df_select%>%
+  group_by(df_select$BORO_NM) %>%
+  summarise(count=n())%>%
+  ungroup()
+
+ChorDF <- data.frame(ChorDF[,-1], row.names = unlist(ChorDF[,1]))
+
+ChorDF <- merge(ChorDF,DATA2,by = 0)
+
+
+ChorDF$count <-as.numeric(ChorDF$count)
+
+ChorDF$Population <-as.numeric((gsub("\\,", "", ChorDF$Population)))
+
+ChorDF <-ChorDF %>%
+  mutate(rate = as.double(count/Population)*100000)
+
+ChorDF[,'region'] <- NA
+
+for(i in 1:nrow(ChorDF)){
+  if(ChorDF[i,1] == 'BRONX'){ChorDF[i,'region'] <-36005}
+  if(ChorDF[i,1] == 'BROOKLYN'){ChorDF[i,'region'] <-36047}
+  if(ChorDF[i,1] == 'MANHATTAN'){ChorDF[i,'region'] <-36061}
+  if(ChorDF[i,1] == 'QUEENS'){ChorDF[i,'region'] <-	36081}
+  if(ChorDF[i,1] == 'STATEN ISLAND'){ChorDF[i,'region'] <-36085}
+}
+
+colnames(ChorDF)[4] <-'value'
+
+
+data(county.regions)
+nyc_county_names = c("kings", "bronx", "new york", "queens", "richmond")
+nyc_county_fips = county.regions %>%
+  filter(state.name == "new york" & county.name %in% nyc_county_names) %>%
+  select(region)
+county_choropleth(ChorDF,
+                  title = "Number of Selected Crime per 100000 Population for Five Borough",
+                  legend = "Crime Rate",
+                  county_zoom = nyc_county_fips$region)
+```
+
