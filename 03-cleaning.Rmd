@@ -8,7 +8,7 @@ library(dplyr)
 library(lubridate)
 library(chron)
 DATA <- read.csv("NYPD_Complaint_Data_Current__Year_To_Date_.csv",na.strings = "")
-str(DATA)
+
 DATA <-DATA[!is.na(DATA$CMPLNT_FR_DT), ]
 DATA$CMPLNT_FR_DT <-as.Date(DATA$CMPLNT_FR_DT,format = "%m/%d/%Y")
 
@@ -53,41 +53,6 @@ df <- df %>% mutate(OFNS_DESC = ifelse(OFNS_DESC %in% picked, OFNS_DESC, NA)) %>
 ```
 
 ```{r}
-cols <- c('BORO_NM', 'CMPLNT_FR_DT','CMPLNT_FR_TM','OFNS_DESC', 'SUSP_AGE_GROUP', 'PREM_TYP_DESC', 'SUSP_AGE_GROUP', 'SUSP_SEX', 'SUSP_RACE', 'VIC_AGE_GROUP', 'VIC_RACE', 'VIC_SEX', 'Latitude', 'Longitude')
+cols <- c('BORO_NM', 'CMPLNT_FR_DT','CMPLNT_FR_TM','OFNS_DESC', 'SUSP_AGE_GROUP', 'PREM_TYP_DESC', 'SUSP_SEX', 'SUSP_RACE', 'VIC_AGE_GROUP', 'VIC_RACE', 'VIC_SEX', 'Latitude', 'Longitude')
 df_select <- df[, cols]
-```
-
-```{r}
-picked_time <- c("07am - 11am", "15pm - 19pm", "19pm - 23pm")
-crime_color <- c("#7851a9", "#800020", "#ef5927", "#0079c1", "#dac751", "#133a30")
-
-df_select <- df_select %>% drop_na(BORO_NM)
-df_select <- df_select %>% mutate(timerange = CMPLNT_FR_TM)
-df_select <- df_select %>% mutate(timerange = ifelse(CMPLNT_FR_TM >= chron(times="07:00:00") 
-                                                & CMPLNT_FR_TM <= chron(times="11:00:00"),
-                                                "07am - 11am", timerange) )
-df_select <- df_select %>% mutate(timerange = ifelse(CMPLNT_FR_TM >= chron(times="15:00:00") 
-                                                & CMPLNT_FR_TM <= chron(times="19:00:00"),
-                                                "15pm - 19pm", timerange) )
-df_select <- df_select %>% mutate(timerange = ifelse(CMPLNT_FR_TM >= chron(times="19:00:00") 
-                                                & CMPLNT_FR_TM <= chron(times="23:00:00"),
-                                                "19pm - 23pm", timerange) )
-
-df_select <- df_select %>% mutate(color = timerange)
-df_select <- df_select %>% mutate( color = ifelse(timerange == picked_time[1], "red", color) )
-df_select <- df_select %>% mutate( color = ifelse(timerange == picked_time[2], "green", color) )
-df_select <- df_select %>% mutate( color = ifelse(timerange == picked_time[3], "blue", color) )
-
-df_select <- df_select %>% mutate(crimecolor = OFNS_DESC)
-for(i in 1:length(dangerous)){
-  df_select <- df_select %>% mutate( crimecolor = ifelse(OFNS_DESC == dangerous[i], crime_color[i], crimecolor) )   
-}
-
-df_select <- df_select %>% mutate(timerange = ifelse(timerange %in% picked_time, timerange, NA)) %>% drop_na(timerange)
-```
-
-```{r}
-dangerous <-c('BURGLARY','OFFENSE','RAPE','ROBBERY','THIEF','WEAPON')
-df_select <- df_select %>% mutate(OFNS_DESC = ifelse(OFNS_DESC %in% dangerous, OFNS_DESC, NA)) %>% drop_na(OFNS_DESC)
-df_select <- drop_na(df_select, BORO_NM)
 ```
