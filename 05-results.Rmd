@@ -191,7 +191,7 @@ Therefore, we focus on other four types. It is interesting that Brooklyn have hi
 
 The bronx have second highest total crime rate and also second highest rate for all serious crime types. Therefroe both bronx and brooklyn are not good choice for student like us to choose from the safty concern. 
 
-For the staten island, the frepuency of all crime types are signifnatly lower then thoes of other four counties. From the safety concern, staten island maybe a good choice for moving to. However, the final deicison should take the transportation into account.
+For the staten island, the frepuency of all crime types are signifnatly lower then thoes of other four counties. From the safety concern, staten island maybe a good choice for moving to. However, the final deicison should take the commute time into account.
 
 
 ```{r}
