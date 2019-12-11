@@ -254,3 +254,27 @@ ggplot(df_race, aes(x = OFNS_DESC, y = Freq))+
   theme(axis.text.x=element_text(size=6))+
   labs(x = "Crime Types", y = "log(Total amount)", title = "Major Crimes faced by different races in NYC")
 ```
+
+
+
+
+
+```{r}
+df_race <-df_select[,c('BORO_NM','VIC_RACE')]
+df_race <- df_race %>%
+  filter(VIC_RACE != 'UNKNOWN')
+
+df_race['count'] <- 1
+
+df_race<- df_race %>%
+  group_by(VIC_RACE,BORO_NM) %>%
+  summarize(Freq = log(sum(count)))
+
+
+ggplot(df_race, aes(x = BORO_NM, y = Freq))+
+  geom_bar(position = "dodge",stat = "identity",fill="lightblue") +
+  facet_wrap(~VIC_RACE, scales="free", nrow = 3)+
+  theme(axis.text.x=element_text(size=6))+
+  labs(x = "Crime Types", y = "log(Total amount)", title = "Major Crimes faced by different races in NYC")
+```
+
