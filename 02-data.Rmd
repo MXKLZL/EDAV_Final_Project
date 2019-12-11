@@ -1,7 +1,24 @@
 # Data sources
 
+We got the data of crime events to be researched from NYC Open Data, and the link is as following:
+
+https://data.cityofnewyork.us/Public-Safety/NYPD-Complaint-Data-Current-Year-To-Date-/5uac-w243/data
+
+This dataset includes all valid felony, misdemeanor, and violation crimes reported to the New York City Police Department (NYPD) for all complete quarters so far this year (2019). Because we found the data in the end of October, the data is up to September, 2019. Then we downloaded the dataset as a csv file, and we also downloaded the explanation of each column name as a pdf file found from "About" in the right side of the website.
+
+The dataset is read by following code:
+
 ```{r}
 library(tidyr)
 library(tidyverse)
 DATA <- read.csv("NYPD_Complaint_Data_Current__Year_To_Date_.csv", na.strings = "")
 ```
+
+
+Another dataset is the population in each of 5 boroughs in New York City in 2018, and we downloaded it from the following link:
+
+https://www.census.gov/quickfacts/fact/table/newyorkcountymanhattanboroughnewyork,bronxcountybronxboroughnewyork,queenscountyqueensboroughnewyork,kingscountybrooklynboroughnewyork,richmondcountystatenislandboroughnewyork,newyorkcitynewyork/HSG010218
+
+Because currently we are in 2019 and there is no data of population in the end of 2019, we will use this dataset to calculate the crime rate for each borough in the later research.
+
+Dataset reading is shown in later chapter.

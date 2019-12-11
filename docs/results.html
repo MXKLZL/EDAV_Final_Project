@@ -176,258 +176,258 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="results" class="section level1">
 <h1><span class="header-section-number">Chapter 5</span> Results</h1>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw">library</span>(dplyr)</a>
-<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="kw">library</span>(choroplethrMaps)</a>
-<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="kw">library</span>(choroplethr)</a>
-<a class="sourceLine" id="cb9-4" data-line-number="4"><span class="kw">library</span>(ggplot2)</a>
-<a class="sourceLine" id="cb9-5" data-line-number="5"><span class="kw">library</span>(viridis)</a>
-<a class="sourceLine" id="cb9-6" data-line-number="6"><span class="kw">library</span>(chron)</a>
-<a class="sourceLine" id="cb9-7" data-line-number="7"><span class="kw">library</span>(tidyverse)</a></code></pre></div>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">df1 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(df_select[,<span class="dv">4</span>])</a>
-<a class="sourceLine" id="cb10-2" data-line-number="2">df1[<span class="st">&#39;count&#39;</span>] &lt;-<span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb10-3" data-line-number="3">df1&lt;-<span class="st"> </span>df1 <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb10-4" data-line-number="4"><span class="st">  </span><span class="kw">group_by</span>(df_select...<span class="fl">4.</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb10-5" data-line-number="5"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">Freq =</span> <span class="kw">sum</span>(count))</a>
-<a class="sourceLine" id="cb10-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb10-7" data-line-number="7"><span class="kw">ggplot</span>(df1, <span class="kw">aes</span>(<span class="kw">reorder</span>(df_select...<span class="fl">4.</span>,df1<span class="op">$</span>Freq), <span class="dt">y =</span> df1<span class="op">$</span>Freq)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb10-8" data-line-number="8"><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>,<span class="dt">stat =</span> <span class="st">&quot;identity&quot;</span>,<span class="dt">fill=</span><span class="st">&quot;lightblue&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb10-9" data-line-number="9"><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">trans=</span><span class="st">&#39;log2&#39;</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb10-10" data-line-number="10"><span class="st">  </span><span class="kw">coord_flip</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb10-11" data-line-number="11"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Crime Types&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Total amount&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;Major Crimes in NYC&quot;</span>)</a></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">dangerous &lt;-<span class="kw">c</span>(<span class="st">&#39;BURGLARY&#39;</span>,<span class="st">&#39;OFFENSE&#39;</span>,<span class="st">&#39;RAPE&#39;</span>,<span class="st">&#39;ROBBERY&#39;</span>,<span class="st">&#39;THIEF&#39;</span>,<span class="st">&#39;WEAPON&#39;</span>)</a>
-<a class="sourceLine" id="cb11-2" data-line-number="2">df_select &lt;-<span class="st"> </span>df_select <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">OFNS_DESC =</span> <span class="kw">ifelse</span>(OFNS_DESC <span class="op">%in%</span><span class="st"> </span>dangerous, OFNS_DESC, <span class="ot">NA</span>)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">drop_na</span>(OFNS_DESC)</a>
-<a class="sourceLine" id="cb11-3" data-line-number="3">df_select &lt;-<span class="st"> </span><span class="kw">drop_na</span>(df_select, BORO_NM)</a></code></pre></div>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">DATA2 &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;QuickFacts.csv&quot;</span>)</a>
-<a class="sourceLine" id="cb12-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb12-3" data-line-number="3">DATA2 &lt;-DATA2[, <span class="kw">colSums</span>(<span class="kw">is.na</span>(DATA2)) <span class="op">!=</span><span class="st"> </span><span class="kw">nrow</span>(DATA2)]</a>
-<a class="sourceLine" id="cb12-4" data-line-number="4">DATA2 &lt;-DATA2[,<span class="op">-</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">8</span>)]</a>
-<a class="sourceLine" id="cb12-5" data-line-number="5">DATA2 &lt;-<span class="kw">as.data.frame</span>(<span class="kw">t</span>(DATA2))</a>
-<a class="sourceLine" id="cb12-6" data-line-number="6"><span class="kw">names</span>(DATA2) &lt;-<span class="st"> </span><span class="kw">as.character</span>(<span class="kw">unlist</span>(DATA2[<span class="dv">1</span>,]))</a>
-<a class="sourceLine" id="cb12-7" data-line-number="7">DATA2 &lt;-<span class="st"> </span>DATA2[<span class="op">-</span><span class="dv">1</span>,]</a>
-<a class="sourceLine" id="cb12-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb12-9" data-line-number="9">DATA2 &lt;-<span class="kw">as.data.frame</span>(DATA2[,<span class="dv">1</span>])</a>
-<a class="sourceLine" id="cb12-10" data-line-number="10"></a>
-<a class="sourceLine" id="cb12-11" data-line-number="11"><span class="kw">names</span>(DATA2)&lt;-<span class="st">&#39;Population&#39;</span></a>
-<a class="sourceLine" id="cb12-12" data-line-number="12"></a>
-<a class="sourceLine" id="cb12-13" data-line-number="13"><span class="kw">row.names</span>(DATA2) &lt;-<span class="kw">c</span>(<span class="st">&#39;MANHATTAN&#39;</span>,<span class="st">&#39;BRONX&#39;</span>,<span class="st">&#39;QUEENS&#39;</span>,<span class="st">&#39;BROOKLYN&#39;</span>,<span class="st">&#39;STATEN ISLAND&#39;</span>)</a>
-<a class="sourceLine" id="cb12-14" data-line-number="14"></a>
-<a class="sourceLine" id="cb12-15" data-line-number="15"></a>
-<a class="sourceLine" id="cb12-16" data-line-number="16">ChorDF &lt;-df_select<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb12-17" data-line-number="17"><span class="st">  </span><span class="kw">group_by</span>(df_select<span class="op">$</span>BORO_NM) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb12-18" data-line-number="18"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">count=</span><span class="kw">n</span>())<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb12-19" data-line-number="19"><span class="st">  </span><span class="kw">ungroup</span>()</a>
-<a class="sourceLine" id="cb12-20" data-line-number="20"></a>
-<a class="sourceLine" id="cb12-21" data-line-number="21">ChorDF &lt;-<span class="st"> </span><span class="kw">data.frame</span>(ChorDF[,<span class="op">-</span><span class="dv">1</span>], <span class="dt">row.names =</span> <span class="kw">unlist</span>(ChorDF[,<span class="dv">1</span>]))</a>
-<a class="sourceLine" id="cb12-22" data-line-number="22"></a>
-<a class="sourceLine" id="cb12-23" data-line-number="23">ChorDF &lt;-<span class="st"> </span><span class="kw">merge</span>(ChorDF,DATA2,<span class="dt">by =</span> <span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb12-24" data-line-number="24"></a>
-<a class="sourceLine" id="cb12-25" data-line-number="25"></a>
-<a class="sourceLine" id="cb12-26" data-line-number="26">ChorDF<span class="op">$</span>count &lt;-<span class="kw">as.numeric</span>(ChorDF<span class="op">$</span>count)</a>
-<a class="sourceLine" id="cb12-27" data-line-number="27"></a>
-<a class="sourceLine" id="cb12-28" data-line-number="28">ChorDF<span class="op">$</span>Population &lt;-<span class="kw">as.numeric</span>((<span class="kw">gsub</span>(<span class="st">&quot;</span><span class="ch">\\</span><span class="st">,&quot;</span>, <span class="st">&quot;&quot;</span>, ChorDF<span class="op">$</span>Population)))</a>
-<a class="sourceLine" id="cb12-29" data-line-number="29"></a>
-<a class="sourceLine" id="cb12-30" data-line-number="30">ChorDF &lt;-ChorDF <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb12-31" data-line-number="31"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">rate =</span> <span class="kw">as.double</span>(count<span class="op">/</span>Population)<span class="op">*</span><span class="dv">100000</span>)</a>
-<a class="sourceLine" id="cb12-32" data-line-number="32"></a>
-<a class="sourceLine" id="cb12-33" data-line-number="33">ChorDF[,<span class="st">&#39;region&#39;</span>] &lt;-<span class="st"> </span><span class="ot">NA</span></a>
-<a class="sourceLine" id="cb12-34" data-line-number="34"></a>
-<a class="sourceLine" id="cb12-35" data-line-number="35"><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(ChorDF)){</a>
-<a class="sourceLine" id="cb12-36" data-line-number="36">  <span class="cf">if</span>(ChorDF[i,<span class="dv">1</span>] <span class="op">==</span><span class="st"> &#39;BRONX&#39;</span>){ChorDF[i,<span class="st">&#39;region&#39;</span>] &lt;-<span class="dv">36005</span>}</a>
-<a class="sourceLine" id="cb12-37" data-line-number="37">  <span class="cf">if</span>(ChorDF[i,<span class="dv">1</span>] <span class="op">==</span><span class="st"> &#39;BROOKLYN&#39;</span>){ChorDF[i,<span class="st">&#39;region&#39;</span>] &lt;-<span class="dv">36047</span>}</a>
-<a class="sourceLine" id="cb12-38" data-line-number="38">  <span class="cf">if</span>(ChorDF[i,<span class="dv">1</span>] <span class="op">==</span><span class="st"> &#39;MANHATTAN&#39;</span>){ChorDF[i,<span class="st">&#39;region&#39;</span>] &lt;-<span class="dv">36061</span>}</a>
-<a class="sourceLine" id="cb12-39" data-line-number="39">  <span class="cf">if</span>(ChorDF[i,<span class="dv">1</span>] <span class="op">==</span><span class="st"> &#39;QUEENS&#39;</span>){ChorDF[i,<span class="st">&#39;region&#39;</span>] &lt;-<span class="st"> </span><span class="dv">36081</span>}</a>
-<a class="sourceLine" id="cb12-40" data-line-number="40">  <span class="cf">if</span>(ChorDF[i,<span class="dv">1</span>] <span class="op">==</span><span class="st"> &#39;STATEN ISLAND&#39;</span>){ChorDF[i,<span class="st">&#39;region&#39;</span>] &lt;-<span class="dv">36085</span>}</a>
-<a class="sourceLine" id="cb12-41" data-line-number="41">}</a>
-<a class="sourceLine" id="cb12-42" data-line-number="42"></a>
-<a class="sourceLine" id="cb12-43" data-line-number="43"><span class="kw">colnames</span>(ChorDF)[<span class="dv">4</span>] &lt;-<span class="st">&#39;value&#39;</span></a>
-<a class="sourceLine" id="cb12-44" data-line-number="44"></a>
-<a class="sourceLine" id="cb12-45" data-line-number="45"></a>
-<a class="sourceLine" id="cb12-46" data-line-number="46"><span class="kw">data</span>(county.regions)</a>
-<a class="sourceLine" id="cb12-47" data-line-number="47">nyc_county_names =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;kings&quot;</span>, <span class="st">&quot;bronx&quot;</span>, <span class="st">&quot;new york&quot;</span>, <span class="st">&quot;queens&quot;</span>, <span class="st">&quot;richmond&quot;</span>)</a>
-<a class="sourceLine" id="cb12-48" data-line-number="48">nyc_county_fips =<span class="st"> </span>county.regions <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb12-49" data-line-number="49"><span class="st">  </span><span class="kw">filter</span>(state.name <span class="op">==</span><span class="st"> &quot;new york&quot;</span> <span class="op">&amp;</span><span class="st"> </span>county.name <span class="op">%in%</span><span class="st"> </span>nyc_county_names) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb12-50" data-line-number="50"><span class="st">  </span><span class="kw">select</span>(region)</a>
-<a class="sourceLine" id="cb12-51" data-line-number="51"><span class="kw">county_choropleth</span>(ChorDF,</a>
-<a class="sourceLine" id="cb12-52" data-line-number="52">                  <span class="dt">title =</span> <span class="st">&quot;Number of Selected Crime per 100000 Population for Five Borough&quot;</span>,</a>
-<a class="sourceLine" id="cb12-53" data-line-number="53">                  <span class="dt">legend =</span> <span class="st">&quot;Crime Rate&quot;</span>,</a>
-<a class="sourceLine" id="cb12-54" data-line-number="54">                  <span class="dt">county_zoom =</span> nyc_county_fips<span class="op">$</span>region)</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">library</span>(dplyr)</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="kw">library</span>(choroplethrMaps)</a>
+<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="kw">library</span>(choroplethr)</a>
+<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="kw">library</span>(ggplot2)</a>
+<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="kw">library</span>(viridis)</a>
+<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="kw">library</span>(chron)</a>
+<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="kw">library</span>(tidyverse)</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">df1 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(df_select[,<span class="dv">4</span>])</a>
+<a class="sourceLine" id="cb6-2" data-line-number="2">df1[<span class="st">&#39;count&#39;</span>] &lt;-<span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb6-3" data-line-number="3">df1&lt;-<span class="st"> </span>df1 <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="st">  </span><span class="kw">group_by</span>(df_select...<span class="fl">4.</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">Freq =</span> <span class="kw">sum</span>(count))</a>
+<a class="sourceLine" id="cb6-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb6-7" data-line-number="7"><span class="kw">ggplot</span>(df1, <span class="kw">aes</span>(<span class="kw">reorder</span>(df_select...<span class="fl">4.</span>,df1<span class="op">$</span>Freq), <span class="dt">y =</span> df1<span class="op">$</span>Freq)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb6-8" data-line-number="8"><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>,<span class="dt">stat =</span> <span class="st">&quot;identity&quot;</span>,<span class="dt">fill=</span><span class="st">&quot;lightblue&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb6-9" data-line-number="9"><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">trans=</span><span class="st">&#39;log2&#39;</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb6-10" data-line-number="10"><span class="st">  </span><span class="kw">coord_flip</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb6-11" data-line-number="11"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Crime Types&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Total amount&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;Major Crimes in NYC&quot;</span>)</a></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">dangerous &lt;-<span class="kw">c</span>(<span class="st">&#39;BURGLARY&#39;</span>,<span class="st">&#39;OFFENSE&#39;</span>,<span class="st">&#39;RAPE&#39;</span>,<span class="st">&#39;ROBBERY&#39;</span>,<span class="st">&#39;THIEF&#39;</span>,<span class="st">&#39;WEAPON&#39;</span>)</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2">df_select &lt;-<span class="st"> </span>df_select <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">OFNS_DESC =</span> <span class="kw">ifelse</span>(OFNS_DESC <span class="op">%in%</span><span class="st"> </span>dangerous, OFNS_DESC, <span class="ot">NA</span>)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">drop_na</span>(OFNS_DESC)</a>
+<a class="sourceLine" id="cb7-3" data-line-number="3">df_select &lt;-<span class="st"> </span><span class="kw">drop_na</span>(df_select, BORO_NM)</a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">DATA2 &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;QuickFacts.csv&quot;</span>)</a>
+<a class="sourceLine" id="cb8-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb8-3" data-line-number="3">DATA2 &lt;-DATA2[, <span class="kw">colSums</span>(<span class="kw">is.na</span>(DATA2)) <span class="op">!=</span><span class="st"> </span><span class="kw">nrow</span>(DATA2)]</a>
+<a class="sourceLine" id="cb8-4" data-line-number="4">DATA2 &lt;-DATA2[,<span class="op">-</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">8</span>)]</a>
+<a class="sourceLine" id="cb8-5" data-line-number="5">DATA2 &lt;-<span class="kw">as.data.frame</span>(<span class="kw">t</span>(DATA2))</a>
+<a class="sourceLine" id="cb8-6" data-line-number="6"><span class="kw">names</span>(DATA2) &lt;-<span class="st"> </span><span class="kw">as.character</span>(<span class="kw">unlist</span>(DATA2[<span class="dv">1</span>,]))</a>
+<a class="sourceLine" id="cb8-7" data-line-number="7">DATA2 &lt;-<span class="st"> </span>DATA2[<span class="op">-</span><span class="dv">1</span>,]</a>
+<a class="sourceLine" id="cb8-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb8-9" data-line-number="9">DATA2 &lt;-<span class="kw">as.data.frame</span>(DATA2[,<span class="dv">1</span>])</a>
+<a class="sourceLine" id="cb8-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb8-11" data-line-number="11"><span class="kw">names</span>(DATA2)&lt;-<span class="st">&#39;Population&#39;</span></a>
+<a class="sourceLine" id="cb8-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb8-13" data-line-number="13"><span class="kw">row.names</span>(DATA2) &lt;-<span class="kw">c</span>(<span class="st">&#39;MANHATTAN&#39;</span>,<span class="st">&#39;BRONX&#39;</span>,<span class="st">&#39;QUEENS&#39;</span>,<span class="st">&#39;BROOKLYN&#39;</span>,<span class="st">&#39;STATEN ISLAND&#39;</span>)</a>
+<a class="sourceLine" id="cb8-14" data-line-number="14"></a>
+<a class="sourceLine" id="cb8-15" data-line-number="15"></a>
+<a class="sourceLine" id="cb8-16" data-line-number="16">ChorDF &lt;-df_select<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb8-17" data-line-number="17"><span class="st">  </span><span class="kw">group_by</span>(df_select<span class="op">$</span>BORO_NM) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb8-18" data-line-number="18"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">count=</span><span class="kw">n</span>())<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb8-19" data-line-number="19"><span class="st">  </span><span class="kw">ungroup</span>()</a>
+<a class="sourceLine" id="cb8-20" data-line-number="20"></a>
+<a class="sourceLine" id="cb8-21" data-line-number="21">ChorDF &lt;-<span class="st"> </span><span class="kw">data.frame</span>(ChorDF[,<span class="op">-</span><span class="dv">1</span>], <span class="dt">row.names =</span> <span class="kw">unlist</span>(ChorDF[,<span class="dv">1</span>]))</a>
+<a class="sourceLine" id="cb8-22" data-line-number="22"></a>
+<a class="sourceLine" id="cb8-23" data-line-number="23">ChorDF &lt;-<span class="st"> </span><span class="kw">merge</span>(ChorDF,DATA2,<span class="dt">by =</span> <span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb8-24" data-line-number="24"></a>
+<a class="sourceLine" id="cb8-25" data-line-number="25"></a>
+<a class="sourceLine" id="cb8-26" data-line-number="26">ChorDF<span class="op">$</span>count &lt;-<span class="kw">as.numeric</span>(ChorDF<span class="op">$</span>count)</a>
+<a class="sourceLine" id="cb8-27" data-line-number="27"></a>
+<a class="sourceLine" id="cb8-28" data-line-number="28">ChorDF<span class="op">$</span>Population &lt;-<span class="kw">as.numeric</span>((<span class="kw">gsub</span>(<span class="st">&quot;</span><span class="ch">\\</span><span class="st">,&quot;</span>, <span class="st">&quot;&quot;</span>, ChorDF<span class="op">$</span>Population)))</a>
+<a class="sourceLine" id="cb8-29" data-line-number="29"></a>
+<a class="sourceLine" id="cb8-30" data-line-number="30">ChorDF &lt;-ChorDF <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb8-31" data-line-number="31"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">rate =</span> <span class="kw">as.double</span>(count<span class="op">/</span>Population)<span class="op">*</span><span class="dv">100000</span>)</a>
+<a class="sourceLine" id="cb8-32" data-line-number="32"></a>
+<a class="sourceLine" id="cb8-33" data-line-number="33">ChorDF[,<span class="st">&#39;region&#39;</span>] &lt;-<span class="st"> </span><span class="ot">NA</span></a>
+<a class="sourceLine" id="cb8-34" data-line-number="34"></a>
+<a class="sourceLine" id="cb8-35" data-line-number="35"><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(ChorDF)){</a>
+<a class="sourceLine" id="cb8-36" data-line-number="36">  <span class="cf">if</span>(ChorDF[i,<span class="dv">1</span>] <span class="op">==</span><span class="st"> &#39;BRONX&#39;</span>){ChorDF[i,<span class="st">&#39;region&#39;</span>] &lt;-<span class="dv">36005</span>}</a>
+<a class="sourceLine" id="cb8-37" data-line-number="37">  <span class="cf">if</span>(ChorDF[i,<span class="dv">1</span>] <span class="op">==</span><span class="st"> &#39;BROOKLYN&#39;</span>){ChorDF[i,<span class="st">&#39;region&#39;</span>] &lt;-<span class="dv">36047</span>}</a>
+<a class="sourceLine" id="cb8-38" data-line-number="38">  <span class="cf">if</span>(ChorDF[i,<span class="dv">1</span>] <span class="op">==</span><span class="st"> &#39;MANHATTAN&#39;</span>){ChorDF[i,<span class="st">&#39;region&#39;</span>] &lt;-<span class="dv">36061</span>}</a>
+<a class="sourceLine" id="cb8-39" data-line-number="39">  <span class="cf">if</span>(ChorDF[i,<span class="dv">1</span>] <span class="op">==</span><span class="st"> &#39;QUEENS&#39;</span>){ChorDF[i,<span class="st">&#39;region&#39;</span>] &lt;-<span class="st"> </span><span class="dv">36081</span>}</a>
+<a class="sourceLine" id="cb8-40" data-line-number="40">  <span class="cf">if</span>(ChorDF[i,<span class="dv">1</span>] <span class="op">==</span><span class="st"> &#39;STATEN ISLAND&#39;</span>){ChorDF[i,<span class="st">&#39;region&#39;</span>] &lt;-<span class="dv">36085</span>}</a>
+<a class="sourceLine" id="cb8-41" data-line-number="41">}</a>
+<a class="sourceLine" id="cb8-42" data-line-number="42"></a>
+<a class="sourceLine" id="cb8-43" data-line-number="43"><span class="kw">colnames</span>(ChorDF)[<span class="dv">4</span>] &lt;-<span class="st">&#39;value&#39;</span></a>
+<a class="sourceLine" id="cb8-44" data-line-number="44"></a>
+<a class="sourceLine" id="cb8-45" data-line-number="45"></a>
+<a class="sourceLine" id="cb8-46" data-line-number="46"><span class="kw">data</span>(county.regions)</a>
+<a class="sourceLine" id="cb8-47" data-line-number="47">nyc_county_names =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;kings&quot;</span>, <span class="st">&quot;bronx&quot;</span>, <span class="st">&quot;new york&quot;</span>, <span class="st">&quot;queens&quot;</span>, <span class="st">&quot;richmond&quot;</span>)</a>
+<a class="sourceLine" id="cb8-48" data-line-number="48">nyc_county_fips =<span class="st"> </span>county.regions <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb8-49" data-line-number="49"><span class="st">  </span><span class="kw">filter</span>(state.name <span class="op">==</span><span class="st"> &quot;new york&quot;</span> <span class="op">&amp;</span><span class="st"> </span>county.name <span class="op">%in%</span><span class="st"> </span>nyc_county_names) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb8-50" data-line-number="50"><span class="st">  </span><span class="kw">select</span>(region)</a>
+<a class="sourceLine" id="cb8-51" data-line-number="51"><span class="kw">county_choropleth</span>(ChorDF,</a>
+<a class="sourceLine" id="cb8-52" data-line-number="52">                  <span class="dt">title =</span> <span class="st">&quot;Number of Selected Crime per 100000 Population for Five Borough&quot;</span>,</a>
+<a class="sourceLine" id="cb8-53" data-line-number="53">                  <span class="dt">legend =</span> <span class="st">&quot;Crime Rate&quot;</span>,</a>
+<a class="sourceLine" id="cb8-54" data-line-number="54">                  <span class="dt">county_zoom =</span> nyc_county_fips<span class="op">$</span>region)</a></code></pre></div>
 <pre><code>## Warning in min(xx[xx &gt; upper]): no non-missing arguments to min; returning
 ## Inf</code></pre>
+<p><img src="_main_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw">library</span>(chron)</a>
+<a class="sourceLine" id="cb10-2" data-line-number="2"><span class="kw">library</span>(ggplot2)</a>
+<a class="sourceLine" id="cb10-3" data-line-number="3"><span class="kw">ggplot</span>(df_select, <span class="kw">aes</span>(<span class="kw">factor</span>(<span class="kw">weekdays</span>(CMPLNT_FR_DT,<span class="dt">abbreviate =</span><span class="ot">TRUE</span>), <span class="dt">levels=</span><span class="kw">c</span>(<span class="st">&quot;Mon&quot;</span>, <span class="st">&quot;Tue&quot;</span>, <span class="st">&quot;Wed&quot;</span>, <span class="st">&quot;Thu&quot;</span>, <span class="st">&quot;Fri&quot;</span>, <span class="st">&quot;Sat&quot;</span>, <span class="st">&quot;Sun&quot;</span>))))<span class="op">+</span></a>
+<a class="sourceLine" id="cb10-4" data-line-number="4"><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">fill=</span><span class="st">&quot;lightblue&quot;</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb10-5" data-line-number="5"><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Weekdays&quot;</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb10-6" data-line-number="6"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;The Number of Crime Events in Weekdays by Borough in New York City&quot;</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb10-7" data-line-number="7"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="st">&quot;BORO_NM&quot;</span>, <span class="dt">scale=</span><span class="st">&quot;free&quot;</span>)</a></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">df2 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(df_select[,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>])</a>
+<a class="sourceLine" id="cb11-2" data-line-number="2">df2[<span class="st">&#39;count&#39;</span>] &lt;-<span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb11-3" data-line-number="3">df2&lt;-<span class="st"> </span>df2 <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb11-4" data-line-number="4"><span class="st">  </span><span class="kw">group_by</span>(CMPLNT_FR_DT) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb11-5" data-line-number="5"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">Freq =</span> <span class="kw">sum</span>(count))</a>
+<a class="sourceLine" id="cb11-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb11-7" data-line-number="7">df2 &lt;-<span class="st"> </span>df2 <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb11-8" data-line-number="8"><span class="st">  </span><span class="kw">filter</span>(CMPLNT_FR_DT <span class="op">&gt;=</span><span class="kw">as.Date</span>(<span class="st">&#39;2019-01-01&#39;</span>))</a>
+<a class="sourceLine" id="cb11-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb11-10" data-line-number="10"><span class="kw">ggplot</span>(df2, <span class="kw">aes</span>(<span class="kw">as.Date</span>(CMPLNT_FR_DT), <span class="dt">y =</span> Freq)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb11-11" data-line-number="11"><span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">color=</span><span class="st">&quot;orange&quot;</span>)<span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb11-12" data-line-number="12"><span class="st">  </span><span class="kw">ylim</span>(<span class="dv">0</span>, <span class="dv">900</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb11-13" data-line-number="13"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Time&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Total amount&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;Time series pattern in 2019&quot;</span>)</a></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="kw">library</span>(chron)</a>
-<a class="sourceLine" id="cb14-2" data-line-number="2"><span class="kw">library</span>(ggplot2)</a>
-<a class="sourceLine" id="cb14-3" data-line-number="3"><span class="kw">ggplot</span>(df_select, <span class="kw">aes</span>(<span class="kw">factor</span>(<span class="kw">weekdays</span>(CMPLNT_FR_DT,<span class="dt">abbreviate =</span><span class="ot">TRUE</span>), <span class="dt">levels=</span><span class="kw">c</span>(<span class="st">&quot;Mon&quot;</span>, <span class="st">&quot;Tue&quot;</span>, <span class="st">&quot;Wed&quot;</span>, <span class="st">&quot;Thu&quot;</span>, <span class="st">&quot;Fri&quot;</span>, <span class="st">&quot;Sat&quot;</span>, <span class="st">&quot;Sun&quot;</span>))))<span class="op">+</span></a>
-<a class="sourceLine" id="cb14-4" data-line-number="4"><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">fill=</span><span class="st">&quot;lightblue&quot;</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb14-5" data-line-number="5"><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Weekdays&quot;</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb14-6" data-line-number="6"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;The Number of Crime Events in Weekdays by Borough in New York City&quot;</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb14-7" data-line-number="7"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="st">&quot;BORO_NM&quot;</span>, <span class="dt">scale=</span><span class="st">&quot;free&quot;</span>)</a></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1">df2 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(df_select[,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>])</a>
-<a class="sourceLine" id="cb15-2" data-line-number="2">df2[<span class="st">&#39;count&#39;</span>] &lt;-<span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb15-3" data-line-number="3">df2&lt;-<span class="st"> </span>df2 <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb15-4" data-line-number="4"><span class="st">  </span><span class="kw">group_by</span>(CMPLNT_FR_DT) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb15-5" data-line-number="5"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">Freq =</span> <span class="kw">sum</span>(count))</a>
-<a class="sourceLine" id="cb15-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb15-7" data-line-number="7">df2 &lt;-<span class="st"> </span>df2 <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb15-8" data-line-number="8"><span class="st">  </span><span class="kw">filter</span>(CMPLNT_FR_DT <span class="op">&gt;=</span><span class="kw">as.Date</span>(<span class="st">&#39;2019-01-01&#39;</span>))</a>
-<a class="sourceLine" id="cb15-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb15-10" data-line-number="10"><span class="kw">ggplot</span>(df2, <span class="kw">aes</span>(<span class="kw">as.Date</span>(CMPLNT_FR_DT), <span class="dt">y =</span> Freq)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb15-11" data-line-number="11"><span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">color=</span><span class="st">&quot;orange&quot;</span>)<span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb15-12" data-line-number="12"><span class="st">  </span><span class="kw">ylim</span>(<span class="dv">0</span>, <span class="dv">900</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb15-13" data-line-number="13"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Time&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Total amount&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;Time series pattern in 2019&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">df2 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(df_select[,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>])</a>
+<a class="sourceLine" id="cb12-2" data-line-number="2">df2[<span class="st">&#39;count&#39;</span>] &lt;-<span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb12-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb12-4" data-line-number="4">df2 &lt;-df2[<span class="op">!</span><span class="kw">is.na</span>(df2<span class="op">$</span>BORO_NM), ]</a>
+<a class="sourceLine" id="cb12-5" data-line-number="5">df2&lt;-<span class="st"> </span>df2 <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb12-6" data-line-number="6"><span class="st">  </span><span class="kw">group_by</span>(BORO_NM,CMPLNT_FR_DT) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb12-7" data-line-number="7"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">Freq =</span> <span class="kw">sum</span>(count))</a>
+<a class="sourceLine" id="cb12-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb12-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb12-10" data-line-number="10">df2 &lt;-<span class="st"> </span>df2 <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb12-11" data-line-number="11"><span class="st">  </span><span class="kw">filter</span>(CMPLNT_FR_DT <span class="op">&gt;=</span><span class="kw">as.Date</span>(<span class="st">&#39;2019-01-01&#39;</span>))</a>
+<a class="sourceLine" id="cb12-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb12-13" data-line-number="13">df2[<span class="st">&quot;adjusted&quot;</span>] &lt;-<span class="st"> </span><span class="dv">0</span></a>
+<a class="sourceLine" id="cb12-14" data-line-number="14">df3 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(df2)</a>
+<a class="sourceLine" id="cb12-15" data-line-number="15">DA &lt;-<span class="st"> </span><span class="kw">data.frame</span>(DATA2)</a>
+<a class="sourceLine" id="cb12-16" data-line-number="16">DA<span class="op">$</span>Population &lt;-<span class="kw">as.numeric</span>((<span class="kw">gsub</span>(<span class="st">&quot;</span><span class="ch">\\</span><span class="st">,&quot;</span>, <span class="st">&quot;&quot;</span>, DA<span class="op">$</span>Population)))</a>
+<a class="sourceLine" id="cb12-17" data-line-number="17"></a>
+<a class="sourceLine" id="cb12-18" data-line-number="18"><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">1365</span>){</a>
+<a class="sourceLine" id="cb12-19" data-line-number="19">  states &lt;-<span class="st"> </span>df3[i,<span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb12-20" data-line-number="20">  df3[i,<span class="st">&#39;adjusted&#39;</span>]&lt;-<span class="dv">100000</span><span class="op">*</span>df3[i,<span class="dv">3</span>]<span class="op">/</span>DA[states,<span class="st">&quot;Population&quot;</span>]</a>
+<a class="sourceLine" id="cb12-21" data-line-number="21">}</a>
+<a class="sourceLine" id="cb12-22" data-line-number="22"></a>
+<a class="sourceLine" id="cb12-23" data-line-number="23"><span class="kw">ggplot</span>(df3, <span class="kw">aes</span>(<span class="kw">as.Date</span>(CMPLNT_FR_DT), <span class="dt">y =</span> Freq)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb12-24" data-line-number="24"><span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">color=</span><span class="st">&quot;orange&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb12-25" data-line-number="25"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>BORO_NM, <span class="dt">scales=</span><span class="st">&quot;free_y&quot;</span>,<span class="dt">ncol =</span> <span class="dv">2</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb12-26" data-line-number="26"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Time&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Crime Rate&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;Time series pattern in 2019 in different boroughs&quot;</span>)</a></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-11-1.png" width="480" /></p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="co">#Cleveland dot plot</span></a>
+<a class="sourceLine" id="cb13-2" data-line-number="2"><span class="kw">library</span>(tidyverse)</a>
+<a class="sourceLine" id="cb13-3" data-line-number="3">cleveland &lt;-df_select[,<span class="kw">c</span>(<span class="st">&#39;BORO_NM&#39;</span>,<span class="st">&#39;OFNS_DESC&#39;</span>)]</a>
+<a class="sourceLine" id="cb13-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb13-5" data-line-number="5">cleveland[<span class="st">&#39;Freq&#39;</span>] =<span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb13-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb13-7" data-line-number="7">cleveland &lt;-<span class="st"> </span>cleveland <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb13-8" data-line-number="8"><span class="st">  </span><span class="kw">group_by</span>(BORO_NM,OFNS_DESC) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb13-9" data-line-number="9"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">Freq =</span> <span class="kw">log</span>(<span class="kw">sum</span>(Freq),<span class="dv">2</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb13-10" data-line-number="10"><span class="st">  </span><span class="kw">ungroup</span>()</a>
+<a class="sourceLine" id="cb13-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb13-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb13-13" data-line-number="13">theme_dotplot &lt;-<span class="st"> </span><span class="kw">theme_bw</span>(<span class="dv">14</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb13-14" data-line-number="14"><span class="st">    </span><span class="kw">theme</span>(<span class="dt">axis.text.y =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="kw">rel</span>(.<span class="dv">55</span>)),</a>
+<a class="sourceLine" id="cb13-15" data-line-number="15">          <span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="kw">rel</span>(.<span class="dv">70</span>)),</a>
+<a class="sourceLine" id="cb13-16" data-line-number="16">        <span class="dt">axis.ticks.y =</span> <span class="kw">element_blank</span>(),</a>
+<a class="sourceLine" id="cb13-17" data-line-number="17">        <span class="dt">axis.title.x =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="kw">rel</span>(.<span class="dv">70</span>)),</a>
+<a class="sourceLine" id="cb13-18" data-line-number="18">        <span class="dt">axis.title.y =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="kw">rel</span>(.<span class="dv">70</span>)),</a>
+<a class="sourceLine" id="cb13-19" data-line-number="19">        <span class="dt">panel.grid.major.x =</span> <span class="kw">element_blank</span>(),</a>
+<a class="sourceLine" id="cb13-20" data-line-number="20">        <span class="dt">panel.grid.major.y =</span> <span class="kw">element_line</span>(<span class="dt">size =</span> <span class="fl">0.5</span>),</a>
+<a class="sourceLine" id="cb13-21" data-line-number="21">        <span class="dt">panel.grid.minor.x =</span> <span class="kw">element_blank</span>())</a>
+<a class="sourceLine" id="cb13-22" data-line-number="22"></a>
+<a class="sourceLine" id="cb13-23" data-line-number="23"><span class="kw">ggplot</span>(cleveland,<span class="kw">aes</span>(Freq,<span class="kw">fct_reorder2</span>(BORO_NM,</a>
+<a class="sourceLine" id="cb13-24" data-line-number="24">   OFNS_DESC <span class="op">==</span><span class="st"> &#39;THIEF&#39;</span>,Freq, <span class="dt">.desc =</span> <span class="ot">FALSE</span>),<span class="dt">color =</span> OFNS_DESC))<span class="op">+</span></a>
+<a class="sourceLine" id="cb13-25" data-line-number="25"><span class="st">  </span><span class="kw">geom_point</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb13-26" data-line-number="26"><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&#39;Boroughs&#39;</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb13-27" data-line-number="27"><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&#39;Crime Rate&#39;</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb13-28" data-line-number="28"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&#39;Crime rate for each type by Boroughs &#39;</span>,<span class="dt">color =</span> <span class="st">&quot;Crime Type&quot;</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb13-29" data-line-number="29"><span class="st">  </span>theme_dotplot</a></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1">df2 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(df_select[,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>])</a>
-<a class="sourceLine" id="cb16-2" data-line-number="2">df2[<span class="st">&#39;count&#39;</span>] &lt;-<span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb16-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb16-4" data-line-number="4">df2 &lt;-df2[<span class="op">!</span><span class="kw">is.na</span>(df2<span class="op">$</span>BORO_NM), ]</a>
-<a class="sourceLine" id="cb16-5" data-line-number="5">df2&lt;-<span class="st"> </span>df2 <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb16-6" data-line-number="6"><span class="st">  </span><span class="kw">group_by</span>(BORO_NM,CMPLNT_FR_DT) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb16-7" data-line-number="7"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">Freq =</span> <span class="kw">sum</span>(count))</a>
-<a class="sourceLine" id="cb16-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb16-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb16-10" data-line-number="10">df2 &lt;-<span class="st"> </span>df2 <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb16-11" data-line-number="11"><span class="st">  </span><span class="kw">filter</span>(CMPLNT_FR_DT <span class="op">&gt;=</span><span class="kw">as.Date</span>(<span class="st">&#39;2019-01-01&#39;</span>))</a>
-<a class="sourceLine" id="cb16-12" data-line-number="12"></a>
-<a class="sourceLine" id="cb16-13" data-line-number="13">df2[<span class="st">&quot;adjusted&quot;</span>] &lt;-<span class="st"> </span><span class="dv">0</span></a>
-<a class="sourceLine" id="cb16-14" data-line-number="14">df3 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(df2)</a>
-<a class="sourceLine" id="cb16-15" data-line-number="15">DA &lt;-<span class="st"> </span><span class="kw">data.frame</span>(DATA2)</a>
-<a class="sourceLine" id="cb16-16" data-line-number="16">DA<span class="op">$</span>Population &lt;-<span class="kw">as.numeric</span>((<span class="kw">gsub</span>(<span class="st">&quot;</span><span class="ch">\\</span><span class="st">,&quot;</span>, <span class="st">&quot;&quot;</span>, DA<span class="op">$</span>Population)))</a>
-<a class="sourceLine" id="cb16-17" data-line-number="17"></a>
-<a class="sourceLine" id="cb16-18" data-line-number="18"><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">1365</span>){</a>
-<a class="sourceLine" id="cb16-19" data-line-number="19">  states &lt;-<span class="st"> </span>df3[i,<span class="dv">1</span>]</a>
-<a class="sourceLine" id="cb16-20" data-line-number="20">  df3[i,<span class="st">&#39;adjusted&#39;</span>]&lt;-<span class="dv">100000</span><span class="op">*</span>df3[i,<span class="dv">3</span>]<span class="op">/</span>DA[states,<span class="st">&quot;Population&quot;</span>]</a>
-<a class="sourceLine" id="cb16-21" data-line-number="21">}</a>
-<a class="sourceLine" id="cb16-22" data-line-number="22"></a>
-<a class="sourceLine" id="cb16-23" data-line-number="23"><span class="kw">ggplot</span>(df3, <span class="kw">aes</span>(<span class="kw">as.Date</span>(CMPLNT_FR_DT), <span class="dt">y =</span> Freq)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb16-24" data-line-number="24"><span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">color=</span><span class="st">&quot;orange&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb16-25" data-line-number="25"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>BORO_NM, <span class="dt">scales=</span><span class="st">&quot;free_y&quot;</span>,<span class="dt">ncol =</span> <span class="dv">2</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb16-26" data-line-number="26"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Time&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Crime Rate&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;Time series pattern in 2019 in different boroughs&quot;</span>)</a></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-13-1.png" width="480" /></p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="co">#Cleveland dot plot</span></a>
-<a class="sourceLine" id="cb17-2" data-line-number="2"><span class="kw">library</span>(tidyverse)</a>
-<a class="sourceLine" id="cb17-3" data-line-number="3">cleveland &lt;-df_select[,<span class="kw">c</span>(<span class="st">&#39;BORO_NM&#39;</span>,<span class="st">&#39;OFNS_DESC&#39;</span>)]</a>
-<a class="sourceLine" id="cb17-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb17-5" data-line-number="5">cleveland[<span class="st">&#39;Freq&#39;</span>] =<span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb17-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb17-7" data-line-number="7">cleveland &lt;-<span class="st"> </span>cleveland <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb17-8" data-line-number="8"><span class="st">  </span><span class="kw">group_by</span>(BORO_NM,OFNS_DESC) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb17-9" data-line-number="9"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">Freq =</span> <span class="kw">log</span>(<span class="kw">sum</span>(Freq),<span class="dv">2</span>)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb17-10" data-line-number="10"><span class="st">  </span><span class="kw">ungroup</span>()</a>
-<a class="sourceLine" id="cb17-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb17-12" data-line-number="12"></a>
-<a class="sourceLine" id="cb17-13" data-line-number="13">theme_dotplot &lt;-<span class="st"> </span><span class="kw">theme_bw</span>(<span class="dv">14</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb17-14" data-line-number="14"><span class="st">    </span><span class="kw">theme</span>(<span class="dt">axis.text.y =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="kw">rel</span>(.<span class="dv">55</span>)),</a>
-<a class="sourceLine" id="cb17-15" data-line-number="15">          <span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="kw">rel</span>(.<span class="dv">70</span>)),</a>
-<a class="sourceLine" id="cb17-16" data-line-number="16">        <span class="dt">axis.ticks.y =</span> <span class="kw">element_blank</span>(),</a>
-<a class="sourceLine" id="cb17-17" data-line-number="17">        <span class="dt">axis.title.x =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="kw">rel</span>(.<span class="dv">70</span>)),</a>
-<a class="sourceLine" id="cb17-18" data-line-number="18">        <span class="dt">axis.title.y =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="kw">rel</span>(.<span class="dv">70</span>)),</a>
-<a class="sourceLine" id="cb17-19" data-line-number="19">        <span class="dt">panel.grid.major.x =</span> <span class="kw">element_blank</span>(),</a>
-<a class="sourceLine" id="cb17-20" data-line-number="20">        <span class="dt">panel.grid.major.y =</span> <span class="kw">element_line</span>(<span class="dt">size =</span> <span class="fl">0.5</span>),</a>
-<a class="sourceLine" id="cb17-21" data-line-number="21">        <span class="dt">panel.grid.minor.x =</span> <span class="kw">element_blank</span>())</a>
-<a class="sourceLine" id="cb17-22" data-line-number="22"></a>
-<a class="sourceLine" id="cb17-23" data-line-number="23"><span class="kw">ggplot</span>(cleveland,<span class="kw">aes</span>(Freq,<span class="kw">fct_reorder2</span>(BORO_NM,</a>
-<a class="sourceLine" id="cb17-24" data-line-number="24">   OFNS_DESC <span class="op">==</span><span class="st"> &#39;THIEF&#39;</span>,Freq, <span class="dt">.desc =</span> <span class="ot">FALSE</span>),<span class="dt">color =</span> OFNS_DESC))<span class="op">+</span></a>
-<a class="sourceLine" id="cb17-25" data-line-number="25"><span class="st">  </span><span class="kw">geom_point</span>()<span class="op">+</span></a>
-<a class="sourceLine" id="cb17-26" data-line-number="26"><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&#39;Boroughs&#39;</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb17-27" data-line-number="27"><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&#39;Crime Rate&#39;</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb17-28" data-line-number="28"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&#39;Crime rate for each type by Boroughs &#39;</span>,<span class="dt">color =</span> <span class="st">&quot;Crime Type&quot;</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb17-29" data-line-number="29"><span class="st">  </span>theme_dotplot</a></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1">picked_time &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;07am - 11am&quot;</span>, <span class="st">&quot;15pm - 19pm&quot;</span>, <span class="st">&quot;19pm - 23pm&quot;</span>)</a>
-<a class="sourceLine" id="cb18-2" data-line-number="2">crime_color &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;#7851a9&quot;</span>, <span class="st">&quot;#800020&quot;</span>, <span class="st">&quot;#ef5927&quot;</span>, <span class="st">&quot;#0079c1&quot;</span>, <span class="st">&quot;#dac751&quot;</span>, <span class="st">&quot;#133a30&quot;</span>)</a>
-<a class="sourceLine" id="cb18-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb18-4" data-line-number="4">df_select &lt;-<span class="st"> </span>df_select <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">drop_na</span>(BORO_NM)</a>
-<a class="sourceLine" id="cb18-5" data-line-number="5">df_select &lt;-<span class="st"> </span>df_select <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">timerange =</span> CMPLNT_FR_TM)</a>
-<a class="sourceLine" id="cb18-6" data-line-number="6">df_select &lt;-<span class="st"> </span>df_select <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">timerange =</span> <span class="kw">ifelse</span>(CMPLNT_FR_TM <span class="op">&gt;=</span><span class="st"> </span><span class="kw">chron</span>(<span class="dt">times=</span><span class="st">&quot;07:00:00&quot;</span>) </a>
-<a class="sourceLine" id="cb18-7" data-line-number="7">                                                <span class="op">&amp;</span><span class="st"> </span>CMPLNT_FR_TM <span class="op">&lt;=</span><span class="st"> </span><span class="kw">chron</span>(<span class="dt">times=</span><span class="st">&quot;11:00:00&quot;</span>),</a>
-<a class="sourceLine" id="cb18-8" data-line-number="8">                                                <span class="st">&quot;07am - 11am&quot;</span>, timerange) )</a>
-<a class="sourceLine" id="cb18-9" data-line-number="9">df_select &lt;-<span class="st"> </span>df_select <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">timerange =</span> <span class="kw">ifelse</span>(CMPLNT_FR_TM <span class="op">&gt;=</span><span class="st"> </span><span class="kw">chron</span>(<span class="dt">times=</span><span class="st">&quot;15:00:00&quot;</span>) </a>
-<a class="sourceLine" id="cb18-10" data-line-number="10">                                                <span class="op">&amp;</span><span class="st"> </span>CMPLNT_FR_TM <span class="op">&lt;=</span><span class="st"> </span><span class="kw">chron</span>(<span class="dt">times=</span><span class="st">&quot;19:00:00&quot;</span>),</a>
-<a class="sourceLine" id="cb18-11" data-line-number="11">                                                <span class="st">&quot;15pm - 19pm&quot;</span>, timerange) )</a>
-<a class="sourceLine" id="cb18-12" data-line-number="12">df_select &lt;-<span class="st"> </span>df_select <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">timerange =</span> <span class="kw">ifelse</span>(CMPLNT_FR_TM <span class="op">&gt;=</span><span class="st"> </span><span class="kw">chron</span>(<span class="dt">times=</span><span class="st">&quot;19:00:00&quot;</span>) </a>
-<a class="sourceLine" id="cb18-13" data-line-number="13">                                                <span class="op">&amp;</span><span class="st"> </span>CMPLNT_FR_TM <span class="op">&lt;=</span><span class="st"> </span><span class="kw">chron</span>(<span class="dt">times=</span><span class="st">&quot;23:00:00&quot;</span>),</a>
-<a class="sourceLine" id="cb18-14" data-line-number="14">                                                <span class="st">&quot;19pm - 23pm&quot;</span>, timerange) )</a>
-<a class="sourceLine" id="cb18-15" data-line-number="15"></a>
-<a class="sourceLine" id="cb18-16" data-line-number="16">df_select &lt;-<span class="st"> </span>df_select <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">color =</span> timerange)</a>
-<a class="sourceLine" id="cb18-17" data-line-number="17">df_select &lt;-<span class="st"> </span>df_select <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>( <span class="dt">color =</span> <span class="kw">ifelse</span>(timerange <span class="op">==</span><span class="st"> </span>picked_time[<span class="dv">1</span>], <span class="st">&quot;red&quot;</span>, color) )</a>
-<a class="sourceLine" id="cb18-18" data-line-number="18">df_select &lt;-<span class="st"> </span>df_select <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>( <span class="dt">color =</span> <span class="kw">ifelse</span>(timerange <span class="op">==</span><span class="st"> </span>picked_time[<span class="dv">2</span>], <span class="st">&quot;green&quot;</span>, color) )</a>
-<a class="sourceLine" id="cb18-19" data-line-number="19">df_select &lt;-<span class="st"> </span>df_select <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>( <span class="dt">color =</span> <span class="kw">ifelse</span>(timerange <span class="op">==</span><span class="st"> </span>picked_time[<span class="dv">3</span>], <span class="st">&quot;blue&quot;</span>, color) )</a>
-<a class="sourceLine" id="cb18-20" data-line-number="20"></a>
-<a class="sourceLine" id="cb18-21" data-line-number="21">df_select &lt;-<span class="st"> </span>df_select <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">crimecolor =</span> OFNS_DESC)</a>
-<a class="sourceLine" id="cb18-22" data-line-number="22"><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(dangerous)){</a>
-<a class="sourceLine" id="cb18-23" data-line-number="23">  df_select &lt;-<span class="st"> </span>df_select <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>( <span class="dt">crimecolor =</span> <span class="kw">ifelse</span>(OFNS_DESC <span class="op">==</span><span class="st"> </span>dangerous[i], crime_color[i], crimecolor) )   </a>
-<a class="sourceLine" id="cb18-24" data-line-number="24">}</a>
-<a class="sourceLine" id="cb18-25" data-line-number="25"></a>
-<a class="sourceLine" id="cb18-26" data-line-number="26">df_select &lt;-<span class="st"> </span>df_select <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">timerange =</span> <span class="kw">ifelse</span>(timerange <span class="op">%in%</span><span class="st"> </span>picked_time, timerange, <span class="ot">NA</span>)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">drop_na</span>(timerange)</a></code></pre></div>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="kw">ggplot</span>(df_select, <span class="kw">aes</span>(<span class="dt">x=</span>OFNS_DESC, ..count.., <span class="dt">fill=</span>timerange)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb19-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">position=</span><span class="st">&quot;dodge&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb19-3" data-line-number="3"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>BORO_NM, <span class="dt">ncol=</span><span class="dv">2</span>,<span class="dt">scales=</span><span class="st">&quot;free_x&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb19-4" data-line-number="4"><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">trans=</span><span class="st">&#39;log2&#39;</span>) </a></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-16-1.png" width="576" /></p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1">df_age &lt;-<span class="st"> </span><span class="kw">subset</span>(df_select, <span class="kw">as.character</span>(VIC_AGE_GROUP) <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;&lt;18&quot;</span>, <span class="st">&quot;18-24&quot;</span>, <span class="st">&quot;25-44&quot;</span>, <span class="st">&quot;45-64&quot;</span>,<span class="st">&quot;65+&quot;</span>) )</a>
-<a class="sourceLine" id="cb20-2" data-line-number="2"><span class="kw">ggplot</span>(df_age, <span class="kw">aes</span>(VIC_AGE_GROUP))<span class="op">+</span></a>
-<a class="sourceLine" id="cb20-3" data-line-number="3"><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">fill=</span><span class="st">&quot;lightblue&quot;</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb20-4" data-line-number="4"><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Age Groups&quot;</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb20-5" data-line-number="5"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;The Distribution of Age Groups of Victims by Borough in New York City&quot;</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb20-6" data-line-number="6"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="st">&quot;BORO_NM&quot;</span>, <span class="dt">scale=</span><span class="st">&quot;free&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1">picked_time &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;07am - 11am&quot;</span>, <span class="st">&quot;15pm - 19pm&quot;</span>, <span class="st">&quot;19pm - 23pm&quot;</span>)</a>
+<a class="sourceLine" id="cb14-2" data-line-number="2">crime_color &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;#7851a9&quot;</span>, <span class="st">&quot;#800020&quot;</span>, <span class="st">&quot;#ef5927&quot;</span>, <span class="st">&quot;#0079c1&quot;</span>, <span class="st">&quot;#dac751&quot;</span>, <span class="st">&quot;#133a30&quot;</span>)</a>
+<a class="sourceLine" id="cb14-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb14-4" data-line-number="4">df_select &lt;-<span class="st"> </span>df_select <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">drop_na</span>(BORO_NM)</a>
+<a class="sourceLine" id="cb14-5" data-line-number="5">df_select &lt;-<span class="st"> </span>df_select <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">timerange =</span> CMPLNT_FR_TM)</a>
+<a class="sourceLine" id="cb14-6" data-line-number="6">df_select &lt;-<span class="st"> </span>df_select <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">timerange =</span> <span class="kw">ifelse</span>(CMPLNT_FR_TM <span class="op">&gt;=</span><span class="st"> </span><span class="kw">chron</span>(<span class="dt">times=</span><span class="st">&quot;07:00:00&quot;</span>) </a>
+<a class="sourceLine" id="cb14-7" data-line-number="7">                                                <span class="op">&amp;</span><span class="st"> </span>CMPLNT_FR_TM <span class="op">&lt;=</span><span class="st"> </span><span class="kw">chron</span>(<span class="dt">times=</span><span class="st">&quot;11:00:00&quot;</span>),</a>
+<a class="sourceLine" id="cb14-8" data-line-number="8">                                                <span class="st">&quot;07am - 11am&quot;</span>, timerange) )</a>
+<a class="sourceLine" id="cb14-9" data-line-number="9">df_select &lt;-<span class="st"> </span>df_select <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">timerange =</span> <span class="kw">ifelse</span>(CMPLNT_FR_TM <span class="op">&gt;=</span><span class="st"> </span><span class="kw">chron</span>(<span class="dt">times=</span><span class="st">&quot;15:00:00&quot;</span>) </a>
+<a class="sourceLine" id="cb14-10" data-line-number="10">                                                <span class="op">&amp;</span><span class="st"> </span>CMPLNT_FR_TM <span class="op">&lt;=</span><span class="st"> </span><span class="kw">chron</span>(<span class="dt">times=</span><span class="st">&quot;19:00:00&quot;</span>),</a>
+<a class="sourceLine" id="cb14-11" data-line-number="11">                                                <span class="st">&quot;15pm - 19pm&quot;</span>, timerange) )</a>
+<a class="sourceLine" id="cb14-12" data-line-number="12">df_select &lt;-<span class="st"> </span>df_select <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">timerange =</span> <span class="kw">ifelse</span>(CMPLNT_FR_TM <span class="op">&gt;=</span><span class="st"> </span><span class="kw">chron</span>(<span class="dt">times=</span><span class="st">&quot;19:00:00&quot;</span>) </a>
+<a class="sourceLine" id="cb14-13" data-line-number="13">                                                <span class="op">&amp;</span><span class="st"> </span>CMPLNT_FR_TM <span class="op">&lt;=</span><span class="st"> </span><span class="kw">chron</span>(<span class="dt">times=</span><span class="st">&quot;23:00:00&quot;</span>),</a>
+<a class="sourceLine" id="cb14-14" data-line-number="14">                                                <span class="st">&quot;19pm - 23pm&quot;</span>, timerange) )</a>
+<a class="sourceLine" id="cb14-15" data-line-number="15"></a>
+<a class="sourceLine" id="cb14-16" data-line-number="16">df_select &lt;-<span class="st"> </span>df_select <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">color =</span> timerange)</a>
+<a class="sourceLine" id="cb14-17" data-line-number="17">df_select &lt;-<span class="st"> </span>df_select <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>( <span class="dt">color =</span> <span class="kw">ifelse</span>(timerange <span class="op">==</span><span class="st"> </span>picked_time[<span class="dv">1</span>], <span class="st">&quot;red&quot;</span>, color) )</a>
+<a class="sourceLine" id="cb14-18" data-line-number="18">df_select &lt;-<span class="st"> </span>df_select <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>( <span class="dt">color =</span> <span class="kw">ifelse</span>(timerange <span class="op">==</span><span class="st"> </span>picked_time[<span class="dv">2</span>], <span class="st">&quot;green&quot;</span>, color) )</a>
+<a class="sourceLine" id="cb14-19" data-line-number="19">df_select &lt;-<span class="st"> </span>df_select <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>( <span class="dt">color =</span> <span class="kw">ifelse</span>(timerange <span class="op">==</span><span class="st"> </span>picked_time[<span class="dv">3</span>], <span class="st">&quot;blue&quot;</span>, color) )</a>
+<a class="sourceLine" id="cb14-20" data-line-number="20"></a>
+<a class="sourceLine" id="cb14-21" data-line-number="21">df_select &lt;-<span class="st"> </span>df_select <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">crimecolor =</span> OFNS_DESC)</a>
+<a class="sourceLine" id="cb14-22" data-line-number="22"><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(dangerous)){</a>
+<a class="sourceLine" id="cb14-23" data-line-number="23">  df_select &lt;-<span class="st"> </span>df_select <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>( <span class="dt">crimecolor =</span> <span class="kw">ifelse</span>(OFNS_DESC <span class="op">==</span><span class="st"> </span>dangerous[i], crime_color[i], crimecolor) )   </a>
+<a class="sourceLine" id="cb14-24" data-line-number="24">}</a>
+<a class="sourceLine" id="cb14-25" data-line-number="25"></a>
+<a class="sourceLine" id="cb14-26" data-line-number="26">df_select &lt;-<span class="st"> </span>df_select <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">timerange =</span> <span class="kw">ifelse</span>(timerange <span class="op">%in%</span><span class="st"> </span>picked_time, timerange, <span class="ot">NA</span>)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">drop_na</span>(timerange)</a></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw">ggplot</span>(df_select, <span class="kw">aes</span>(<span class="dt">x=</span>OFNS_DESC, ..count.., <span class="dt">fill=</span>timerange)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb15-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">position=</span><span class="st">&quot;dodge&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb15-3" data-line-number="3"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>BORO_NM, <span class="dt">ncol=</span><span class="dv">2</span>,<span class="dt">scales=</span><span class="st">&quot;free_x&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb15-4" data-line-number="4"><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">trans=</span><span class="st">&#39;log2&#39;</span>) </a></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-14-1.png" width="576" /></p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1">df_age &lt;-<span class="st"> </span><span class="kw">subset</span>(df_select, <span class="kw">as.character</span>(VIC_AGE_GROUP) <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;&lt;18&quot;</span>, <span class="st">&quot;18-24&quot;</span>, <span class="st">&quot;25-44&quot;</span>, <span class="st">&quot;45-64&quot;</span>,<span class="st">&quot;65+&quot;</span>) )</a>
+<a class="sourceLine" id="cb16-2" data-line-number="2"><span class="kw">ggplot</span>(df_age, <span class="kw">aes</span>(VIC_AGE_GROUP))<span class="op">+</span></a>
+<a class="sourceLine" id="cb16-3" data-line-number="3"><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">fill=</span><span class="st">&quot;lightblue&quot;</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb16-4" data-line-number="4"><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Age Groups&quot;</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb16-5" data-line-number="5"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;The Distribution of Age Groups of Victims by Borough in New York City&quot;</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb16-6" data-line-number="6"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="st">&quot;BORO_NM&quot;</span>, <span class="dt">scale=</span><span class="st">&quot;free&quot;</span>)</a></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1">df_age2&lt;-<span class="kw">subset</span>(df_age, <span class="kw">as.character</span>(VIC_AGE_GROUP)<span class="op">==</span><span class="st">&quot;18-24&quot;</span>)</a>
+<a class="sourceLine" id="cb17-2" data-line-number="2"><span class="co">#df_age2 &lt;- df_age2$VIC_AGE_GROUP</span></a>
+<a class="sourceLine" id="cb17-3" data-line-number="3">df_age2 &lt;-df_age2<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb17-4" data-line-number="4"><span class="st">  </span><span class="kw">group_by</span>(df_age2<span class="op">$</span>BORO_NM) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb17-5" data-line-number="5"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">count=</span><span class="kw">n</span>())<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb17-6" data-line-number="6"><span class="st">  </span><span class="kw">ungroup</span>()</a>
+<a class="sourceLine" id="cb17-7" data-line-number="7"><span class="kw">names</span>(df_age2)[<span class="dv">1</span>] &lt;-<span class="st"> &quot;Borough&quot;</span></a>
+<a class="sourceLine" id="cb17-8" data-line-number="8">df_age2<span class="op">$</span>count &lt;-<span class="st"> </span>df_age2<span class="op">$</span>count<span class="op">/</span>ChorDF<span class="op">$</span>Population<span class="op">*</span><span class="dv">100000</span></a>
+<a class="sourceLine" id="cb17-9" data-line-number="9"><span class="kw">names</span>(df_age2)[<span class="dv">2</span>] &lt;-<span class="st"> &quot;Rate&quot;</span></a>
+<a class="sourceLine" id="cb17-10" data-line-number="10"><span class="kw">ggplot</span>(df_age2, <span class="kw">aes</span>(<span class="dt">x=</span><span class="kw">reorder</span>(Borough, <span class="op">-</span>Rate), <span class="dt">y=</span>Rate))<span class="op">+</span></a>
+<a class="sourceLine" id="cb17-11" data-line-number="11"><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">stat =</span> <span class="st">&quot;identity&quot;</span>,<span class="dt">fill=</span><span class="st">&quot;lightblue&quot;</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb17-12" data-line-number="12"><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Boroughs&quot;</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb17-13" data-line-number="13"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;The Number of Victims per 100000 People in 18-24 Age Group by Borough in New York City&quot;</span>)</a></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1">df_race &lt;-df_select[,<span class="kw">c</span>(<span class="st">&#39;OFNS_DESC&#39;</span>,<span class="st">&#39;VIC_RACE&#39;</span>)]</a>
+<a class="sourceLine" id="cb18-2" data-line-number="2">df_race &lt;-<span class="st"> </span>df_race <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb18-3" data-line-number="3"><span class="st">  </span><span class="kw">filter</span>(VIC_RACE <span class="op">!=</span><span class="st"> &#39;UNKNOWN&#39;</span>)</a>
+<a class="sourceLine" id="cb18-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb18-5" data-line-number="5">df_race[<span class="st">&#39;count&#39;</span>] &lt;-<span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb18-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb18-7" data-line-number="7">df_race&lt;-<span class="st"> </span>df_race <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb18-8" data-line-number="8"><span class="st">  </span><span class="kw">group_by</span>(VIC_RACE,OFNS_DESC) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb18-9" data-line-number="9"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">Freq =</span> <span class="kw">log</span>(<span class="kw">sum</span>(count)))</a>
+<a class="sourceLine" id="cb18-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb18-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb18-12" data-line-number="12"><span class="kw">ggplot</span>(df_race, <span class="kw">aes</span>(<span class="dt">x =</span> OFNS_DESC, <span class="dt">y =</span> Freq))<span class="op">+</span></a>
+<a class="sourceLine" id="cb18-13" data-line-number="13"><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>,<span class="dt">stat =</span> <span class="st">&quot;identity&quot;</span>,<span class="dt">fill=</span><span class="st">&quot;lightblue&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb18-14" data-line-number="14"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>VIC_RACE, <span class="dt">scales=</span><span class="st">&quot;free&quot;</span>, <span class="dt">nrow =</span> <span class="dv">3</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb18-15" data-line-number="15"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x=</span><span class="kw">element_text</span>(<span class="dt">size=</span><span class="dv">6</span>))<span class="op">+</span></a>
+<a class="sourceLine" id="cb18-16" data-line-number="16"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Crime Types&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;log(Total amount)&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;Major Crimes faced by different races in NYC&quot;</span>)</a></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1">df_age2&lt;-<span class="kw">subset</span>(df_age, <span class="kw">as.character</span>(VIC_AGE_GROUP)<span class="op">==</span><span class="st">&quot;18-24&quot;</span>)</a>
-<a class="sourceLine" id="cb21-2" data-line-number="2"><span class="co">#df_age2 &lt;- df_age2$VIC_AGE_GROUP</span></a>
-<a class="sourceLine" id="cb21-3" data-line-number="3">df_age2 &lt;-df_age2<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb21-4" data-line-number="4"><span class="st">  </span><span class="kw">group_by</span>(df_age2<span class="op">$</span>BORO_NM) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb21-5" data-line-number="5"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">count=</span><span class="kw">n</span>())<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb21-6" data-line-number="6"><span class="st">  </span><span class="kw">ungroup</span>()</a>
-<a class="sourceLine" id="cb21-7" data-line-number="7"><span class="kw">names</span>(df_age2)[<span class="dv">1</span>] &lt;-<span class="st"> &quot;Borough&quot;</span></a>
-<a class="sourceLine" id="cb21-8" data-line-number="8">df_age2<span class="op">$</span>count &lt;-<span class="st"> </span>df_age2<span class="op">$</span>count<span class="op">/</span>ChorDF<span class="op">$</span>Population<span class="op">*</span><span class="dv">100000</span></a>
-<a class="sourceLine" id="cb21-9" data-line-number="9"><span class="kw">names</span>(df_age2)[<span class="dv">2</span>] &lt;-<span class="st"> &quot;Rate&quot;</span></a>
-<a class="sourceLine" id="cb21-10" data-line-number="10"><span class="kw">ggplot</span>(df_age2, <span class="kw">aes</span>(<span class="dt">x=</span><span class="kw">reorder</span>(Borough, <span class="op">-</span>Rate), <span class="dt">y=</span>Rate))<span class="op">+</span></a>
-<a class="sourceLine" id="cb21-11" data-line-number="11"><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">stat =</span> <span class="st">&quot;identity&quot;</span>,<span class="dt">fill=</span><span class="st">&quot;lightblue&quot;</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb21-12" data-line-number="12"><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Boroughs&quot;</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb21-13" data-line-number="13"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;The Number of Victims per 100000 People in 18-24 Age Group by Borough in New York City&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1">df_race &lt;-df_select[,<span class="kw">c</span>(<span class="st">&#39;BORO_NM&#39;</span>,<span class="st">&#39;VIC_RACE&#39;</span>)]</a>
+<a class="sourceLine" id="cb19-2" data-line-number="2">df_race &lt;-<span class="st"> </span>df_race <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb19-3" data-line-number="3"><span class="st">  </span><span class="kw">filter</span>(VIC_RACE <span class="op">!=</span><span class="st"> &#39;UNKNOWN&#39;</span>)</a>
+<a class="sourceLine" id="cb19-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb19-5" data-line-number="5">df_race[<span class="st">&#39;count&#39;</span>] &lt;-<span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb19-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb19-7" data-line-number="7">df_race&lt;-<span class="st"> </span>df_race <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb19-8" data-line-number="8"><span class="st">  </span><span class="kw">group_by</span>(VIC_RACE,BORO_NM) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb19-9" data-line-number="9"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">Freq =</span> <span class="kw">sum</span>(count))</a>
+<a class="sourceLine" id="cb19-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb19-11" data-line-number="11">df_race[<span class="st">&#39;adjusted&#39;</span>] &lt;-<span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb19-12" data-line-number="12">df_race &lt;-<span class="st"> </span><span class="kw">data.frame</span>(df_race)</a>
+<a class="sourceLine" id="cb19-13" data-line-number="13"></a>
+<a class="sourceLine" id="cb19-14" data-line-number="14"><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">30</span>){</a>
+<a class="sourceLine" id="cb19-15" data-line-number="15">  state &lt;-<span class="st"> </span>df_race[i,<span class="dv">2</span>]</a>
+<a class="sourceLine" id="cb19-16" data-line-number="16">  df_race[i,<span class="st">&#39;adjusted&#39;</span>]&lt;-<span class="dv">100000</span><span class="op">*</span>df3[i,<span class="dv">3</span>]<span class="op">/</span>DA[state,<span class="st">&quot;Population&quot;</span>]</a>
+<a class="sourceLine" id="cb19-17" data-line-number="17">}</a>
+<a class="sourceLine" id="cb19-18" data-line-number="18"></a>
+<a class="sourceLine" id="cb19-19" data-line-number="19"></a>
+<a class="sourceLine" id="cb19-20" data-line-number="20"><span class="kw">ggplot</span>(df_race, <span class="kw">aes</span>(<span class="dt">x =</span> BORO_NM, <span class="dt">y =</span> adjusted))<span class="op">+</span></a>
+<a class="sourceLine" id="cb19-21" data-line-number="21"><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>,<span class="dt">stat =</span> <span class="st">&quot;identity&quot;</span>,<span class="dt">fill=</span><span class="st">&quot;lightblue&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb19-22" data-line-number="22"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>VIC_RACE, <span class="dt">scales=</span><span class="st">&quot;free&quot;</span>, <span class="dt">nrow =</span> <span class="dv">3</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb19-23" data-line-number="23"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x=</span><span class="kw">element_text</span>(<span class="dt">size=</span><span class="dv">6</span>))<span class="op">+</span></a>
+<a class="sourceLine" id="cb19-24" data-line-number="24"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Crime Types&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Crime Rate&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;Crimes faced by different races in different Boroughs&quot;</span>)</a></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1">df_race &lt;-df_select[,<span class="kw">c</span>(<span class="st">&#39;OFNS_DESC&#39;</span>,<span class="st">&#39;VIC_RACE&#39;</span>)]</a>
-<a class="sourceLine" id="cb22-2" data-line-number="2">df_race &lt;-<span class="st"> </span>df_race <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb22-3" data-line-number="3"><span class="st">  </span><span class="kw">filter</span>(VIC_RACE <span class="op">!=</span><span class="st"> &#39;UNKNOWN&#39;</span>)</a>
-<a class="sourceLine" id="cb22-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb22-5" data-line-number="5">df_race[<span class="st">&#39;count&#39;</span>] &lt;-<span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb22-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb22-7" data-line-number="7">df_race&lt;-<span class="st"> </span>df_race <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb22-8" data-line-number="8"><span class="st">  </span><span class="kw">group_by</span>(VIC_RACE,OFNS_DESC) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb22-9" data-line-number="9"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">Freq =</span> <span class="kw">log</span>(<span class="kw">sum</span>(count)))</a>
-<a class="sourceLine" id="cb22-10" data-line-number="10"></a>
-<a class="sourceLine" id="cb22-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb22-12" data-line-number="12"><span class="kw">ggplot</span>(df_race, <span class="kw">aes</span>(<span class="dt">x =</span> OFNS_DESC, <span class="dt">y =</span> Freq))<span class="op">+</span></a>
-<a class="sourceLine" id="cb22-13" data-line-number="13"><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>,<span class="dt">stat =</span> <span class="st">&quot;identity&quot;</span>,<span class="dt">fill=</span><span class="st">&quot;lightblue&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb22-14" data-line-number="14"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>VIC_RACE, <span class="dt">scales=</span><span class="st">&quot;free&quot;</span>, <span class="dt">nrow =</span> <span class="dv">3</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb22-15" data-line-number="15"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x=</span><span class="kw">element_text</span>(<span class="dt">size=</span><span class="dv">6</span>))<span class="op">+</span></a>
-<a class="sourceLine" id="cb22-16" data-line-number="16"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Crime Types&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;log(Total amount)&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;Major Crimes faced by different races in NYC&quot;</span>)</a></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1">df_race &lt;-df_select[,<span class="kw">c</span>(<span class="st">&#39;BORO_NM&#39;</span>,<span class="st">&#39;VIC_RACE&#39;</span>)]</a>
-<a class="sourceLine" id="cb23-2" data-line-number="2">df_race &lt;-<span class="st"> </span>df_race <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb23-3" data-line-number="3"><span class="st">  </span><span class="kw">filter</span>(VIC_RACE <span class="op">!=</span><span class="st"> &#39;UNKNOWN&#39;</span>)</a>
-<a class="sourceLine" id="cb23-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb23-5" data-line-number="5">df_race[<span class="st">&#39;count&#39;</span>] &lt;-<span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb23-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb23-7" data-line-number="7">df_race&lt;-<span class="st"> </span>df_race <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb23-8" data-line-number="8"><span class="st">  </span><span class="kw">group_by</span>(VIC_RACE,BORO_NM) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb23-9" data-line-number="9"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">Freq =</span> <span class="kw">sum</span>(count))</a>
-<a class="sourceLine" id="cb23-10" data-line-number="10"></a>
-<a class="sourceLine" id="cb23-11" data-line-number="11">df_race[<span class="st">&#39;adjusted&#39;</span>] &lt;-<span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb23-12" data-line-number="12">df_race &lt;-<span class="st"> </span><span class="kw">data.frame</span>(df_race)</a>
-<a class="sourceLine" id="cb23-13" data-line-number="13"></a>
-<a class="sourceLine" id="cb23-14" data-line-number="14"><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">30</span>){</a>
-<a class="sourceLine" id="cb23-15" data-line-number="15">  state &lt;-<span class="st"> </span>df_race[i,<span class="dv">2</span>]</a>
-<a class="sourceLine" id="cb23-16" data-line-number="16">  df_race[i,<span class="st">&#39;adjusted&#39;</span>]&lt;-<span class="dv">100000</span><span class="op">*</span>df3[i,<span class="dv">3</span>]<span class="op">/</span>DA[state,<span class="st">&quot;Population&quot;</span>]</a>
-<a class="sourceLine" id="cb23-17" data-line-number="17">}</a>
-<a class="sourceLine" id="cb23-18" data-line-number="18"></a>
-<a class="sourceLine" id="cb23-19" data-line-number="19"></a>
-<a class="sourceLine" id="cb23-20" data-line-number="20"><span class="kw">ggplot</span>(df_race, <span class="kw">aes</span>(<span class="dt">x =</span> BORO_NM, <span class="dt">y =</span> adjusted))<span class="op">+</span></a>
-<a class="sourceLine" id="cb23-21" data-line-number="21"><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>,<span class="dt">stat =</span> <span class="st">&quot;identity&quot;</span>,<span class="dt">fill=</span><span class="st">&quot;lightblue&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb23-22" data-line-number="22"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>VIC_RACE, <span class="dt">scales=</span><span class="st">&quot;free&quot;</span>, <span class="dt">nrow =</span> <span class="dv">3</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb23-23" data-line-number="23"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x=</span><span class="kw">element_text</span>(<span class="dt">size=</span><span class="dv">6</span>))<span class="op">+</span></a>
-<a class="sourceLine" id="cb23-24" data-line-number="24"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Crime Types&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Crime Rate&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;Crimes faced by different races in different Boroughs&quot;</span>)</a></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
 
 </div>
             </section>

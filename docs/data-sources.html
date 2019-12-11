@@ -176,9 +176,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="data-sources" class="section level1">
 <h1><span class="header-section-number">Chapter 2</span> Data sources</h1>
+<p>We got the data of crime events to be researched from NYC Open Data, and the link is as following:</p>
+<p><a href="https://data.cityofnewyork.us/Public-Safety/NYPD-Complaint-Data-Current-Year-To-Date-/5uac-w243/data" class="uri">https://data.cityofnewyork.us/Public-Safety/NYPD-Complaint-Data-Current-Year-To-Date-/5uac-w243/data</a></p>
+<p>This dataset includes all valid felony, misdemeanor, and violation crimes reported to the New York City Police Department (NYPD) for all complete quarters so far this year (2019). Because we found the data in the end of October, the data is up to September, 2019. Then we downloaded the dataset as a csv file, and we also downloaded the explanation of each column name as a pdf file found from “About” in the right side of the website.</p>
+<p>The dataset is read by following code:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(tidyr)</a>
 <a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">library</span>(tidyverse)</a>
 <a class="sourceLine" id="cb1-3" data-line-number="3">DATA &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;NYPD_Complaint_Data_Current__Year_To_Date_.csv&quot;</span>, <span class="dt">na.strings =</span> <span class="st">&quot;&quot;</span>)</a></code></pre></div>
+<p>Another dataset is the population in each of 5 boroughs in New York City in 2018, and we downloaded it from the following link:</p>
+<p><a href="https://www.census.gov/quickfacts/fact/table/newyorkcountymanhattanboroughnewyork,bronxcountybronxboroughnewyork,queenscountyqueensboroughnewyork,kingscountybrooklynboroughnewyork,richmondcountystatenislandboroughnewyork,newyorkcitynewyork/HSG010218" class="uri">https://www.census.gov/quickfacts/fact/table/newyorkcountymanhattanboroughnewyork,bronxcountybronxboroughnewyork,queenscountyqueensboroughnewyork,kingscountybrooklynboroughnewyork,richmondcountystatenislandboroughnewyork,newyorkcitynewyork/HSG010218</a></p>
+<p>Because currently we are in 2019 and there is no data of population in the end of 2019, we will use this dataset to calculate the crime rate for each borough in the later research.</p>
+<p>Dataset reading is shown in later chapter.</p>
 
 </div>
             </section>
