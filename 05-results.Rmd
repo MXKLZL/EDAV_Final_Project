@@ -88,6 +88,10 @@ county_choropleth(ChorDF,
                   county_zoom = nyc_county_fips$region)
 ``` 
 
+After we selected the six most related crime to us, we take the population of each county into account and calculate the the crime rate of selected crime in five counties. The higher crime rate start from brooklyn along mahanttan to  bronx whereas queens and staten island have lower crime rate. The suprsing thing is that, in our mind, brooklyn is always considered as a more dangerous county than mahanttan. 
+
+However,we cannot judge which county is more dangerous for us and which county is more safe from this graph. Since different person may have different rank for the dangerousness of the crime types. 
+
 
 ```{r}
 library(chron)
@@ -181,6 +185,13 @@ ggplot(cleveland,aes(Freq,fct_reorder2(BORO_NM,
   labs(title = 'Crime rate for each type by Boroughs ',color = "Crime Type")+
   theme_dotplot
 ```
+The above graph showing the exactly crime rate for each type in five counties. The most frequent crime are Offense and thief for all counties. As we discuss above, the cost of theft is the lowest and definiton of offense is broadly defined which shoube be the reason for high frequency of this two crime type. 
+
+Therefore, we focus on other four types. It is interesting that Brooklyn have highest crime rate for all four serious cirme types(Rape,Robbery,weapon,burglary) but the total crime rate for brooklyn actually lower than manhattan. It seem like that the crimes happened in brookyln are more likely to be some serious crimes.
+
+The bronx have second highest total crime rate and also second highest rate for all serious crime types. Therefroe both bronx and brooklyn are not good choice for student like us to choose from the safty concern. 
+
+For the staten island, the frepuency of all crime types are signifnatly lower then thoes of other four counties. From the safety concern, staten island maybe a good choice for moving to. However, the final deicison should take the transportation into account.
 
 
 ```{r}
