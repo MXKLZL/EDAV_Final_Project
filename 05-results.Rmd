@@ -90,11 +90,8 @@ county_choropleth(ChorDF,
 
 
 ```{r}
-<<<<<<< HEAD
-=======
 library(chron)
 library(ggplot2)
->>>>>>> e97da9f2f83c8efe2866e45b3f154f1385859d64
 ggplot(df_select, aes(factor(weekdays(CMPLNT_FR_DT,abbreviate =TRUE), levels=c("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"))))+
   geom_bar(fill="lightblue")+
   xlab("Weekdays")+
@@ -140,8 +137,8 @@ DA <- data.frame(DATA2)
 DA$Population <-as.numeric((gsub("\\,", "", DA$Population)))
 
 for(i in 1:1365){
-  state <- df3[i,1]
-  df3[i,'adjusted']<-100000*df3[i,3]/DA[state,"Population"]
+  states <- df3[i,1]
+  df3[i,'adjusted']<-100000*df3[i,3]/DA[states,"Population"]
 }
 
 ggplot(df3, aes(as.Date(CMPLNT_FR_DT), y = Freq)) +
