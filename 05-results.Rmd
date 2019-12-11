@@ -207,3 +207,21 @@ county_choropleth(ChorDF,
                   county_zoom = nyc_county_fips$region)
 ```
 
+```{r}
+df_age <- subset(df_select, as.character(VIC_AGE_GROUP) %in% c("<18", "18-24", "25-44", "45-64","65+") )
+ggplot(df_age, aes(VIC_AGE_GROUP))+
+  geom_bar(fill="lightblue")+
+  xlab("Age Groups")+
+  ggtitle("The Distribution of Age Groups of Victims by Borough in New York City")+
+  facet_wrap("BORO_NM", scale="free")
+```
+
+```{r}
+df_age2<-subset(df_age, as.character(VIC_AGE_GROUP)=="18-24")
+df_age2$BORO_NM <- fct_infreq(df_age2$BORO_NM)
+ggplot(df_age2, aes(BORO_NM))+
+  geom_bar(fill="lightblue")+
+  xlab("Boroughs")+
+  ggtitle("The Distribution of Victims in 18-24 Age Group by Borough in New York City")
+```
+
