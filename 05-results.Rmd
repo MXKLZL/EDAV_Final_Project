@@ -5,6 +5,8 @@ library(choroplethrMaps)
 library(choroplethr)
 library(ggplot2)
 library(viridis)
+library(chron)
+library(tidyverse)
 ```
 
 ```{r}
@@ -89,9 +91,6 @@ county_choropleth(ChorDF,
 
 
 ```{r}
-
-library(chron)
-library(ggplot2)
 ggplot(df_select, aes(factor(weekdays(CMPLNT_FR_DT,abbreviate =TRUE), levels=c("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"))))+
   geom_bar(fill="lightblue")+
   xlab("Weekdays")+
@@ -121,7 +120,7 @@ ggplot(df2, aes(as.Date(CMPLNT_FR_DT), y = Freq)) +
 
 
 ```{r fig.height = 5, fig.width = 5}
-library(tidyverse)
+
 df2 <- data.frame(df_select[,1:2])
 df2['count'] <- 1
 
@@ -134,11 +133,20 @@ df2<- df2 %>%
 df2 <- df2 %>%
   filter(CMPLNT_FR_DT >=as.Date('2019-01-01'))
 
+df2["adjusted"] <- 0
+df3 <- data.frame(df2)
+DA <- data.frame(DATA2)
+DA$Population <-as.numeric((gsub("\\,", "", DA$Population)))
 
-ggplot(df2, aes(as.Date(CMPLNT_FR_DT), y = Freq)) +
+for(i in 1:1365){
+  state <- df3[i,1]
+  df3[i,'adjusted']<-100000*df3[i,3]/DA[state,"Population"]
+}
+
+ggplot(df3, aes(as.Date(CMPLNT_FR_DT), y = Freq)) +
   geom_line(color="orange") + 
   facet_wrap(~BORO_NM, scales="free_y",ncol = 2)+
-  labs(x = "Time", y = "Total amount", title = "Time series pattern in 2019 in different boroughs")
+  labs(x = "Time", y = "Crime Rate", title = "Time series pattern in 2019 in different boroughs")
 
 
 ```
@@ -278,13 +286,21 @@ df_race['count'] <- 1
 
 df_race<- df_race %>%
   group_by(VIC_RACE,BORO_NM) %>%
-  summarize(Freq = log(sum(count)))
+  summarize(Freq = sum(count))
+
+df_race['adjusted'] <- 1
+df_race <- data.frame(df_race)
+
+for(i in 1:30){
+  state <- df_race[i,2]
+  df_race[i,'adjusted']<-100000*df3[i,3]/DA[state,"Population"]
+}
 
 
-ggplot(df_race, aes(x = BORO_NM, y = Freq))+
+ggplot(df_race, aes(x = BORO_NM, y = adjusted))+
   geom_bar(position = "dodge",stat = "identity",fill="lightblue") +
   facet_wrap(~VIC_RACE, scales="free", nrow = 3)+
   theme(axis.text.x=element_text(size=6))+
-  labs(x = "Crime Types", y = "log(Total amount)", title = "Major Crimes faced by different races in NYC")
+  labs(x = "Crime Types", y = "Crime Rate", title = "Crimes faced by different races in different Boroughs")
 ```
 
