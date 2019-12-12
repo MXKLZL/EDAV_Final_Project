@@ -4,9 +4,9 @@
 
 We got the data of crime events to be researched from NYC Open Data, and here is the [link](https://data.cityofnewyork.us/Public-Safety/NYPD-Complaint-Data-Current-Year-To-Date-/5uac-w243/data).
 
-This dataset includes all valid felony, misdemeanor, and violation crimes reported to the New York City Police Department (NYPD) for all complete quarters so far this year (2019). Because we found the data in the end of October, the data is up to September, 2019. Then we downloaded the dataset as a csv file, and we also downloaded the explanation of each column name as a pdf file found from "About" in the right side of the website.
+This dataset includes all valid felony, misdemeanor, and violation crimes reported to the New York City Police Department (NYPD) for all complete quarters so far this year (2019). Because we found the data at the end of October, the data is up to September 2019. Then we downloaded the dataset as a CSV file, and we also downloaded the explanation of each column name as a pdf file found from "About" on the right side of the website.
 
-There are 347074 observations with 35 variables in this dataset. These variables include information about the victim, subspect, location, date of crime, type of crime, description of crime and more. All crimes are divided into 62 different types. The problem is that this dataset is quite sparse, and some spatial and suspect information is missing. There is also some wrong information, for example, some crimes are reported in the year of 1018.
+There are 347074 observations with 35 variables in this dataset. These variables include information about the victim, suspect, location, date of crime, type of crime, description of crime and more. All crimes are divided into 62 different types. The problem is that this dataset is quite sparse, and some spatial and suspect information is missing. There is also some wrong information, for example, some crimes are reported in the year of 1018.
 
 ## United States Census Bureau Quick Facts
 
