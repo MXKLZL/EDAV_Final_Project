@@ -1,6 +1,6 @@
 # Data sources
 
-##NYPD Complaint Data
+## NYPD Complaint Data
 
 We got the data of crime events to be researched from NYC Open Data, and here is the [link](https://data.cityofnewyork.us/Public-Safety/NYPD-Complaint-Data-Current-Year-To-Date-/5uac-w243/data).
 
@@ -8,7 +8,7 @@ This dataset includes all valid felony, misdemeanor, and violation crimes report
 
 There are 347074 observations with 35 variables in this dataset. These variables include information about the victim, subspect, location, date of crime, type of crime, description of crime and more. All crimes are divided into 62 different types. The problem is that this dataset is quite sparse, and some spatial and suspect information is missing. There is also some wrong information, for example, some crimes are reported in the year of 1018.
 
-##United States Census Bureau Quick Facts
+## United States Census Bureau Quick Facts
 
 Another dataset we will use is the report of population in each of 5 boroughs in New York City in the end of 2018 from U.S. Census, which is downloaded from this [link](https://www.census.gov/quickfacts/fact/table/newyorkcountymanhattanboroughnewyork,bronxcountybronxboroughnewyork,queenscountyqueensboroughnewyork,kingscountybrooklynboroughnewyork,richmondcountystatenislandboroughnewyork,newyorkcitynewyork/HSG010218).
 
