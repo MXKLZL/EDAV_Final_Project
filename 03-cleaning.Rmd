@@ -34,7 +34,7 @@ df <- DATA %>%
 
 ## Pick Out Relevant Crimes
 
-Another goal of our exploration is to analyze the types of crime in each borough. However, some crime descriptions are too detailed. So we classified all of them into 11 types based on broader definitions of each type(like all offenses with different targets are classified as an offense). And all other types with low frequency and completely irrelevant to us such as gambling was dropped.
+Another goal of our exploration is to analyze the types of crime in each borough. However, some crime descriptions are too detailed. So we classify all of them into 11 types based on broader definitions of each type(like all offenses with different targets are classified as an offense). And all other types with low frequency and completely irrelevant to us such as gambling is dropped.
 
 ```{r echo=FALSE}
 offense <- c('ANTICIPATORY OFFENSES', "OFF. AGNST PUB ORD SENSBLTY &", "OFFENSES AGAINST MARRIAGE UNCL", "OFFENSES AGAINST PUBLIC ADMINI", "OFFENSES AGAINST PUBLIC SAFETY", "OFFENSES AGAINST THE PERSON", "OFFENSES INVOLVING FRAUD", "OFFENSES RELATED TO CHILDREN", "OTHER OFFENSES RELATED TO THEF","HARASSMENT 2")
