@@ -30,6 +30,7 @@ For the convenience of the later researches, we drop 5 types of crime from our d
 
 MURDER related data has great amount of missing data for latitude and longitude, also ARSON, MURDER and KIDNAPPING contain very few useful pieces of data, which is difficult to conduct instructive analysis. We drop FRAUD because this could be avoided effectively. For DRUG, although it is very common, usually it is the indirect reason for other crimes like offence or murder, the crime DRUG itself usually doesn't cause great harm to the society.
 
+
 ```{r}
 dangerous <-c('BURGLARY','OFFENSE','RAPE','ROBBERY','THEFT','WEAPON')
 df_select <- df_select %>% mutate(OFNS_DESC = ifelse(OFNS_DESC %in% dangerous, OFNS_DESC, NA)) %>% drop_na(OFNS_DESC)
@@ -98,9 +99,6 @@ county_choropleth(ChorDF,
 After selecting the six crime types that most related to us, we take the population of each borough into account and calculate the crime rate of selected crime in five boroughs. The Boroughs with top three highest crime rate are Mahanttan, Bronx and Brooklyn, whereas Queens and Staten Island have lower crime rate, and this forms a spatial pattern in the graph. We are surprised about the finding, because it breaks our "stereotype" that Brooklyn is the most dangerous borough in New York City. 
 
 However,we cannot judge which county is more dangerous for us and which county is safer from this graph. Since different person may have different ranks for the dangerousness of the crime types. 
-
-As full-time students, we go out more frequently from Monday to Friday rather than weekends. Therefore we want to find a borough with lowest frequency of crime events in weekdays, and the plot is as following: 
-
 
 
 
@@ -259,6 +257,8 @@ ggplot(df_select, aes(x=BORO_NM, ..count.., fill=timerange)) +
 From the graph above, there is same pattern for every borough. The desceding order of numebr of crimes is 3pm -7pm, 11am - 3pm, 7pm - 11pm, and 7am - 11am. Seperating the time period doesn't help us figure out which borough has apprant advantage to live. However we can adjust our schdule base on the graph above. For example, if you live in Manhattan, going out before 11am and back to home after 7pm can help you avoid more crimes.   
 
 
+
+As full-time students, we go out more frequently from Monday to Friday rather than weekends. Therefore we want to find a borough with lower frequency of crime events in weekdays, and the plot is as following: 
 ```{r}
 library(chron)
 library(ggplot2)
