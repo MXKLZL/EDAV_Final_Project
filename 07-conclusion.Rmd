@@ -6,7 +6,7 @@ Based on concerns about crime type, crime time, and victim age group, the three 
 
 ## Specific Places for Selected Borough
 
-For more detailed address, we find out two specific places from our interactive graph base on our schedule and rank. The first place we recommend is Long Island City in Queens. In the interactive graph, there are only 4 crimes(three theft and one offense) happened in here and even no recorded crime at 7 am - 11 am. These four crimes are not considered severe crimes in our criteria. The second place is Roosevelt Island, which has only two recorded thefts and has no recorded crime at 7 pm - 11 pm. It should be a good choice for students with more courses in the afternoon and evening. For students who would like to live in Manhattan, Manhattan downtown has lower crime at 7 am - 11 am and 7 pm - 11 pm, and both midtown and downtown have less severe crimes than uptown.
+For more detailed address, we find out two specific places from our interactive graph based on our schedule and rank. The first place we recommend is Long Island City in Queens. In the interactive graph, there are only 4 crimes(three theft and one offense) happened in here and even no recorded crime at 7 am - 11 am. These four crimes are not considered severe crimes in our criteria. The second place is Roosevelt Island, which has only two recorded thefts and has no recorded crime at 7 pm - 11 pm. It should be a good choice for students with more courses in the afternoon and evening. For students who would like to live in Manhattan, Manhattan downtown has lower crime at 7 am - 11 am and 7 pm - 11 pm, and both midtown and downtown have less severe crimes than uptown.
 
 ## Limitation
 
