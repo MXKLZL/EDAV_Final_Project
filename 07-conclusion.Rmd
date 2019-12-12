@@ -105,7 +105,7 @@ leaf <- leaf %>%
 leaf <- leaf %>%addMarkers(data=Y[[2]],
                           lng=~Longitude, lat=~Latitude,
                           label=~OFNS_DESC,
-                          popup=~OFNS_DESC,
+                          popup=~OFNS_DESC, 
                           clusterOptions = markerClusterOptions(removeOutsideVisibleBounds = T),
                           labelOptions = labelOptions(direction = 'auto'),
                           group = "15pm - 19pm"
