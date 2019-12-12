@@ -15,6 +15,7 @@ library(grid)
 library(gridExtra)
 ```
 
+We have randomly sampled 1000 data to analysis the missing value pattern of the dataset after we have cleaned the data. We have also changed the "UNKNOWN" entry to NA.
 ```{r}
 df_cols <- colnames(df_select)
 df <- df_select %>%
@@ -26,52 +27,50 @@ df <- df %>% mutate(SUSP_AGE_GROUP = ifelse(SUSP_AGE_GROUP == "UNKNOWN", NA, SUS
 df <- df %>% mutate(SUSP_RACE = ifelse(SUSP_RACE == "UNKNOWN", NA, SUSP_RACE))
 df <- df %>% mutate(VIC_AGE_GROUP = ifelse(VIC_AGE_GROUP == "UNKNOWN", NA, VIC_AGE_GROUP))
 df <- df %>% mutate(VIC_RACE = ifelse(VIC_RACE == "UNKNOWN", NA, VIC_RACE))
-```
-We have randomly sampled 1000 data to analysis the missing value pattern of the dataset after we have cleaned the data. We have also changed the "UNKNOWN" entry to NA.
-
-```{r}
 vis_miss(df)
 ```
 
 From the plot above, we see that majority of missing data came from the columns: "SUSP_AGE_GEOUP", "SUSP_SEX", "SUSP_RACE", "VIC_AGE_GROUP", "VIC_RACE", "Latitude", and "Longitude". We also see that "Latitude", and "Longitude" are always missing together. 
 
+We can further investigate the missing row patterns by using the missing_data.frame function.
 ```{r}
 df$CMPLNT_FR_DT <- as.character(df$CMPLNT_FR_DT)
 df$CMPLNT_FR_TM <- as.character(df$CMPLNT_FR_TM)
 names(df) <- df_cols
 x <- missing_data.frame(df)
 summary(x@patterns) 
-#image(x)
 ```
 
-We can further investigate the missing row patterns by using the missing_data.frame function, and we found out that there are 30 different row missing patterns. Some of the patterns only have one or two ocurrences and 20 of them have 10 ocurrences or below.
+Here, we found out that there are 30 different row missing patterns. Some of the patterns only have one or two ocurrences and 20 of them have 10 ocurrences or below.
 
 We can check how many time each of the row missing pattern appears in the data set by the following and also visualize these row missing patterns with visna function.
 
-```{r}
+```{r fig.height = 4}
 visna(df, sort='r')
 ```
 
 By using the visna function, we observed the following missing row patterns:
 
-1. The pattern that occurs the most is missing both Latitude and Longitude, which is about 91.5% of the data.
+1. The pattern that occurs the most is missing both Latitude and Longitude, which is about 92% of the data.
 2. The information of the suspect are missing such as age, sex, and race tends to be missing along with some other variables.
-
 
 Since the objective of our project is to analysis the safty issue, when doing the interative part of the project, we will need to use the location information. So we have to drop all the data with Longitude and Latitude missing when we do that. This might affect the distribution of the crime, so we plotted the following diagram to compare the distribution of crime type before and after when location is removed.
 
 ```{r fig.height = 4, fig.width = 4}
 p1 <- ggplot(df_select, aes(x=OFNS_DESC, y=..count..)) +
-  geom_bar() + 
-  xlab("Crime Type")+
-  ylab("Number of Crimes")+
-  labs(title="Count by crime type")
+  geom_bar(fill="lightblue") + 
+  xlab("Crime Type") +
+  ylab("Number of Crimes") +
+  labs(title="Count by crime type") + 
+  coord_flip()
+
 df_locationNA_dropped <- df_select %>% drop_na(Latitude)
 p2 <- ggplot(df_locationNA_dropped, aes(x=OFNS_DESC, y=..count..)) +
-  geom_bar()+
-  xlab("Crime Type")+
-  ylab("Number of Crimes")+
-  labs(title="Count by crime type with location NA dropped")
+  geom_bar(fill="lightblue") +
+  xlab("Crime Type") +
+  ylab("Number of Crimes") +
+  labs(title="Count by crime type with location NA dropped") + 
+  coord_flip()
 
 grid.arrange(p1, p2, ncol = 1)
 ```

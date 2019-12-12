@@ -1,5 +1,5 @@
 --- 
-title: "NYC Crime analysis"
+title: "NYC Crime Analysis"
 author: "Yichi Zhang, Zelin Li, Huayun Xu, Mingfang Chang"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
@@ -7,4 +7,4 @@ site: bookdown::bookdown_site
 
 # Introduction
 
-Many full-time students at Columbia, including us, are living off campus currently and may need to find new housing in next semester or next year. Among all the considerations while searching available apartments, we care most about the safety of areas surrounding the apartment. However, when googling the crime rate analysis, we found that they are not very instructive, as there are many crime types are included that irrelevent to us, like kidnapping. Hence the objective of our final project is that based on the crime types we care about, find the relatively safe areas by researching the crime rate of five boroughts, Manhattan, Bronx, Brooklyn, Queens and Staten Island, in New York City, which can be regarded as a reference of safety for people who are finding housing.
+Many full-time students at Columbia, including us, are living off campus currently and may need to find new housing in the next semester or the next year. Among all the considerations while searching available apartments, we care most about the safety of areas surrounding the apartment. However, when googling the crime rate analysis, we found that they are not very instructive, as there are many crime types are included that irrelevent to us. Hence the objective of our final project is that based on the crime types we care about, find the relatively safe areas by researching the crime rate of five boroughts, Manhattan, Bronx, Brooklyn, Queens and Staten Island, in New York City, which can be regarded as a reference of safety for people who are finding housing.

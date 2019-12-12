@@ -14,6 +14,7 @@ library(tidyverse)
 DATA <- read.csv("NYPD_Complaint_Data_Current__Year_To_Date_.csv", na.strings = "")
 ```
 
+There is 347074 observation in this dataset. The crime is broken down into 62 different types.
 
 Another dataset is the population in each of 5 boroughs in New York City in 2018, and we downloaded it from the following link:
 
