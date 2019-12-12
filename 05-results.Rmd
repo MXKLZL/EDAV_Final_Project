@@ -209,14 +209,14 @@ Among 5 boroughs, There are small decline trends after August in all Boroughs ex
 
 
 ```{r}
-picked_time <- c("07am - 11am", "11am - 3pm", "3pm - 7pm","7pm - 11pm")
+picked_time <- c("7am - 11am", "11am - 3pm", "3pm - 7pm","7pm - 11pm")
 crime_color <- c("#7851a9", "#800020", "#ef5927", "#0079c1", "#dac751", "#133a30")
 
 df_select <- df_select %>% drop_na(BORO_NM)
 df_select <- df_select %>% mutate(timerange = CMPLNT_FR_TM)
 df_select <- df_select %>% mutate(timerange = ifelse(CMPLNT_FR_TM >= chron(times="07:00:00") 
                                                 & CMPLNT_FR_TM <= chron(times="10:59:59"),
-                                                "07am - 11am", timerange) )
+                                                "7am - 11am", timerange) )
 df_select <- df_select %>% mutate(timerange = ifelse(CMPLNT_FR_TM >= chron(times="11:00:00") 
                                                 & CMPLNT_FR_TM <= chron(times="14:59:59"),
                                                 "11am - 3pm", timerange) )
@@ -256,7 +256,7 @@ ggplot(df_select, aes(x=BORO_NM, ..count.., fill=timerange)) +
   theme(legend.title = element_blank())
   #scale_fill_manual(values=c("tomato2", "deepskyblue", "slateblue4",'yellow1'))
 ```
-From the graph above, there is same pattern for every borough. The desceding order of numebr of crimes is 3pm -7pm, 11am - 3pm, 7pm - 11pm, and 07am - 11am. Seperating the time period doesn't help us figure out which borough has apprant advantage to live. However we can adjust our schdule base on the graph above. For example, if you live in Manhattan, going out before 11am and back to home after 7pm can help you avoid more crimes.   
+From the graph above, there is same pattern for every borough. The desceding order of numebr of crimes is 3pm -7pm, 11am - 3pm, 7pm - 11pm, and 7am - 11am. Seperating the time period doesn't help us figure out which borough has apprant advantage to live. However we can adjust our schdule base on the graph above. For example, if you live in Manhattan, going out before 11am and back to home after 7pm can help you avoid more crimes.   
 
 
 ```{r}
@@ -270,25 +270,6 @@ ggplot(df_select, aes(factor(weekdays(CMPLNT_FR_DT,abbreviate =TRUE), levels=c("
 ```
 
 Based on the above plot, the weekdays pattern is similar for each borough, where in the weekends the occurance of crime events is relatively infrequent compare to weekdays. Since we will go outside more during weekdays, the graph above dones't help us find out the most suitable borough. However, the graph reminder us that we should try to choose safer periods to go outside in Friday. 
-
-
-##buyao
-
-#Because we are all in the age group 18-24, and we want to find how we are related to the victims of crime events, first we plot the distribution of 5 age groups from <18 to 65+ in each borough, and the result is as following:
-
-```{r}
-df_age <- subset(df_select, as.character(VIC_AGE_GROUP) %in% c("<18", "18-24", "25-44", "45-64","65+") )
-ggplot(df_age, aes(VIC_AGE_GROUP))+
-  geom_bar(fill="lightblue")+
-  xlab("Age Groups")+
-  ggtitle("The Distribution of Age Groups of Victims by Borough in New York City")+
-  facet_wrap("BORO_NM", scale="free")
-```
-
-##According to the graphs, we found that for each borough, the pattern of victims age group is similar, where the 25-44 age group has the largest number of victims, and the 45-64 age group has the second largest number of victims. For this plot it seems that the 18-24 age group among different boroughs is not apparent, so we extract the 18-24 group of each borough and draw the following barplot:
-
-##buyao
-
 
 
 Since most of full time students are in the age group 18-24, and we want to find how these students including us are related to the victims of crime events,so we extract the 18-24 group of each borough and draw the following barplot:
@@ -311,59 +292,3 @@ ggplot(df_age2, aes(x=reorder(Borough, -Rate), y=Rate))+
 ```
 For the plotn above, we convert the count of crime events to crime rate per 100000 people, and we can see clearly that Manhattan has the largest crime rate for age group 18-24, while Staten Island and Queens have the smallest crime rate. Combining with the result from crime types part(Manhattan and Queens are two best choice), Queens should be better choice for full time student than Manhattan.
 
-
-
-
-##buyao
-
-```{r}
-df_race <-df_select[,c('OFNS_DESC','VIC_RACE')]
-df_race <- df_race %>%
-  filter(VIC_RACE != 'UNKNOWN')
-
-df_race['count'] <- 1
-
-df_race<- df_race %>%
-  group_by(VIC_RACE,OFNS_DESC) %>%
-  summarize(Freq = log(sum(count)))
-
-
-ggplot(df_race, aes(x = OFNS_DESC, y = Freq))+
-  geom_bar(position = "dodge",stat = "identity",fill="lightblue") +
-  facet_wrap(~VIC_RACE, scales="free", nrow = 3)+
-  theme(axis.text.x=element_text(size=6))+
-  labs(x = "Crime Types", y = "log(Total amount)", title = "Major Crimes faced by different races in NYC")
-```
-
-
-Also for different races, people may face different crime rate among different borough. In order to help students with different origins to make the proper choices, we make the following graph.
-```{r}
-df_race <-df_select[,c('BORO_NM','VIC_RACE')]
-df_race <- df_race %>%
-  filter(VIC_RACE != 'UNKNOWN')
-
-df_race['count'] <- 1
-
-df_race<- df_race %>%
-  group_by(VIC_RACE,BORO_NM) %>%
-  summarize(Freq = sum(count))
-
-df_race['adjusted'] <- 1
-df_race <- data.frame(df_race)
-
-for(i in 1:30){
-  state <- df_race[i,2]
-  df_race[i,'adjusted']<-100000*df3[i,3]/DA[state,"Population"]
-}
-
-
-ggplot(df_race, aes(x = BORO_NM, y = adjusted))+
-  geom_bar(position = "dodge",stat = "identity",fill="lightblue") +
-  facet_wrap(~VIC_RACE, scales="free", nrow = 3)+
-  theme(axis.text.x=element_text(size=6)) +
-  labs(x = "Crime Types", y = "Crime Rate", title = "Crimes faced by different races in different Boroughs")
-```
-According to the graph, we don't recommend students to live in STATEN ISLAND, because its crime rate is much greater than the other boroughs. And for students with different races, they can choose the region with low crime rate according to their own condition. For example, BRONX and MANHATTAN are more suitable for Asian students rather than BROOKLYN.
-
-
-##buyao
