@@ -145,7 +145,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
-<li class="chapter" data-level="2" data-path="data-sources.html"><a href="data-sources.html"><i class="fa fa-check"></i><b>2</b> Data sources</a></li>
+<li class="chapter" data-level="2" data-path="data-sources.html"><a href="data-sources.html"><i class="fa fa-check"></i><b>2</b> Data sources</a><ul>
+<li class="chapter" data-level="2.1" data-path="data-sources.html"><a href="data-sources.html#nypd-complaint-data"><i class="fa fa-check"></i><b>2.1</b> NYPD Complaint Data</a></li>
+<li class="chapter" data-level="2.2" data-path="data-sources.html"><a href="data-sources.html#united-states-census-bureau-quick-facts"><i class="fa fa-check"></i><b>2.2</b> United States Census Bureau Quick Facts</a></li>
+</ul></li>
 <li class="chapter" data-level="3" data-path="data-transformation.html"><a href="data-transformation.html"><i class="fa fa-check"></i><b>3</b> Data transformation</a></li>
 <li class="chapter" data-level="4" data-path="missing-values.html"><a href="missing-values.html"><i class="fa fa-check"></i><b>4</b> Missing values</a></li>
 <li class="chapter" data-level="5" data-path="results.html"><a href="results.html"><i class="fa fa-check"></i><b>5</b> Results</a></li>
@@ -195,71 +198,74 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb5-2" data-line-number="2">df<span class="op">$</span>CMPLNT_FR_TM &lt;-<span class="st"> </span><span class="kw">as.character</span>(df<span class="op">$</span>CMPLNT_FR_TM)</a>
 <a class="sourceLine" id="cb5-3" data-line-number="3"><span class="kw">names</span>(df) &lt;-<span class="st"> </span>df_cols</a>
 <a class="sourceLine" id="cb5-4" data-line-number="4">x &lt;-<span class="st"> </span><span class="kw">missing_data.frame</span>(df)</a></code></pre></div>
-<pre><code>## NOTE: The following pairs of variables appear to have the same missingness pattern.
+<pre><code>## NOTE: In the following pairs of variables, the missingness pattern of the second is a subset of the first.
 ##  Please verify whether they are in fact logically distinct variables.
-##      [,1]       [,2]       
-## [1,] &quot;Latitude&quot; &quot;Longitude&quot;</code></pre>
+##      [,1]             [,2]           
+## [1,] &quot;SUSP_AGE_GROUP&quot; &quot;PREM_TYP_DESC&quot;
+## [2,] &quot;SUSP_AGE_GROUP&quot; &quot;SUSP_SEX&quot;</code></pre>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw">summary</span>(x<span class="op">@</span>patterns) </a></code></pre></div>
 <pre><code>##                                                                           nothing 
-##                                                                                16 
+##                                                                                 8 
 ##                                                                    SUSP_AGE_GROUP 
-##                                                                                 3 
-##                                                                          VIC_RACE 
-##                                                                                 2 
+##                                                                                 5 
+##                                                                     VIC_AGE_GROUP 
+##                                                                                 1 
+##                                                                         SUSP_RACE 
+##                                                                                 1 
 ##                                                               Latitude, Longitude 
-##                                                                               132 
-##                                                           VIC_AGE_GROUP, VIC_RACE 
-##                                                                                27 
+##                                                                               145 
 ##                                                         SUSP_AGE_GROUP, SUSP_RACE 
-##                                                                                14 
+##                                                                                12 
 ##                                                          SUSP_AGE_GROUP, VIC_RACE 
 ##                                                                                 1 
+##                                                           VIC_AGE_GROUP, VIC_RACE 
+##                                                                                11 
 ##                                               SUSP_AGE_GROUP, Latitude, Longitude 
-##                                                                                44 
-##                                               SUSP_AGE_GROUP, SUSP_SEX, SUSP_RACE 
-##                                                                                19 
+##                                                                                54 
 ##                                                     VIC_RACE, Latitude, Longitude 
-##                                                                                 7 
-##                                                    SUSP_RACE, Latitude, Longitude 
-##                                                                                 4 
-##                                                VIC_AGE_GROUP, Latitude, Longitude 
-##                                                                                 2 
-##                                           SUSP_AGE_GROUP, VIC_AGE_GROUP, VIC_RACE 
-##                                                                                 1 
-##                                    SUSP_AGE_GROUP, SUSP_RACE, Latitude, Longitude 
-##                                                                               140 
-##                                      VIC_AGE_GROUP, VIC_RACE, Latitude, Longitude 
-##                                                                               207 
-##                                          SUSP_RACE, VIC_RACE, Latitude, Longitude 
 ##                                                                                 5 
+##                                               SUSP_AGE_GROUP, SUSP_SEX, SUSP_RACE 
+##                                                                                23 
+##                                           SUSP_AGE_GROUP, VIC_AGE_GROUP, VIC_RACE 
+##                                                                                 7 
+##                                                VIC_AGE_GROUP, Latitude, Longitude 
+##                                                                                 3 
+##                                                    SUSP_RACE, Latitude, Longitude 
+##                                                                                 3 
+##                                      VIC_AGE_GROUP, VIC_RACE, Latitude, Longitude 
+##                                                                               202 
+##                                    SUSP_AGE_GROUP, SUSP_RACE, Latitude, Longitude 
+##                                                                               142 
 ##                                SUSP_AGE_GROUP, SUSP_RACE, VIC_AGE_GROUP, VIC_RACE 
-##                                                                                 1 
-##                                SUSP_AGE_GROUP, VIC_AGE_GROUP, Latitude, Longitude 
 ##                                                                                 2 
-##                                SUSP_AGE_GROUP, PREM_TYP_DESC, Latitude, Longitude 
-##                                                                                 1 
 ##                                     SUSP_AGE_GROUP, VIC_RACE, Latitude, Longitude 
 ##                                                                                 1 
-##                      SUSP_AGE_GROUP, VIC_AGE_GROUP, VIC_RACE, Latitude, Longitude 
-##                                                                                44 
-##                          SUSP_AGE_GROUP, SUSP_RACE, VIC_RACE, Latitude, Longitude 
-##                                                                                 7 
+##                                SUSP_AGE_GROUP, VIC_AGE_GROUP, Latitude, Longitude 
+##                                                                                 1 
 ##                          SUSP_AGE_GROUP, SUSP_SEX, SUSP_RACE, Latitude, Longitude 
-##                                                                               201 
+##                                                                               207 
+##                      SUSP_AGE_GROUP, VIC_AGE_GROUP, VIC_RACE, Latitude, Longitude 
+##                                                                                35 
+##                          SUSP_AGE_GROUP, SUSP_RACE, VIC_RACE, Latitude, Longitude 
+##                                                                                 6 
+##                      SUSP_AGE_GROUP, SUSP_SEX, SUSP_RACE, VIC_AGE_GROUP, VIC_RACE 
+##                                                                                 7 
 ##                     SUSP_AGE_GROUP, PREM_TYP_DESC, SUSP_RACE, Latitude, Longitude 
 ##                                                                                 1 
-##                      SUSP_AGE_GROUP, SUSP_SEX, SUSP_RACE, VIC_AGE_GROUP, VIC_RACE 
-##                                                                                 6 
+##                           SUSP_RACE, VIC_AGE_GROUP, VIC_RACE, Latitude, Longitude 
+##                                                                                 1 
 ##           SUSP_AGE_GROUP, SUSP_RACE, VIC_AGE_GROUP, VIC_RACE, Latitude, Longitude 
-##                                                                                24 
+##                                                                                35 
 ##                SUSP_AGE_GROUP, SUSP_SEX, SUSP_RACE, VIC_RACE, Latitude, Longitude 
-##                                                                                12 
+##                                                                                 8 
+##       SUSP_AGE_GROUP, PREM_TYP_DESC, VIC_AGE_GROUP, VIC_RACE, Latitude, Longitude 
+##                                                                                 1 
 ##           SUSP_AGE_GROUP, SUSP_SEX, SUSP_RACE, VIC_AGE_GROUP, Latitude, Longitude 
 ##                                                                                 1 
-##           SUSP_AGE_GROUP, PREM_TYP_DESC, SUSP_SEX, SUSP_RACE, Latitude, Longitude 
-##                                                                                 1 
 ## SUSP_AGE_GROUP, SUSP_SEX, SUSP_RACE, VIC_AGE_GROUP, VIC_RACE, Latitude, Longitude 
-##                                                                                74</code></pre>
+##                                                                                70 
+##  BORO_NM, SUSP_AGE_GROUP, PREM_TYP_DESC, SUSP_SEX, SUSP_RACE, Latitude, Longitude 
+##                                                                                 1</code></pre>
 <p>Here, we found out that there are 30 different row missing patterns. Some of the patterns only have one or two ocurrences and 20 of them have 10 ocurrences or below.</p>
 <p>We can check how many time each of the row missing pattern appears in the data set by the following and also visualize these row missing patterns with visna function.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw">visna</span>(df, <span class="dt">sort=</span><span class="st">&#39;r&#39;</span>)</a></code></pre></div>

@@ -145,7 +145,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
-<li class="chapter" data-level="2" data-path="data-sources.html"><a href="data-sources.html"><i class="fa fa-check"></i><b>2</b> Data sources</a></li>
+<li class="chapter" data-level="2" data-path="data-sources.html"><a href="data-sources.html"><i class="fa fa-check"></i><b>2</b> Data sources</a><ul>
+<li class="chapter" data-level="2.1" data-path="data-sources.html"><a href="data-sources.html#nypd-complaint-data"><i class="fa fa-check"></i><b>2.1</b> NYPD Complaint Data</a></li>
+<li class="chapter" data-level="2.2" data-path="data-sources.html"><a href="data-sources.html#united-states-census-bureau-quick-facts"><i class="fa fa-check"></i><b>2.2</b> United States Census Bureau Quick Facts</a></li>
+</ul></li>
 <li class="chapter" data-level="3" data-path="data-transformation.html"><a href="data-transformation.html"><i class="fa fa-check"></i><b>3</b> Data transformation</a></li>
 <li class="chapter" data-level="4" data-path="missing-values.html"><a href="missing-values.html"><i class="fa fa-check"></i><b>4</b> Missing values</a></li>
 <li class="chapter" data-level="5" data-path="results.html"><a href="results.html"><i class="fa fa-check"></i><b>5</b> Results</a></li>
@@ -176,7 +179,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="data-transformation" class="section level1">
 <h1><span class="header-section-number">Chapter 3</span> Data transformation</h1>
-<p>First of all, since we would like to analysis the occurance time and date of each record, we changed the type of column CMPLNT_FR_DT, CMPLNT_FR_TM to date and time. However, some crime records happend in long year age(like 1950s) but completeed recently are included in our dataset. In order to keep our data up to date, we drop all record happend before 2018-01-01. For severals error data such as record happend in 1018 or 1019, we fixed their date.</p>
+<p>First of all, since we would like to analysis the occurrence time and date of each record, we changed the type of column CMPLNT_FR_DT, CMPLNT_FR_TM to date and time. However, some crime records happend in long year ago(like 1950s) but completed recently are included in our dataset. In order to keep our data up to date, we drop all records happened before 2018-01-01. For severals error data such as record happend in 1018 or 1019, we fixed their date.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(tidyr)</a>
 <a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">library</span>(tidyverse)</a>
 <a class="sourceLine" id="cb1-3" data-line-number="3"><span class="kw">library</span>(dplyr)</a>
