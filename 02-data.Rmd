@@ -10,8 +10,8 @@ There are 347074 observations with 35 variables in this dataset. These variables
 
 ## United States Census Bureau Quick Facts
 
-Another dataset we will use is the report of population in each of 5 boroughs in New York City in the end of 2018 from U.S. Census, which is downloaded from this [link](https://www.census.gov/quickfacts/fact/table/newyorkcountymanhattanboroughnewyork,bronxcountybronxboroughnewyork,queenscountyqueensboroughnewyork,kingscountybrooklynboroughnewyork,richmondcountystatenislandboroughnewyork,newyorkcitynewyork/HSG010218).
+Another dataset we will use is the report of the population in each of 5 boroughs in New York City at the end of 2018 from the U.S. Census, which is downloaded from this [link](https://www.census.gov/quickfacts/fact/table/newyorkcountymanhattanboroughnewyork,bronxcountybronxboroughnewyork,queenscountyqueensboroughnewyork,kingscountybrooklynboroughnewyork,richmondcountystatenislandboroughnewyork,newyorkcitynewyork/HSG010218).
 
-Because currently we are in 2019 and there is no data of population in the end of 2019, we will use this dataset to calculate the crime rate for each borough in the later research.
+Because currently we are in 2019 and there is no data of the population at the end of 2019, we will use this dataset to calculate the crime rate for each borough in the later research.
 
-Dataset reading is shown in later chapter.
+Dataset reading is shown in a later chapter.
