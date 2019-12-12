@@ -1,5 +1,7 @@
 --- 
-title: "NYC Crime Analysis"
+title: |
+  | "Recommended Boroughs and Places for Full-Time Student to Live in"
+  | "Examination of Selected Crime Rate in New York City"
 author: "Yichi Zhang, Zelin Li, Huayun Xu, Mingfang Chang"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
