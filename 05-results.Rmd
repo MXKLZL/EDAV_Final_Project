@@ -24,7 +24,9 @@ ggplot(df1, aes(reorder(df_select...4.,df1$Freq), y = df1$Freq)) +
   labs(x = "Crime Types", y = "Total amount", title = "Major Crimes in NYC")
 
 ```
-To make the ranking more easy to identify, we use log function to adjust each crime amount. As we can see, THEFT is the most common crime in NYC and we deduce that this phenomenon may result from the low cost of theft. Offence also appears very common, because there are many different types of crime could be classified as OFFENCE. ARSON, MURDER and KIDNAPPING are the least common crimes in the dataset.
+
+To make the ranking more easy to identify, we use log function to adjust each crime amount. As we can see, THEFT is the most
+common crime in NYC and we deduce that this phenomenon may result from the low cost of theft. Offence also appears very common, because there are many different types of crime could be classified as OFFENCE. ARSON, MURDER and KIDNAPPING are the least common crimes in the dataset.
 
 
 For the convenience of the next few researches, we drop 5 types of crime from our dataset: ARSON, MURDER, KIDNAPPING, DRUG and FRAUD. 
@@ -94,14 +96,11 @@ county_choropleth(ChorDF,
                   county_zoom = nyc_county_fips$region)
 ``` 
 
-<<<<<<< HEAD
-As full-time students, we go out more frequently from Monday to Friday rather than weekends. Therefore we want to know the days with the most and least frequent number of crime events for each borough, and the plot is as following: 
-=======
 After we selected the six most related crime to us, we take the population of each county into account and calculate the the crime rate of selected crime in five counties. The higher crime rate start from brooklyn along mahanttan to  bronx whereas queens and staten island have lower crime rate. The suprsing thing is that, in our mind, brooklyn is always considered as a more dangerous county than mahanttan. 
 
 However,we cannot judge which county is more dangerous for us and which county is more safe from this graph. Since different person may have different rank for the dangerousness of the crime types. 
 
->>>>>>> c1934c0b37e5c9dbd58a925e2c5f4db05210292a
+As full-time students, we go out more frequently from Monday to Friday rather than weekends. Therefore we want to know the days with the most and least frequent number of crime events for each borough, and the plot is as following: 
 
 ```{r}
 library(chron)
@@ -113,12 +112,12 @@ ggplot(df_select, aes(factor(weekdays(CMPLNT_FR_DT,abbreviate =TRUE), levels=c("
   facet_wrap("BORO_NM", scale="free")
 ```
 
-<<<<<<< HEAD
+
 Based on the above plot, the weekdays pattern is similar for each borough, where in the weekends the occurance of crime events is relatively infrequently compare to weekdays. Moreover, it seems that Staten Island is the best place to live if only safety is considered.
 
-=======
+
 We want to figure out if there are special time of the year where more crimes happen. So we build the following graph for recognizing time series patterns. 
->>>>>>> c1934c0b37e5c9dbd58a925e2c5f4db05210292a
+
 ```{r}
 df2 <- data.frame(df_select[,1:2])
 df2['count'] <- 1
@@ -240,7 +239,7 @@ for(i in 1:length(dangerous)){
 df_select <- df_select %>% mutate(timerange = ifelse(timerange %in% picked_time, timerange, NA)) %>% drop_na(timerange)
 ```
 
-As a student, we rent a place because we need to goto school or job. So it is very important to aviod the places that have a higher chance of crime when we are walking to school, or coming back to home. Therefore, we have broken down the the time that the crime happened into the ranges that we cared about the most. Which are the following:
+As a student, we rent a place because we need to go to school or job. So it is very important to avoid the places that have a higher chance of crime when we are walking to school, or coming back to home. Therefore, we have broken down the the time that the crime happened into the ranges that we cared about the most. Which are the following:
 
 1. 7am - 11am (the time when we go to school or work)
 2. 15pm - 19pm (the time we go back to home )

@@ -188,7 +188,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb5-10" data-line-number="10">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">VIC_RACE =</span> <span class="kw">ifelse</span>(VIC_RACE <span class="op">==</span><span class="st"> &quot;UNKNOWN&quot;</span>, <span class="ot">NA</span>, VIC_RACE))</a></code></pre></div>
 <p>We have randomly sampled 1000 data to analysis the missing value pattern of the dataset after we have cleaned the data. We have also changed the “UNKNOWN” entry to NA.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw">vis_miss</span>(df)</a></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-48-1.png" width="672" /></p>
 <p>From the plot above, we see that majority of missing data came from the columns: “SUSP_AGE_GEOUP”, “SUSP_SEX”, “SUSP_RACE”, “VIC_AGE_GROUP”, “VIC_RACE”, “Latitude”, and “Longitude”. We also see that “Latitude”, and “Longitude” are always missing together.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">df<span class="op">$</span>CMPLNT_FR_DT &lt;-<span class="st"> </span><span class="kw">as.character</span>(df<span class="op">$</span>CMPLNT_FR_DT)</a>
 <a class="sourceLine" id="cb7-2" data-line-number="2">df<span class="op">$</span>CMPLNT_FR_TM &lt;-<span class="st"> </span><span class="kw">as.character</span>(df<span class="op">$</span>CMPLNT_FR_TM)</a>
@@ -200,69 +200,67 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## [1,] &quot;SUSP_AGE_GROUP&quot; &quot;SUSP_SEX&quot;</code></pre>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw">summary</span>(x<span class="op">@</span>patterns) </a></code></pre></div>
 <pre><code>##                                                                           nothing 
-##                                                                                 7 
-##                                                                    SUSP_AGE_GROUP 
-##                                                                                 2 
+##                                                                                18 
 ##                                                                          VIC_RACE 
-##                                                                                 1 
-##                                                         SUSP_AGE_GROUP, SUSP_RACE 
-##                                                                                12 
-##                                                           VIC_AGE_GROUP, VIC_RACE 
-##                                                                                13 
-##                                                               Latitude, Longitude 
-##                                                                               145 
-##                                               SUSP_AGE_GROUP, Latitude, Longitude 
-##                                                                                65 
-##                                           SUSP_AGE_GROUP, VIC_AGE_GROUP, VIC_RACE 
 ##                                                                                 2 
-##                                               SUSP_AGE_GROUP, SUSP_SEX, SUSP_RACE 
-##                                                                                13 
-##                                                VIC_AGE_GROUP, Latitude, Longitude 
+##                                                                    SUSP_AGE_GROUP 
+##                                                                                 4 
+##                                                                     VIC_AGE_GROUP 
 ##                                                                                 1 
+##                                                               Latitude, Longitude 
+##                                                                               140 
+##                                                         SUSP_AGE_GROUP, SUSP_RACE 
+##                                                                                 8 
+##                                                           VIC_AGE_GROUP, VIC_RACE 
+##                                                                                17 
+##                                               SUSP_AGE_GROUP, Latitude, Longitude 
+##                                                                                62 
+##                                               SUSP_AGE_GROUP, SUSP_SEX, SUSP_RACE 
+##                                                                                15 
+##                                                    SUSP_RACE, Latitude, Longitude 
+##                                                                                 9 
+##                                                VIC_AGE_GROUP, Latitude, Longitude 
+##                                                                                 6 
 ##                                                     VIC_RACE, Latitude, Longitude 
 ##                                                                                 5 
-##                                                    SUSP_RACE, Latitude, Longitude 
-##                                                                                 3 
-##                                                SUSP_RACE, VIC_AGE_GROUP, VIC_RACE 
+##                                               SUSP_AGE_GROUP, SUSP_RACE, VIC_RACE 
 ##                                                                                 1 
-##                                      VIC_AGE_GROUP, VIC_RACE, Latitude, Longitude 
-##                                                                               202 
-##                                    SUSP_AGE_GROUP, SUSP_RACE, Latitude, Longitude 
-##                                                                               149 
-##                                          SUSP_RACE, VIC_RACE, Latitude, Longitude 
+##                                           SUSP_AGE_GROUP, VIC_AGE_GROUP, VIC_RACE 
 ##                                                                                 2 
-##                                     SUSP_AGE_GROUP, VIC_RACE, Latitude, Longitude 
-##                                                                                 3 
-##                                       BORO_NM, PREM_TYP_DESC, Latitude, Longitude 
-##                                                                                 1 
-##                                SUSP_AGE_GROUP, PREM_TYP_DESC, Latitude, Longitude 
+##                                      VIC_AGE_GROUP, VIC_RACE, Latitude, Longitude 
+##                                                                               176 
+##                                    SUSP_AGE_GROUP, SUSP_RACE, Latitude, Longitude 
+##                                                                               171 
+##                                SUSP_AGE_GROUP, SUSP_RACE, VIC_AGE_GROUP, VIC_RACE 
 ##                                                                                 1 
 ##                                SUSP_AGE_GROUP, VIC_AGE_GROUP, Latitude, Longitude 
 ##                                                                                 2 
+##                                       BORO_NM, PREM_TYP_DESC, Latitude, Longitude 
+##                                                                                 2 
+##                                     SUSP_AGE_GROUP, VIC_RACE, Latitude, Longitude 
+##                                                                                 3 
+##                                          SUSP_RACE, VIC_RACE, Latitude, Longitude 
+##                                                                                 1 
 ##                          SUSP_AGE_GROUP, SUSP_SEX, SUSP_RACE, Latitude, Longitude 
-##                                                                               192 
+##                                                                               209 
 ##                      SUSP_AGE_GROUP, VIC_AGE_GROUP, VIC_RACE, Latitude, Longitude 
-##                                                                                37 
+##                                                                                28 
 ##                          SUSP_AGE_GROUP, SUSP_RACE, VIC_RACE, Latitude, Longitude 
-##                                                                                 5 
+##                                                                                 6 
+##                      SUSP_AGE_GROUP, SUSP_SEX, SUSP_RACE, VIC_AGE_GROUP, VIC_RACE 
+##                                                                                 3 
 ##                           SUSP_RACE, VIC_AGE_GROUP, VIC_RACE, Latitude, Longitude 
 ##                                                                                 2 
-##                      SUSP_AGE_GROUP, SUSP_SEX, SUSP_RACE, VIC_AGE_GROUP, VIC_RACE 
-##                                                                                 1 
-##                     SUSP_AGE_GROUP, SUSP_RACE, VIC_AGE_GROUP, Latitude, Longitude 
-##                                                                                 1 
 ##           SUSP_AGE_GROUP, SUSP_RACE, VIC_AGE_GROUP, VIC_RACE, Latitude, Longitude 
-##                                                                                37 
-##           SUSP_AGE_GROUP, SUSP_SEX, SUSP_RACE, VIC_AGE_GROUP, Latitude, Longitude 
-##                                                                                 5 
+##                                                                                23 
+##           SUSP_AGE_GROUP, PREM_TYP_DESC, SUSP_SEX, SUSP_RACE, Latitude, Longitude 
+##                                                                                 2 
 ##                SUSP_AGE_GROUP, SUSP_SEX, SUSP_RACE, VIC_RACE, Latitude, Longitude 
-##                                                                                 8 
-##       SUSP_AGE_GROUP, PREM_TYP_DESC, SUSP_SEX, SUSP_RACE, VIC_AGE_GROUP, VIC_RACE 
-##                                                                                 1 
-##       SUSP_AGE_GROUP, PREM_TYP_DESC, VIC_AGE_GROUP, VIC_RACE, Latitude, Longitude 
-##                                                                                 1 
+##                                                                                 9 
+##           SUSP_AGE_GROUP, SUSP_SEX, SUSP_RACE, VIC_AGE_GROUP, Latitude, Longitude 
+##                                                                                 3 
 ## SUSP_AGE_GROUP, SUSP_SEX, SUSP_RACE, VIC_AGE_GROUP, VIC_RACE, Latitude, Longitude 
-##                                                                                80</code></pre>
+##                                                                                69</code></pre>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="co">#image(x)</span></a></code></pre></div>
 <p>We can further investigate the missing row patterns by using the missing_data.frame function, and we found out that there are 30 different row missing patterns. Some of the patterns only have one or two ocurrences and 20 of them have 10 ocurrences or below.</p>
 <p>We can check how many time each of the row missing pattern appears in the data set by the following and also visualize these row missing patterns with visna function.</p>
@@ -274,7 +272,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## reshape2 while both libraries are attached, e.g. melt.list, you can prepend
 ## the namespace like reshape2::melt(as.data.frame(xs)). In the next version,
 ## this warning will become an error.</code></pre>
-<p><img src="_main_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-50-1.png" width="672" /></p>
 <p>By using the visna function, we observed the following missing row patterns:</p>
 <ol style="list-style-type: decimal">
 <li>The pattern that occurs the most is missing both Latitude and Longitude, which is about 91.5% of the data.</li>
@@ -284,12 +282,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="kw">ggplot</span>(df_select, <span class="kw">aes</span>(<span class="dt">x=</span>OFNS_DESC, <span class="dt">y=</span>..count..)) <span class="op">+</span></a>
 <a class="sourceLine" id="cb14-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_bar</span>() <span class="op">+</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb14-3" data-line-number="3"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;Count by crime type&quot;</span>)</a></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-51-1.png" width="672" /></p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1">df_locationNA_dropped &lt;-<span class="st"> </span>df_select <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">drop_na</span>(Latitude)</a>
 <a class="sourceLine" id="cb15-2" data-line-number="2"><span class="kw">ggplot</span>(df_locationNA_dropped, <span class="kw">aes</span>(<span class="dt">x=</span>OFNS_DESC, <span class="dt">y=</span>..count..)) <span class="op">+</span></a>
 <a class="sourceLine" id="cb15-3" data-line-number="3"><span class="st">  </span><span class="kw">geom_bar</span>() <span class="op">+</span></a>
 <a class="sourceLine" id="cb15-4" data-line-number="4"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;Count by crime type with location NA dropped&quot;</span>)</a></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-9-2.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-51-2.png" width="672" /></p>
 <p>Base on the above two plots, we see that after we have removed all the data that are missing location, the distribution of the crime type is unchanged. So, the missing of location is somewhat random and we are safe to remove it when doing the interactive part.</p>
 
 </div>
