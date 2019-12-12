@@ -47,7 +47,7 @@ df <- df %>% mutate(OFNS_DESC = ifelse(OFNS_DESC %in% drug, "DRUG", OFNS_DESC))
 df <- df %>% mutate(OFNS_DESC = ifelse(OFNS_DESC %in% weapon, "WEAPON", OFNS_DESC))
 df <- df %>% mutate(OFNS_DESC = ifelse(OFNS_DESC %in% rape, "RAPE", OFNS_DESC))
 df <- df %>% mutate(OFNS_DESC = ifelse(OFNS_DESC %in% fraud, "FRAUD", OFNS_DESC))
-df <- df %>% mutate(OFNS_DESC = ifelse(OFNS_DESC %in% theft, "THIEF", OFNS_DESC))
+df <- df %>% mutate(OFNS_DESC = ifelse(OFNS_DESC %in% theft, "THEFT", OFNS_DESC))
 df <- df %>% mutate(OFNS_DESC = ifelse(OFNS_DESC %in% murder, "MURDER", OFNS_DESC))
 df <- df %>% mutate(OFNS_DESC = ifelse(OFNS_DESC %in% kidnapping, "KIDNAPPING", OFNS_DESC))
 
