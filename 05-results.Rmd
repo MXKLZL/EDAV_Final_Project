@@ -9,7 +9,7 @@ library(chron)
 library(tidyverse)
 ```
 
-In chapter 3, we have dropped some trival crime types like "CRIMINAL MISCHIEF" and now we only pay attention to the common crimes happened in NYC. There are 11 types of crimes in total and we can see the frequency rank of them in the following graph.
+In chapter 3, we have dropped some trivial crime types like "CRIMINAL MISCHIEF" and now we only pay attention to the common crime type happened in NYC. There are 11 types of crimes in total and we can see the frequency rank of them in the following graph.
 ```{r}
 df1 <- data.frame(df_select[,4])
 df1['count'] <- 1
@@ -19,19 +19,17 @@ df1<- df1 %>%
 
 ggplot(df1, aes(reorder(df_select...4.,df1$Freq), y = df1$Freq)) +
   geom_bar(position = "dodge",stat = "identity",fill="lightblue") +
-  scale_y_continuous(trans='log2')+
   coord_flip() +
   labs(x = "Crime Types", y = "Total amount", title = "Major Crimes in NYC")
 
 ```
 
-To make the ranking more easy to identify, we use log function to adjust each crime amount. As we can see, THEFT is the most
-common crime in NYC and we deduce that this phenomenon may result from the low cost of theft. Offence also appears very common, because there are many different types of crime could be classified as OFFENCE. ARSON, MURDER and KIDNAPPING are the least common crimes in the dataset.
-
+As we can see, THEFT is the most common crime in NYC and we deduce that this phenomenon may result from the low cost of theft. Offence also appears very common, because there are many different types of crime could be classified as OFFENCE. ARSON, MURDER and KIDNAPPING are the least common crimes in the dataset.
 
 For the convenience of the next few researches, we drop 5 types of crime from our dataset: ARSON, MURDER, KIDNAPPING, DRUG and FRAUD. 
 
 MURDER related data has great amout of missing data for latitude and longitude, also ARSON, MURDER and KIDNAPPING contain very few useful pieces of data and it's difficult to conduct instructive analysis. We drop FRAUD because this could be avoided effectively and for DRUG, although it's very common, usually it is the indirect reason for other crimes like offence or murder, the crime DRUG itself usually doesn't cause great harm to the society.
+
 ```{r}
 dangerous <-c('BURGLARY','OFFENSE','RAPE','ROBBERY','THIEF','WEAPON')
 df_select <- df_select %>% mutate(OFNS_DESC = ifelse(OFNS_DESC %in% dangerous, OFNS_DESC, NA)) %>% drop_na(OFNS_DESC)
