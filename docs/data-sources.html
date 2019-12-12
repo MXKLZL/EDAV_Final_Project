@@ -145,8 +145,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
-<li class="chapter" data-level="2" data-path="data-sources.html"><a href="data-sources.html"><i class="fa fa-check"></i><b>2</b> Data sources</a></li>
-<li class="chapter" data-level="3" data-path="data-transformation.html"><a href="data-transformation.html"><i class="fa fa-check"></i><b>3</b> Data transformation</a></li>
+<li class="chapter" data-level="2" data-path="data-sources.html"><a href="data-sources.html"><i class="fa fa-check"></i><b>2</b> Data sources</a><ul>
+<li class="chapter" data-level="2.1" data-path="data-sources.html"><a href="data-sources.html#nypd-complaint-data"><i class="fa fa-check"></i><b>2.1</b> NYPD Complaint Data</a></li>
+<li class="chapter" data-level="2.2" data-path="data-sources.html"><a href="data-sources.html#united-states-census-bureau-quick-facts"><i class="fa fa-check"></i><b>2.2</b> United States Census Bureau Quick Facts</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="data-transformation.html"><a href="data-transformation.html"><i class="fa fa-check"></i><b>3</b> Data transformation</a><ul>
+<li class="chapter" data-level="3.1" data-path="data-transformation.html"><a href="data-transformation.html#convert-type-and-fix-error-in-data"><i class="fa fa-check"></i><b>3.1</b> Convert Type and Fix Error in Data</a></li>
+<li class="chapter" data-level="3.2" data-path="data-transformation.html"><a href="data-transformation.html#pick-out-relevant-crimes"><i class="fa fa-check"></i><b>3.2</b> Pick Out Relevant Crimes</a></li>
+</ul></li>
 <li class="chapter" data-level="4" data-path="missing-values.html"><a href="missing-values.html"><i class="fa fa-check"></i><b>4</b> Missing values</a></li>
 <li class="chapter" data-level="5" data-path="results.html"><a href="results.html"><i class="fa fa-check"></i><b>5</b> Results</a></li>
 <li class="chapter" data-level="6" data-path="interactive-component.html"><a href="interactive-component.html"><i class="fa fa-check"></i><b>6</b> Interactive component</a></li>
@@ -176,13 +182,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="data-sources" class="section level1">
 <h1><span class="header-section-number">Chapter 2</span> Data sources</h1>
+<div id="nypd-complaint-data" class="section level2">
+<h2><span class="header-section-number">2.1</span> NYPD Complaint Data</h2>
 <p>We got the data of crime events to be researched from NYC Open Data, and here is the <a href="https://data.cityofnewyork.us/Public-Safety/NYPD-Complaint-Data-Current-Year-To-Date-/5uac-w243/data">link</a>.</p>
 <p>This dataset includes all valid felony, misdemeanor, and violation crimes reported to the New York City Police Department (NYPD) for all complete quarters so far this year (2019). Because we found the data in the end of October, the data is up to September, 2019. Then we downloaded the dataset as a csv file, and we also downloaded the explanation of each column name as a pdf file found from “About” in the right side of the website.</p>
 <p>There are 347074 observations with 35 variables in this dataset. These variables include information about the victim, subspect, location, date of crime, type of crime, description of crime and more. All crimes are divided into 62 different types. The problem is that this dataset is quite sparse, and some spatial and suspect information is missing. There is also some wrong information, for example, some crimes are reported in the year of 1018.</p>
-<p>Another dataset we will use is the report of population in each of 5 boroughs in New York City in the end of 2018, which is downloaded from this <a href="https://www.census.gov/quickfacts/fact/table/newyorkcountymanhattanboroughnewyork,bronxcountybronxboroughnewyork,queenscountyqueensboroughnewyork,kingscountybrooklynboroughnewyork,richmondcountystatenislandboroughnewyork,newyorkcitynewyork/HSG010218">link</a>.</p>
+</div>
+<div id="united-states-census-bureau-quick-facts" class="section level2">
+<h2><span class="header-section-number">2.2</span> United States Census Bureau Quick Facts</h2>
+<p>Another dataset we will use is the report of population in each of 5 boroughs in New York City in the end of 2018 from U.S. Census, which is downloaded from this <a href="https://www.census.gov/quickfacts/fact/table/newyorkcountymanhattanboroughnewyork,bronxcountybronxboroughnewyork,queenscountyqueensboroughnewyork,kingscountybrooklynboroughnewyork,richmondcountystatenislandboroughnewyork,newyorkcitynewyork/HSG010218">link</a>.</p>
 <p>Because currently we are in 2019 and there is no data of population in the end of 2019, we will use this dataset to calculate the crime rate for each borough in the later research.</p>
 <p>Dataset reading is shown in later chapter.</p>
 
+</div>
 </div>
             </section>
 
