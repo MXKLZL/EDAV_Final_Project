@@ -62,7 +62,8 @@ p1 <- ggplot(df_select, aes(x=OFNS_DESC, y=..count..)) +
   xlab("Crime Type") +
   ylab("Number of Crimes") +
   labs(title="Count by crime type") + 
-  coord_flip()
+  coord_flip() +
+  theme_grey(16)
 
 df_locationNA_dropped <- df_select %>% drop_na(Latitude)
 p2 <- ggplot(df_locationNA_dropped, aes(x=OFNS_DESC, y=..count..)) +
@@ -70,7 +71,8 @@ p2 <- ggplot(df_locationNA_dropped, aes(x=OFNS_DESC, y=..count..)) +
   xlab("Crime Type") +
   ylab("Number of Crimes") +
   labs(title="Count by crime type with location NA dropped") + 
-  coord_flip()
+  coord_flip() +
+  theme_grey(16)
 
 grid.arrange(p1, p2, ncol = 1)
 ```
