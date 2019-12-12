@@ -154,7 +154,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.2" data-path="data-transformation.html"><a href="data-transformation.html#pick-out-relevant-crimes"><i class="fa fa-check"></i><b>3.2</b> Pick Out Relevant Crimes</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="missing-values.html"><a href="missing-values.html"><i class="fa fa-check"></i><b>4</b> Missing values</a></li>
-<li class="chapter" data-level="5" data-path="results.html"><a href="results.html"><i class="fa fa-check"></i><b>5</b> Results</a></li>
+<li class="chapter" data-level="5" data-path="results.html"><a href="results.html"><i class="fa fa-check"></i><b>5</b> Results</a><ul>
+<li class="chapter" data-level="5.1" data-path="results.html"><a href="results.html#whcih-crime-types-are-more-common-in-each-borough"><i class="fa fa-check"></i><b>5.1</b> Whcih Crime Types Are More Common in Each Borough?</a></li>
+<li class="chapter" data-level="5.2" data-path="results.html"><a href="results.html#which-borough-is-safer-based-on-crime-time"><i class="fa fa-check"></i><b>5.2</b> Which Borough is Safer Based on Crime Time?</a></li>
+<li class="chapter" data-level="5.3" data-path="results.html"><a href="results.html#which-borough-is-safer-for-student-age-groups"><i class="fa fa-check"></i><b>5.3</b> Which Borough is Safer for Student Age Groups?</a></li>
+</ul></li>
 <li class="chapter" data-level="6" data-path="interactive-component.html"><a href="interactive-component.html"><i class="fa fa-check"></i><b>6</b> Interactive component</a></li>
 <li class="chapter" data-level="7" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>7</b> Conclusion</a></li>
 <li class="chapter" data-level="8" data-path="leaflet.html"><a href="leaflet.html"><i class="fa fa-check"></i><b>8</b> Interactive Geographic Data</a><ul>
@@ -185,14 +189,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="nypd-complaint-data" class="section level2">
 <h2><span class="header-section-number">2.1</span> NYPD Complaint Data</h2>
 <p>We got the data of crime events to be researched from NYC Open Data, and here is the <a href="https://data.cityofnewyork.us/Public-Safety/NYPD-Complaint-Data-Current-Year-To-Date-/5uac-w243/data">link</a>.</p>
-<p>This dataset includes all valid felony, misdemeanor, and violation crimes reported to the New York City Police Department (NYPD) for all complete quarters so far this year (2019). Because we found the data in the end of October, the data is up to September, 2019. Then we downloaded the dataset as a csv file, and we also downloaded the explanation of each column name as a pdf file found from “About” in the right side of the website.</p>
-<p>There are 347074 observations with 35 variables in this dataset. These variables include information about the victim, subspect, location, date of crime, type of crime, description of crime and more. All crimes are divided into 62 different types. The problem is that this dataset is quite sparse, and some spatial and suspect information is missing. There is also some wrong information, for example, some crimes are reported in the year of 1018.</p>
+<p>This dataset includes all valid felony, misdemeanor, and violation crimes reported to the New York City Police Department (NYPD) for all complete quarters so far this year (2019). Because we found the data at the end of October, the data is up to September 2019. Then we downloaded the dataset as a CSV file, and we also downloaded the explanation of each column name as a pdf file found from “About” on the right side of the website.</p>
+<p>There are 347074 observations with 35 variables in this dataset. These variables include information about the victim, suspect, location, date of crime, type of crime, description of crime and more. All crimes are divided into 62 different types. The problem is that this dataset is quite sparse, and some spatial and suspect information is missing. There is also some wrong information, for example, some crimes are reported in the year of 1018.</p>
+<p>We are interested in some of the variables and will pick them out in the cleaning section:</p>
+<p><strong>BORO_NM</strong>: The name of the borough in which the incident occurred</p>
+<p><strong>CMPLNT_FR_DT</strong>: Exact date of occurrence for the reported event (or starting date of occurrence, if CMPLNT_TO_DT exists)</p>
+<p><strong>CMPLNT_FR_TM</strong>: Exact time of occurrence for the reported event (or starting time of occurrence, if CMPLNT_TO_TM exists)</p>
+<p><strong>OFNS_DESC</strong>: Description of offense corresponding with key code</p>
+<p><strong>PREM_TYP_DESC</strong>: Specific description of premises; grocery store, residence, street, etc.</p>
+<p><strong>SUSP_AGE_GROUP</strong>: Suspect’s Age Group</p>
+<p><strong>SUSP_SEX</strong>: Suspect’s Sex Description</p>
+<p><strong>SUSP_RACE</strong>: Suspect’s Race Description</p>
+<p><strong>VIC_AGE_GROUP</strong>: Victim’s Age Group</p>
+<p><strong>VIC_RACE</strong>: Victim’s Race Description</p>
+<p><strong>VIC_SEX</strong>: Victim’s Sex Description (D=Business/Organization, E=PSNY/People of the State of New York, F=Female, M=Male)</p>
+<p><strong>Latitude</strong>: Midblock Latitude coordinate for Global Coordinate System, WGS 1984, decimal degrees (EPSG 4326)</p>
+<p><strong>Longitude</strong>: Midblock Longitude coordinate for Global Coordinate System, WGS 1984, decimal degrees (EPSG 4326)</p>
 </div>
 <div id="united-states-census-bureau-quick-facts" class="section level2">
 <h2><span class="header-section-number">2.2</span> United States Census Bureau Quick Facts</h2>
-<p>Another dataset we will use is the report of population in each of 5 boroughs in New York City in the end of 2018 from U.S. Census, which is downloaded from this <a href="https://www.census.gov/quickfacts/fact/table/newyorkcountymanhattanboroughnewyork,bronxcountybronxboroughnewyork,queenscountyqueensboroughnewyork,kingscountybrooklynboroughnewyork,richmondcountystatenislandboroughnewyork,newyorkcitynewyork/HSG010218">link</a>.</p>
-<p>Because currently we are in 2019 and there is no data of population in the end of 2019, we will use this dataset to calculate the crime rate for each borough in the later research.</p>
-<p>Dataset reading is shown in later chapter.</p>
+<p>Another dataset we will use is the report of the population in each of 5 boroughs in New York City at the end of 2018 from the U.S. Census, which is downloaded from this <a href="https://www.census.gov/quickfacts/fact/table/newyorkcountymanhattanboroughnewyork,bronxcountybronxboroughnewyork,queenscountyqueensboroughnewyork,kingscountybrooklynboroughnewyork,richmondcountystatenislandboroughnewyork,newyorkcitynewyork/HSG010218">link</a>.</p>
+<p>Because currently we are in 2019 and there is no data of the population at the end of 2019, we will use this dataset to calculate the crime rate for each borough in the later research.</p>
+<p>Dataset reading is shown in a later chapter.</p>
 
 </div>
 </div>
