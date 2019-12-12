@@ -1,3 +1,139 @@
 # Interactive component
 
 
+
+```{r load library, eval=TRUE, message=FALSE}
+library(tidyverse)
+library(leaflet)
+library(htmltools)
+library(leaflet.extras)
+library(viridis)
+```
+
+
+
+```{r}
+
+df <- df_select %>% drop_na(Latitude, Longitude)
+Y <- split(df, df$timerange)
+
+leaf <- leaflet() %>% addTiles()
+
+leaf <- leaf %>%
+      addMarkers(data=Y[[1]],
+                          lng=~Longitude, lat=~Latitude,
+                          label=~OFNS_DESC,
+                          popup=~OFNS_DESC,
+                          clusterOptions = markerClusterOptions(removeOutsideVisibleBounds = T),
+                          labelOptions = labelOptions(direction = 'auto'),
+                          group = "07am - 11am"
+                          )
+     
+leaf <- leaf %>%addMarkers(data=Y[[2]],
+                          lng=~Longitude, lat=~Latitude,
+                          label=~OFNS_DESC,
+                          popup=~OFNS_DESC,
+                          clusterOptions = markerClusterOptions(removeOutsideVisibleBounds = T),
+                          labelOptions = labelOptions(direction = 'auto'),
+                          group = "15pm - 19pm"
+
+                          )
+leaf <- leaf %>%
+     addMarkers(data=Y[[3]],
+                          lng=~Longitude, lat=~Latitude,
+                          label=~OFNS_DESC,
+                          popup=~OFNS_DESC,
+                          clusterOptions = markerClusterOptions(removeOutsideVisibleBounds = T),
+                          labelOptions = labelOptions(direction = 'auto'),
+                          group = "19pm - 23pm"
+                          )
+
+leaf %>%
+  addLayersControl(
+    overlayGroups = c("07am - 11am", "15pm - 19pm","19pm - 23pm"),
+    options = layersControlOptions(collapsed = FALSE)
+  )
+
+```
+
+
+
+```{r}
+TYPE <- split(df, df$OFNS_DESC)
+
+leaftype <- leaflet() %>% addTiles()
+
+
+leaftype <- leaftype %>%
+      addMarkers(data=TYPE[[1]],
+                          lng=~Longitude, lat=~Latitude,
+                          label =~OFNS_DESC , 
+                          popup=paste(paste("Victim Age: ",TYPE[[1]]$VIC_AGE_GROUP),
+                                       paste(", Time: ",TYPE[[1]]$timerange),sep = '\n'),
+                          clusterOptions = markerClusterOptions(removeOutsideVisibleBounds = T),
+                          labelOptions = labelOptions(direction = 'auto'),
+                          group = "BURGLARY"
+                          )
+     
+leaftype <- leaftype %>%addMarkers(data=TYPE[[2]],
+                          lng=~Longitude, lat=~Latitude,
+                          label =~OFNS_DESC , 
+                          popup=paste(paste("Victim Age: ",TYPE[[2]]$VIC_AGE_GROUP),
+                                       paste(", Time: ",TYPE[[2]]$timerange),sep = '\n'),
+                          clusterOptions = markerClusterOptions(removeOutsideVisibleBounds = T),
+                          labelOptions = labelOptions(direction = 'auto'),
+                          group = "OFFENSE"
+
+                          )
+leaftype <- leaftype %>%
+     addMarkers(data=TYPE[[3]],
+                          lng=~Longitude, lat=~Latitude,
+                          label =~OFNS_DESC , 
+                          popup=paste(paste("Victim Age: ",TYPE[[3]]$VIC_AGE_GROUP),
+                                       paste(", Time: ",TYPE[[3]]$timerange),sep = '\n'),
+                          clusterOptions = markerClusterOptions(removeOutsideVisibleBounds = T),
+                          labelOptions = labelOptions(direction = 'auto'),
+                          group = "RAPE"
+                          )
+
+
+leaftype <- leaftype %>%
+     addMarkers(data=TYPE[[4]],
+                          lng=~Longitude, lat=~Latitude,
+                          label =~OFNS_DESC , 
+                          popup=paste(paste("Victim Age: ",TYPE[[4]]$VIC_AGE_GROUP),
+                                       paste(", Time: ",TYPE[[4]]$timerange),sep = '\n'),
+                          clusterOptions = markerClusterOptions(removeOutsideVisibleBounds = T),
+                          labelOptions = labelOptions(direction = 'auto'),
+                          group = "ROBBERY"
+                          )
+leaftype <- leaftype %>%
+     addMarkers(data=TYPE[[5]],
+                          lng=~Longitude, lat=~Latitude,
+                          label =~OFNS_DESC , 
+                          popup=paste(paste("Victim Age: ",TYPE[[5]]$VIC_AGE_GROUP),
+                                       paste(", Time: ",TYPE[[5]]$timerange),sep = '\n'),
+                          clusterOptions = markerClusterOptions(removeOutsideVisibleBounds = T),
+                          labelOptions = labelOptions(direction = 'auto'),
+                          group = "THIEF"
+                          )
+leaftype <- leaftype %>%
+     addMarkers(data=TYPE[[6]],
+                          lng=~Longitude, lat=~Latitude,
+                          label =~OFNS_DESC , 
+                          popup=paste(paste("Victim Age: ",TYPE[[6]]$VIC_AGE_GROUP),
+                                       paste(", Time: ",TYPE[[6]]$timerange),sep = '\n'),
+                          clusterOptions = markerClusterOptions(removeOutsideVisibleBounds = T),
+                          labelOptions = labelOptions(direction = 'auto'),
+                          group = "WEAPON"
+                          )
+
+leaftype %>%
+  addLayersControl(
+    overlayGroups = c("BURGLARY","OFFENSE","RAPE","ROBBERY","THIEF","WEAPON"),
+    options = layersControlOptions(collapsed = FALSE)
+  )
+```
+
+
+
