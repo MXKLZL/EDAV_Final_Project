@@ -15,7 +15,7 @@ library(grid)
 library(gridExtra)
 ```
 
-We have randomly sampled 1000 data to analyze the missing value patterns of the dataset after cleaning the data. We also changed the "UNKNOWN" entry to NA for convenience.
+We randomly sample 1000 data to analyze the missing value patterns of the dataset after cleaning the data. We also change the "UNKNOWN" entry to NA for convenience.
 
 ```{r echo=FALSE}
 df_cols <- colnames(df_select)
@@ -43,7 +43,7 @@ x <- missing_data.frame(df)
 summary(x@patterns) 
 ```
 
-We have found out that there are 30 different row missing patterns. Some of the patterns only have one or two occurrences and 20 of them have 10 occurrences or below.
+We find out that there are 30 different row missing patterns. Some of the patterns only have one or two occurrences and 20 of them have 10 occurrences or below.
 
 We can check how many times each of the row missing pattern appears in the data set by the following visualization.
 
@@ -53,12 +53,12 @@ visna(df, sort='r')
 
 (Note that in the above plot, the columns represent the seven variables and the rows the missing patterns. The cells for the variables with missing values in the pattern are drawn in blue.)
 
-Therefore we observed the following missing row patterns:
+Therefore we observe the following missing row patterns:
 
 1. The pattern that occurs the most frequently is missing both Latitude and Longitude, which is about 92% of the data.
 2. The information on the suspect is missing such as age, sex, and race tends to be missing along with some other variables.
 
-Since the objective of our project is to analyze the safety issue, when doing the interactive part of the project, we will need to use the location information. So we have to drop all the data with Longitude and Latitude missing. This might affect the distribution of the crime, so we plotted the following diagram to compare the distribution of crime types before and after the missing location data is removed.
+Since the objective of our project is to analyze the safety issue, when doing the interactive part of the project, we will need to use the location information. So we have to drop all the data with Longitude and Latitude missing. This might affect the distribution of the crime, so we plot the following diagram to compare the distribution of crime types before and after the missing location data is removed.
 
 ```{r fig.height = 4, fig.width = 8, echo=FALSE}
 p1 <- ggplot(df_select, aes(x=OFNS_DESC, y=..count..)) +
