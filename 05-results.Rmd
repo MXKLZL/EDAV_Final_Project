@@ -124,7 +124,7 @@ df2<- df2 %>%
   summarize(Freq = sum(count))
 
 df2 <- df2 %>%
-  filter(CMPLNT_FR_DT >=as.Date('2019-01-01'))
+  filter(CMPLNT_FR_DT >=as.Date('2019-01-01') & CMPLNT_FR_DT <=as.Date('2019-9-25'))
 
 ggplot(df2, aes(as.Date(CMPLNT_FR_DT), y = Freq)) +
   geom_line(color="orange")+ 
@@ -132,7 +132,7 @@ ggplot(df2, aes(as.Date(CMPLNT_FR_DT), y = Freq)) +
   labs(x = "Time", y = "Total amount", title = "Time series pattern in 2019")
 ```
 
-As shown in the graph, more crimes happened in the early Janaury and summer in 2019. Early Jauaury, especially during the new year celebration time, since more people went out for celebration, the raise of crime amount is reasonable. Besides, summer time is another period for more crimes. It may due to the relation between weather and people's moods.
+As shown in the graph, more crimes happened in the early Janaury and summer in 2019. Early Jauaury, especially during the new year celebration time, since more people went out for celebration, the raise of crime amount is reasonable. Besides, summer time is another period for more crimes. It may due to the relation between weather and people's moods and there is dropping tail in the series which may because of 
 
 Since this research is aimed to find the suitable and safe region for university students to live, we want to see the time series pattern in each borough.
 
@@ -148,14 +148,14 @@ df2<- df2 %>%
 
 
 df2 <- df2 %>%
-  filter(CMPLNT_FR_DT >=as.Date('2019-01-01'))
+  filter(CMPLNT_FR_DT >=as.Date('2019-01-01') & CMPLNT_FR_DT <=as.Date('2019-9-25'))
 
 df2["adjusted"] <- 0
 df3 <- data.frame(df2)
 DA <- data.frame(DATA2)
 DA$Population <-as.numeric((gsub("\\,", "", DA$Population)))
 
-for(i in 1:1365){
+for(i in 1:1340){
   states <- df3[i,1]
   df3[i,'adjusted']<-100000*df3[i,3]/DA[states,"Population"]
 }
@@ -168,7 +168,7 @@ ggplot(df3, aes(as.Date(CMPLNT_FR_DT), y = Freq)) +
 
 ```
 
-Among 5 boroughs, There is a decline trend after September in all Boroughs except Manhattan.
+Among 5 boroughs, There is a decline trend after September in all Boroughs except Manhattan and many lease period begin around September. Therefore, from time series graph, Queens may be a better choice to living than Manhattan.
 
 
 ```{r}
