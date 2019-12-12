@@ -202,7 +202,7 @@ ggplot(cleveland,aes(Freq,fct_reorder2(BORO_NM,
   labs(title = 'Crime rate for each type by Boroughs ',color = "Crime Type")+
   theme_dotplot
 ```
-The above graph shows the exactly crime rate for each type in five counties. The most frequent crime are Offense and thief for all counties. As we discuss above, the cost of theft is the lowest and definiton of offense is broadly defined which shoube be the reason for high frequency of this two crime type. 
+The above graph shows the exact crime rate for each type in five boroughs. The most frequent crime types are OFFENSE and THIEF for all boroughs. As we discussed above, the cost of theft is the lowest and definiton of offense is broadly defined, and it could be the reason for high frequency of this two crime types. 
 
 Therefore, we focus on other four types. It is interesting that Brooklyn have highest crime rate for all four serious cirme types(Rape,Robbery,weapon,burglary) but the total crime rate for brooklyn actually lower than manhattan. It seem like that the crimes happened in brookyln are more likely to be some serious crimes.
 
