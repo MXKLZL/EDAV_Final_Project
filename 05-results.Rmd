@@ -88,6 +88,7 @@ county_choropleth(ChorDF,
                   county_zoom = nyc_county_fips$region)
 ``` 
 
+As full-time students, we go out more frequently from Monday to Friday rather than weekends. Therefore we want to know the days with the most and least frequent number of crime events for each borough, and the plot is as following: 
 
 ```{r}
 library(chron)
@@ -98,6 +99,8 @@ ggplot(df_select, aes(factor(weekdays(CMPLNT_FR_DT,abbreviate =TRUE), levels=c("
   ggtitle("The Number of Crime Events in Weekdays by Borough in New York City")+
   facet_wrap("BORO_NM", scale="free")
 ```
+
+Based on the above plot, the weekdays pattern is similar for each borough, where in the weekends the occurance of crime events is relatively infrequently compare to weekdays. Moreover, it seems that Staten Island is the best place to live if only safety is considered.
 
 ```{r}
 df2 <- data.frame(df_select[,1:2])
@@ -220,6 +223,7 @@ ggplot(df_select, aes(x=OFNS_DESC, ..count.., fill=timerange)) +
 ```
 
 
+Because we are all in the age group 18-24, and we want to find how we are related to the victims of crime events, first we plot the distribution of 5 age groups from <18 to 65+ in each borough, and the result is as following:
 
 ```{r}
 df_age <- subset(df_select, as.character(VIC_AGE_GROUP) %in% c("<18", "18-24", "25-44", "45-64","65+") )
@@ -229,6 +233,8 @@ ggplot(df_age, aes(VIC_AGE_GROUP))+
   ggtitle("The Distribution of Age Groups of Victims by Borough in New York City")+
   facet_wrap("BORO_NM", scale="free")
 ```
+
+According to the graphs, we found that for each borough, the pattern of victims age group is similar, where the 25-44 age group has the largest number of victims, and the 45-64 age group has the second largest number of victims. For this plot it seems that the 18-24 age group among different boroughs is not apparent, so we extract the 18-24 group of each borough and draw the following barplot:
 
 ```{r}
 df_age2<-subset(df_age, as.character(VIC_AGE_GROUP)=="18-24")
@@ -245,6 +251,8 @@ ggplot(df_age2, aes(x=reorder(Borough, -Rate), y=Rate))+
   xlab("Boroughs")+
   ggtitle("The Number of Victims per 100000 People in 18-24 Age Group by Borough in New York City")
 ```
+
+For this plot, we convert the count of crime events to crime rate per 100000 people, and we can see clearly that Manhattan has the largest crime rate, while staten island has the smallest crime rate.
 
 ```{r}
 df_race <-df_select[,c('OFNS_DESC','VIC_RACE')]
