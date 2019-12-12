@@ -1,7 +1,5 @@
 # Interactive component
 
-
-
 ```{r eval=TRUE, message=FALSE}
 library(tidyverse)
 library(leaflet)
@@ -10,14 +8,11 @@ library(leaflet.extras)
 library(viridis)
 ```
 
-As we discussion in the last chapter, Queens and Mahattan shoud be the two best borough for us. However, the best choice are base on our critiera and we also doesn't compare the safety level of the specific address in eacy borough. The following two interactive graph provide several choose for both time period and crime type for the person with difference preference and help person identify the most safety address in each borough.
+As we discuss in the previous chapters, Queens and Manhattan should be the two best boroughs for us. However, the best choice is base on our criteria and we also don't compare the safety level of the specific address in each borough. The following two interactive graphs provide several choices for both the time period and crime type for the person with different preferences and help people identify the most safety address in each borough.
 
+Different people may have different schedules. Some students may only have class in the afternoon so the time period they go to school should be 11 am - 3 pm. On the top right corner, there are several checkboxes. The audience may choose some time period based on their own schedule. And the crime distribution in New York City for the selected time period will appear on the map. The number in each circle shows the total number of crimes around the address near the area. You can click the circle shown on the graph to zoom into a smaller scope. Eventually, when the zoom becomes smaller enough, the circle will become pin push in the graph and if you click the pin push, it will show you the exact crime time, victim age group, victim sex, and victim race. 
 
-
-Different person may have different schdule. Some student may only have class in the afternoon so the time period they go to school should be 11am - 3pm. On the top right corner, there are several check boxes. The audience may choose some time period based on their own schedule. And the crime distribution in New York City for the selected time period will appear in the map. The number in each circle show the total number of crime arround the address near address. You can click the circle show on the graph to zoom into smaller scope. Eventually, when the zoom become smaller enough, the circle will become pin push in graph and if you click the pin push, it will show you the exact crime time, victim age group, victim sex, and victim race. 
-
-
-```{r}
+```{r echo=FALSE}
 
 df <- df_select %>% drop_na(Latitude, Longitude)
 Y <- split(df, df$timerange)
@@ -85,17 +80,9 @@ leaf %>%
 
 ```
 
-
-
-
-
-
-
 Different person may have different rank of dangerousness of the crime types. For Female, they may afraid of Rape more and want to choose address with no or extremely low Rape rate. For Male, they may want to live in place have less burglary and robberry. There are several check boxes on the top right corner and user may choose the subset of crime type to choose the exactly address in each borough based on there own crime rank. Same as the graph above, You can click the circle continuesly to zoom into smaller scope and click the pin push, it will show you the exact crime time, victim age group, victim sex, and victim race.  
 
-
-
-```{r}
+```{r echo=FALSE}
 TYPE <- split(df, df$OFNS_DESC)
 
 leaftype <- leaflet() %>% addTiles()
@@ -189,6 +176,3 @@ leaftype %>%
     options = layersControlOptions(collapsed = FALSE)
   )
 ```
-
-
-
