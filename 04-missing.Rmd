@@ -11,6 +11,8 @@ library(mi)
 library(extracat)
 library(tidyverse)
 library(ggplot2)
+library(grid)
+library(gridExtra)
 ```
 
 ```{r}
@@ -55,16 +57,19 @@ By using the visna function, we observed the following missing row patterns:
 1. The pattern that occurs the most is missing both Latitude and Longitude, which is about 91.5% of the data.
 2. The information of the suspect are missing such as age, sex, and race tends to be missing along with some other variables.
 
-Since the objective of our project is to analysis the safty issue, when doing the interative part of the project, we will need to use the location information. So we have to drop all the data with Longitude and Latitude missing. This might affect the distribution of the crime, so we plotted the following diagram to compare the distribution of crime type before and after when location is removed.
 
-```{r}
-ggplot(df_select, aes(x=OFNS_DESC, y=..count..)) +
+Since the objective of our project is to analysis the safty issue, when doing the interative part of the project, we will need to use the location information. So we have to drop all the data with Longitude and Latitude missing when we do that. This might affect the distribution of the crime, so we plotted the following diagram to compare the distribution of crime type before and after when location is removed.
+
+```{r fig.height = 4, fig.width = 4}
+p1 <- ggplot(df_select, aes(x=OFNS_DESC, y=..count..)) +
   geom_bar() + 
   labs(title="Count by crime type")
 df_locationNA_dropped <- df_select %>% drop_na(Latitude)
-ggplot(df_locationNA_dropped, aes(x=OFNS_DESC, y=..count..)) +
+p2 <- ggplot(df_locationNA_dropped, aes(x=OFNS_DESC, y=..count..)) +
   geom_bar() +
   labs(title="Count by crime type with location NA dropped")
+
+grid.arrange(p1, p2, ncol = 1)
 ```
 
-Base on the above two plots, we see that after we have removed all the data that are missing location, the distribution of the crime type is unchanged. So, the missing of location is somewhat random and we are safe to remove it when doing the interactive part.
+Base on the above two plots, we see that after we have removed all the data that are missing location, the distribution of the crime type is unchanged. So, the missing of location is somewhat random and we are safe to remove it when doing the interactive part. However, before the interactive part, we will keep the records without longtitude and latitude in order to preserve more information of our dataset.
