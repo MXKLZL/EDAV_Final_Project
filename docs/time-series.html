@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 6 Time series | NYC Crime analysis</title>
+  <meta name="description" content="Chapter 6 Time series | NYC Crime analysis" />
+  <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 6 Time series | NYC Crime analysis" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 6 Time series | NYC Crime analysis" />
+  
+  
+  
+
+<meta name="author" content="Yichi Zhang, Zelin Li, Huayun Xu, Mingfang Chang" />
+
+
+<meta name="date" content="2019-12-12" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="results.html"/>
+<link rel="next" href="because-we-are-all-in-the-age-group-18-24-and-we-want-to-find-how-we-are-related-to-the-victims-of-crime-events-first-we-plot-the-distribution-of-5-age-groups-from-18-to-65-in-each-borough-and-the-result-is-as-following.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/htmlwidgets-1.3/htmlwidgets.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/Proj4Leaflet-1.0.1/proj4-compressed.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.0.3/leaflet.js"></script>
+<link href="libs/leaflet-markercluster-1.0.5/MarkerCluster.css" rel="stylesheet" />
+<link href="libs/leaflet-markercluster-1.0.5/MarkerCluster.Default.css" rel="stylesheet" />
+<script src="libs/leaflet-markercluster-1.0.5/leaflet.markercluster.js"></script>
+<script src="libs/leaflet-markercluster-1.0.5/leaflet.markercluster.freezable.js"></script>
+<script src="libs/leaflet-markercluster-1.0.5/leaflet.markercluster.layersupport.js"></script>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">NYC Crime Analysis</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="data-sources.html"><a href="data-sources.html"><i class="fa fa-check"></i><b>2</b> Data sources</a></li>
+<li class="chapter" data-level="3" data-path="data-transformation.html"><a href="data-transformation.html"><i class="fa fa-check"></i><b>3</b> Data transformation</a></li>
+<li class="chapter" data-level="4" data-path="missing-values.html"><a href="missing-values.html"><i class="fa fa-check"></i><b>4</b> Missing values</a></li>
+<li class="chapter" data-level="5" data-path="results.html"><a href="results.html"><i class="fa fa-check"></i><b>5</b> Results</a></li>
+<li class="chapter" data-level="6" data-path="time-series.html"><a href="time-series.html"><i class="fa fa-check"></i><b>6</b> Time series</a><ul>
+<li class="chapter" data-level="6.1" data-path="time-series.html"><a href="time-series.html#buyao"><i class="fa fa-check"></i><b>6.1</b> buyao</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="because-we-are-all-in-the-age-group-18-24-and-we-want-to-find-how-we-are-related-to-the-victims-of-crime-events-first-we-plot-the-distribution-of-5-age-groups-from-18-to-65-in-each-borough-and-the-result-is-as-following.html"><a href="because-we-are-all-in-the-age-group-18-24-and-we-want-to-find-how-we-are-related-to-the-victims-of-crime-events-first-we-plot-the-distribution-of-5-age-groups-from-18-to-65-in-each-borough-and-the-result-is-as-following.html"><i class="fa fa-check"></i><b>7</b> Because we are all in the age group 18-24, and we want to find how we are related to the victims of crime events, first we plot the distribution of 5 age groups from &lt;18 to 65+ in each borough, and the result is as following:</a><ul>
+<li class="chapter" data-level="7.1" data-path="because-we-are-all-in-the-age-group-18-24-and-we-want-to-find-how-we-are-related-to-the-victims-of-crime-events-first-we-plot-the-distribution-of-5-age-groups-from-18-to-65-in-each-borough-and-the-result-is-as-following.html"><a href="because-we-are-all-in-the-age-group-18-24-and-we-want-to-find-how-we-are-related-to-the-victims-of-crime-events-first-we-plot-the-distribution-of-5-age-groups-from-18-to-65-in-each-borough-and-the-result-is-as-following.html#according-to-the-graphs-we-found-that-for-each-borough-the-pattern-of-victims-age-group-is-similar-where-the-25-44-age-group-has-the-largest-number-of-victims-and-the-45-64-age-group-has-the-second-largest-number-of-victims.-for-this-plot-it-seems-that-the-18-24-age-group-among-different-boroughs-is-not-apparent-so-we-extract-the-18-24-group-of-each-borough-and-draw-the-following-barplot"><i class="fa fa-check"></i><b>7.1</b> According to the graphs, we found that for each borough, the pattern of victims age group is similar, where the 25-44 age group has the largest number of victims, and the 45-64 age group has the second largest number of victims. For this plot it seems that the 18-24 age group among different boroughs is not apparent, so we extract the 18-24 group of each borough and draw the following barplot:</a></li>
+<li class="chapter" data-level="7.2" data-path="because-we-are-all-in-the-age-group-18-24-and-we-want-to-find-how-we-are-related-to-the-victims-of-crime-events-first-we-plot-the-distribution-of-5-age-groups-from-18-to-65-in-each-borough-and-the-result-is-as-following.html"><a href="because-we-are-all-in-the-age-group-18-24-and-we-want-to-find-how-we-are-related-to-the-victims-of-crime-events-first-we-plot-the-distribution-of-5-age-groups-from-18-to-65-in-each-borough-and-the-result-is-as-following.html#buyao-1"><i class="fa fa-check"></i><b>7.2</b> buyao</a></li>
+<li class="chapter" data-level="7.3" data-path="because-we-are-all-in-the-age-group-18-24-and-we-want-to-find-how-we-are-related-to-the-victims-of-crime-events-first-we-plot-the-distribution-of-5-age-groups-from-18-to-65-in-each-borough-and-the-result-is-as-following.html"><a href="because-we-are-all-in-the-age-group-18-24-and-we-want-to-find-how-we-are-related-to-the-victims-of-crime-events-first-we-plot-the-distribution-of-5-age-groups-from-18-to-65-in-each-borough-and-the-result-is-as-following.html#buyao-2"><i class="fa fa-check"></i><b>7.3</b> buyao</a></li>
+<li class="chapter" data-level="7.4" data-path="because-we-are-all-in-the-age-group-18-24-and-we-want-to-find-how-we-are-related-to-the-victims-of-crime-events-first-we-plot-the-distribution-of-5-age-groups-from-18-to-65-in-each-borough-and-the-result-is-as-following.html"><a href="because-we-are-all-in-the-age-group-18-24-and-we-want-to-find-how-we-are-related-to-the-victims-of-crime-events-first-we-plot-the-distribution-of-5-age-groups-from-18-to-65-in-each-borough-and-the-result-is-as-following.html#buyao-3"><i class="fa fa-check"></i><b>7.4</b> buyao</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="interactive-component.html"><a href="interactive-component.html"><i class="fa fa-check"></i><b>8</b> Interactive component</a></li>
+<li class="chapter" data-level="9" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>9</b> Conclusion</a></li>
+<li class="chapter" data-level="10" data-path="leaflet.html"><a href="leaflet.html"><i class="fa fa-check"></i><b>10</b> Interactive Geographic Data</a><ul>
+<li class="chapter" data-level="10.1" data-path="leaflet.html"><a href="leaflet.html#overview"><i class="fa fa-check"></i><b>10.1</b> Overview</a></li>
+<li class="chapter" data-level="10.2" data-path="leaflet.html"><a href="leaflet.html#brief-description-about-dataset"><i class="fa fa-check"></i><b>10.2</b> Brief Description about Dataset</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">NYC Crime analysis</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="time-series" class="section level1">
+<h1><span class="header-section-number">Chapter 6</span> Time series</h1>
+<p>We want to figure out if there is special time in the year where more crimes happen. So we build the following graph for recognizing time series patterns.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df2 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(df_select[,<span class="dv">1</span>:<span class="dv">2</span>])
+df2[<span class="st">&#39;count&#39;</span>] &lt;-<span class="st"> </span><span class="dv">1</span>
+df2&lt;-<span class="st"> </span>df2 %&gt;%
+<span class="st">  </span><span class="kw">group_by</span>(CMPLNT_FR_DT) %&gt;%
+<span class="st">  </span><span class="kw">summarize</span>(<span class="dt">Freq =</span> <span class="kw">sum</span>(count))
+
+df2 &lt;-<span class="st"> </span>df2 %&gt;%
+<span class="st">  </span><span class="kw">filter</span>(CMPLNT_FR_DT &gt;=<span class="kw">as.Date</span>(<span class="st">&#39;2019-01-01&#39;</span>) &amp;<span class="st"> </span>CMPLNT_FR_DT &lt;=<span class="kw">as.Date</span>(<span class="st">&#39;2019-9-25&#39;</span>))
+
+<span class="kw">ggplot</span>(df2, <span class="kw">aes</span>(<span class="kw">as.Date</span>(CMPLNT_FR_DT), <span class="dt">y =</span> Freq)) +
+<span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">color=</span><span class="st">&quot;orange&quot;</span>)+<span class="st"> </span>
+<span class="st">  </span><span class="kw">ylim</span>(<span class="dv">0</span>, <span class="dv">900</span>) +
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Time&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Total amount&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;Time series pattern in 2019&quot;</span>)</code></pre></div>
+<p><img src="EDAVfinalproj_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p>As shown in the graph, more crimes happened in the early Janaury and summer in 2019. Early Jauaury, especially during the new year celebration time, since more people went out for celebration, the raise of crime amount is reasonable. Besides, summer time is another period for more crimes. It may due to the relation between weather and people’s moods.</p>
+<p>Since this research is aimed to find the suitable and safe region for university students to live, we want to see the time series pattern in each borough.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df2 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(df_select[,<span class="dv">1</span>:<span class="dv">2</span>])
+df2[<span class="st">&#39;count&#39;</span>] &lt;-<span class="st"> </span><span class="dv">1</span>
+
+df2 &lt;-df2[!<span class="kw">is.na</span>(df2$BORO_NM), ]
+df2&lt;-<span class="st"> </span>df2 %&gt;%
+<span class="st">  </span><span class="kw">group_by</span>(BORO_NM,CMPLNT_FR_DT) %&gt;%
+<span class="st">  </span><span class="kw">summarize</span>(<span class="dt">Freq =</span> <span class="kw">sum</span>(count))
+
+
+df2 &lt;-<span class="st"> </span>df2 %&gt;%
+<span class="st">  </span><span class="kw">filter</span>(CMPLNT_FR_DT &gt;=<span class="kw">as.Date</span>(<span class="st">&#39;2019-01-01&#39;</span>) &amp;<span class="st"> </span>CMPLNT_FR_DT &lt;=<span class="kw">as.Date</span>(<span class="st">&#39;2019-9-25&#39;</span>))
+
+df2[<span class="st">&quot;adjusted&quot;</span>] &lt;-<span class="st"> </span><span class="dv">0</span>
+df3 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(df2)
+DA &lt;-<span class="st"> </span><span class="kw">data.frame</span>(DATA2)
+DA$Population &lt;-<span class="kw">as.numeric</span>((<span class="kw">gsub</span>(<span class="st">&quot;</span><span class="ch">\\</span><span class="st">,&quot;</span>, <span class="st">&quot;&quot;</span>, DA$Population)))
+
+for(i in <span class="dv">1</span>:<span class="dv">1340</span>){
+  states &lt;-<span class="st"> </span>df3[i,<span class="dv">1</span>]
+  df3[i,<span class="st">&#39;adjusted&#39;</span>]&lt;-<span class="dv">100000</span>*df3[i,<span class="dv">3</span>]/DA[states,<span class="st">&quot;Population&quot;</span>]
+}
+
+<span class="kw">ggplot</span>(df3, <span class="kw">aes</span>(<span class="kw">as.Date</span>(CMPLNT_FR_DT), <span class="dt">y =</span> Freq)) +
+<span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">color=</span><span class="st">&quot;orange&quot;</span>) +<span class="st"> </span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(~BORO_NM, <span class="dt">scales=</span><span class="st">&quot;free&quot;</span>,<span class="dt">ncol =</span> <span class="dv">2</span>)+
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Time&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Crime Rate&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;Time series pattern in 2019 in different boroughs&quot;</span>)</code></pre></div>
+<p><img src="EDAVfinalproj_files/figure-html/unnamed-chunk-16-1.png" width="480" /></p>
+<p>Among 5 boroughs, There are small decline trends after August in all Boroughs except Manhattan which means the crime rate for all Boroughs except Manhattan may continued to decline after September. Since many lease periods begin around September, Queens may be a better choice to living than Manhattan from the plots above.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">picked_time &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;07am - 11am&quot;</span>, <span class="st">&quot;11am - 3pm&quot;</span>, <span class="st">&quot;3pm - 7pm&quot;</span>,<span class="st">&quot;7pm - 11pm&quot;</span>)
+crime_color &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;#7851a9&quot;</span>, <span class="st">&quot;#800020&quot;</span>, <span class="st">&quot;#ef5927&quot;</span>, <span class="st">&quot;#0079c1&quot;</span>, <span class="st">&quot;#dac751&quot;</span>, <span class="st">&quot;#133a30&quot;</span>)
+
+df_select &lt;-<span class="st"> </span>df_select %&gt;%<span class="st"> </span><span class="kw">drop_na</span>(BORO_NM)
+df_select &lt;-<span class="st"> </span>df_select %&gt;%<span class="st"> </span><span class="kw">mutate</span>(<span class="dt">timerange =</span> CMPLNT_FR_TM)
+df_select &lt;-<span class="st"> </span>df_select %&gt;%<span class="st"> </span><span class="kw">mutate</span>(<span class="dt">timerange =</span> <span class="kw">ifelse</span>(CMPLNT_FR_TM &gt;=<span class="st"> </span><span class="kw">chron</span>(<span class="dt">times=</span><span class="st">&quot;07:00:00&quot;</span>) 
+                                                &amp;<span class="st"> </span>CMPLNT_FR_TM &lt;=<span class="st"> </span><span class="kw">chron</span>(<span class="dt">times=</span><span class="st">&quot;10:59:59&quot;</span>),
+                                                <span class="st">&quot;07am - 11am&quot;</span>, timerange) )
+df_select &lt;-<span class="st"> </span>df_select %&gt;%<span class="st"> </span><span class="kw">mutate</span>(<span class="dt">timerange =</span> <span class="kw">ifelse</span>(CMPLNT_FR_TM &gt;=<span class="st"> </span><span class="kw">chron</span>(<span class="dt">times=</span><span class="st">&quot;11:00:00&quot;</span>) 
+                                                &amp;<span class="st"> </span>CMPLNT_FR_TM &lt;=<span class="st"> </span><span class="kw">chron</span>(<span class="dt">times=</span><span class="st">&quot;14:59:59&quot;</span>),
+                                                <span class="st">&quot;11am - 3pm&quot;</span>, timerange) )
+
+df_select &lt;-<span class="st"> </span>df_select %&gt;%<span class="st"> </span><span class="kw">mutate</span>(<span class="dt">timerange =</span> <span class="kw">ifelse</span>(CMPLNT_FR_TM &gt;=<span class="st"> </span><span class="kw">chron</span>(<span class="dt">times=</span><span class="st">&quot;15:00:00&quot;</span>) 
+                                                &amp;<span class="st"> </span>CMPLNT_FR_TM &lt;=<span class="st"> </span><span class="kw">chron</span>(<span class="dt">times=</span><span class="st">&quot;18:59:59&quot;</span>),
+                                                <span class="st">&quot;3pm - 7pm&quot;</span>, timerange) )
+df_select &lt;-<span class="st"> </span>df_select %&gt;%<span class="st"> </span><span class="kw">mutate</span>(<span class="dt">timerange =</span> <span class="kw">ifelse</span>(CMPLNT_FR_TM &gt;=<span class="st"> </span><span class="kw">chron</span>(<span class="dt">times=</span><span class="st">&quot;19:00:00&quot;</span>) 
+                                                &amp;<span class="st"> </span>CMPLNT_FR_TM &lt;=<span class="st"> </span><span class="kw">chron</span>(<span class="dt">times=</span><span class="st">&quot;23:00:00&quot;</span>),
+                                                <span class="st">&quot;7pm - 11pm&quot;</span>, timerange) )
+
+<span class="co">#df_select &lt;- df_select %&gt;% mutate(color = timerange)</span>
+<span class="co">#df_select &lt;- df_select %&gt;% mutate( color = ifelse(timerange == picked_time[1], &quot;red&quot;, color) )</span>
+<span class="co">#df_select &lt;- df_select %&gt;% mutate( color = ifelse(timerange == picked_time[2], &quot;green&quot;, color) )</span>
+<span class="co">#df_select &lt;- df_select %&gt;% mutate( color = ifelse(timerange == picked_time[3], &quot;blue&quot;, color) )</span>
+
+<span class="co">#df_select &lt;- df_select %&gt;% mutate(crimecolor = OFNS_DESC)</span>
+<span class="co">#for(i in 1:length(dangerous)){</span>
+  <span class="co">#df_select &lt;- df_select %&gt;% mutate( crimecolor = ifelse(OFNS_DESC == dangerous[i], crime_color[i], crimecolor) )   </span>
+<span class="co">#}</span>
+
+df_select &lt;-<span class="st"> </span>df_select %&gt;%<span class="st"> </span><span class="kw">mutate</span>(<span class="dt">timerange =</span> <span class="kw">ifelse</span>(timerange %in%<span class="st"> </span>picked_time, timerange, <span class="ot">NA</span>)) %&gt;%<span class="st"> </span><span class="kw">drop_na</span>(timerange)</code></pre></div>
+<p>As a student, we rent an apartment because we need to go to school or work. So it is very important to avoid the places that have a higher chance of crime when we are walking to school, or coming back to home. Therefore, we have broken down the time periods that the crime happened into the ranges that we care most about, which are as following:</p>
+<ol style="list-style-type: decimal">
+<li>7am - 11am (the time when we go to school or work)</li>
+<li>3pm - 7pm (the time we go back to home )</li>
+<li>7pm - 11pm (the time we go back to home when we have night class)</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(df_select, <span class="kw">aes</span>(<span class="dt">x=</span>BORO_NM, ..count.., <span class="dt">fill=</span>timerange)) +<span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">position=</span><span class="st">&quot;dodge&quot;</span>)+
+<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;&quot;</span>)+
+<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Number of Crimes&quot;</span>)+
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.title =</span> <span class="kw">element_blank</span>())</code></pre></div>
+<p><img src="EDAVfinalproj_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="co">#scale_fill_manual(values=c(&quot;tomato2&quot;, &quot;deepskyblue&quot;, &quot;slateblue4&quot;,&#39;yellow1&#39;))</span></code></pre></div>
+<p>From the graph above, there is same pattern for every borough. The desceding order of numebr of crimes is 3pm -7pm, 11am - 3pm, 7pm - 11pm, and 07am - 11am. Seperating the time period doesn’t help us figure out which borough has apprant advantage to live. However we can adjust our schdule base on the graph above. For example, if you live in Manhattan, going out before 11am and back to home after 7pm can help you avoid more crimes.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(chron)
+<span class="kw">library</span>(ggplot2)
+<span class="kw">ggplot</span>(df_select, <span class="kw">aes</span>(<span class="kw">factor</span>(<span class="kw">weekdays</span>(CMPLNT_FR_DT,<span class="dt">abbreviate =</span><span class="ot">TRUE</span>), <span class="dt">levels=</span><span class="kw">c</span>(<span class="st">&quot;Mon&quot;</span>, <span class="st">&quot;Tue&quot;</span>, <span class="st">&quot;Wed&quot;</span>, <span class="st">&quot;Thu&quot;</span>, <span class="st">&quot;Fri&quot;</span>, <span class="st">&quot;Sat&quot;</span>, <span class="st">&quot;Sun&quot;</span>))))+
+<span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">fill=</span><span class="st">&quot;lightblue&quot;</span>)+
+<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Weekdays and Weekends&quot;</span>)+
+<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;The Number of Crime Events in Weekdays by Borough in New York City&quot;</span>)+
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="st">&quot;BORO_NM&quot;</span>,<span class="dt">scale=</span><span class="st">&quot;free&quot;</span>)</code></pre></div>
+<p><img src="EDAVfinalproj_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<p>Based on the above plot, the weekdays pattern is similar for each borough, where in the weekends the occurance of crime events is relatively infrequent compare to weekdays. Since we will go outside more during weekdays, the graph above dones’t help us find out the most suitable borough. However, the graph reminder us that we should try to choose safer periods to go outside in Friday.</p>
+<div id="buyao" class="section level2">
+<h2><span class="header-section-number">6.1</span> buyao</h2>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="results.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="because-we-are-all-in-the-age-group-18-24-and-we-want-to-find-how-we-are-related-to-the-victims-of-crime-events-first-we-plot-the-distribution-of-5-age-groups-from-18-to-65-in-each-borough-and-the-result-is-as-following.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/MXKLZL/EDAV_Final_Project/edit/master/05-results.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": "https://github.com/MXKLZL/EDAV_Final_Project/blob/master/05-results.Rmd",
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

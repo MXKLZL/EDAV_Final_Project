@@ -1,5 +1,5 @@
 --- 
-title: "YOUR TITLE HERE"
+title: "NYC Crime analysis"
 author: "Yichi Zhang, Zelin Li, Huayun Xu, Mingfang Chang"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
