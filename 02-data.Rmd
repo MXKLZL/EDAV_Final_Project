@@ -11,17 +11,29 @@ There are 347074 observations with 35 variables in this dataset. These variables
 We are interested in some of the variables and will pick them out in the cleaning section:
 
 **BORO_NM**: The name of the borough in which the incident occurred
+
 **CMPLNT_FR_DT**: Exact date of occurrence for the reported event (or starting date of occurrence, if CMPLNT_TO_DT exists)
+
 **CMPLNT_FR_TM**: Exact time of occurrence for the reported event (or starting time of occurrence, if CMPLNT_TO_TM exists)
+
 **OFNS_DESC**: Description of offense corresponding with key code
+
 **PREM_TYP_DESC**: Specific description of premises; grocery store, residence, street, etc.
+
 **SUSP_AGE_GROUP**: Suspect’s Age Group
+
 **SUSP_SEX**: Suspect’s Sex Description
+
 **SUSP_RACE**: Suspect’s Race Description
+
 **VIC_AGE_GROUP**: Victim’s Age Group
+
 **VIC_RACE**: Victim’s Race Description
+
 **VIC_SEX**: Victim’s Sex Description (D=Business/Organization, E=PSNY/People of the State of New York, F=Female, M=Male)
+
 **Latitude**: Midblock Latitude coordinate for Global Coordinate System, WGS 1984, decimal degrees (EPSG 4326)
+
 **Longitude**: Midblock Longitude coordinate for Global Coordinate System, WGS 1984, decimal degrees (EPSG 4326)
 
 ## United States Census Bureau Quick Facts
