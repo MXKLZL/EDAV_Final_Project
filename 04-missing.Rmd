@@ -51,7 +51,7 @@ We can check how many times each of the row missing pattern appears in the data 
 visna(df, sort='r')
 ```
 
-(Note that in the above plot, the columns represent the seven variables and the rows the missing patterns. The cells for the variables with missing values in ta pattern are drawn in blue.)
+(Note that in the above plot, the columns represent the seven variables and the rows the missing patterns. The cells for the variables with missing values in the pattern are drawn in blue.)
 
 Therefore we observed the following missing row patterns:
 
