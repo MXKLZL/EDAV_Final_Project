@@ -25,15 +25,17 @@ df <- DATA %>%
   filter(CMPLNT_FR_DT >=as.Date('2018-01-01'))
 ```
 
+First of all, since we would like to analysis the occurance time and date of each record, we changed the type of column CMPLNT_FR_DT, CMPLNT_FR_TM to date and time. However, some crime records happend in long year age(like 1950s) but completeed recently are included in our dataset. In order to keep our data up to date, we drop all record happend before 2018-01-01. For severals error data such as record happend in 1018 or 1019, we fixed their date.
+
 ```{r}
-offense <- c('ANTICIPATORY OFFENSES', "OFF. AGNST PUB ORD SENSBLTY &", "OFFENSES AGAINST MARRIAGE UNCL", "OFFENSES AGAINST PUBLIC ADMINI", "OFFENSES AGAINST PUBLIC SAFETY", "OFFENSES AGAINST THE PERSON", "OFFENSES INVOLVING FRAUD", "OFFENSES RELATED TO CHILDREN", "OTHER OFFENSES RELATED TO THEF")
-assault <- c('ASSAULT 3 & RELATED OFFENSES', 'FELONY ASSAULT', "HARRASSMENT 2")
+offense <- c('ANTICIPATORY OFFENSES', "OFF. AGNST PUB ORD SENSBLTY &", "OFFENSES AGAINST MARRIAGE UNCL", "OFFENSES AGAINST PUBLIC ADMINI", "OFFENSES AGAINST PUBLIC SAFETY", "OFFENSES AGAINST THE PERSON", "OFFENSES INVOLVING FRAUD", "OFFENSES RELATED TO CHILDREN", "OTHER OFFENSES RELATED TO THEF","HARASSMENT 2")
+assault <- c('ASSAULT 3 & RELATED OFFENSES', 'FELONY ASSAULT')
 burglary <- c('BURGLARY', "BURGLAR'S TOOLS", "CRIMINAL TRESPASS")
 drug <- c("DANGEROUS DRUGS")
 weapon <- c("DANGEROUS WEAPONS", "UNLAWFUL POSS. WEAP. ON SCHOOL" )
 rape <- c("FELONY SEX CRIMES", "RAPE", "SEX CRIMES")
 fraud <- c("FRAUDS", "FORGERY", "FRAUDULENT ACCOSTING", "THEFT-FRAUD")
-thief <- c("GRAND LARCENY", "GRAND LARCENY OF MOTOR VEHICLE", "OTHER OFFENSES RELATED TO THEF", "PETIT LARCENY", "PETIT LARCENY OF MOTOR VEHICLE", "POSSESSION OF STOLEN PROPERTY", "THEFT OF SERVICES")
+theft <- c("GRAND LARCENY", "GRAND LARCENY OF MOTOR VEHICLE", "OTHER OFFENSES RELATED TO THEF", "PETIT LARCENY", "PETIT LARCENY OF MOTOR VEHICLE", "POSSESSION OF STOLEN PROPERTY", "THEFT OF SERVICES")
 murder <- c("MURDER & NON-NEGL. MANSLAUGHTER")
 kidnapping <- c("KIDNAPPING", "KIDNAPPING & RELATED OFFENSES", "KIDNAPPING AND RELATED OFFENSES")
 
@@ -51,8 +53,9 @@ df <- df %>% mutate(OFNS_DESC = ifelse(OFNS_DESC %in% kidnapping, "KIDNAPPING", 
 
 df <- df %>% mutate(OFNS_DESC = ifelse(OFNS_DESC %in% picked, OFNS_DESC, NA)) %>% drop_na(OFNS_DESC)
 ```
-
+Another goal of our exploration is to analysis the type of crime in each county. However, the some of crime description are too detailed. So we classifed all of them into 11 types based on broad definiton(like all offenses with different target are classied as offense). And drop all other type which have very low frequency and completely irrelavant to us such as gambling.
 ```{r}
 cols <- c('BORO_NM', 'CMPLNT_FR_DT','CMPLNT_FR_TM','OFNS_DESC', 'SUSP_AGE_GROUP', 'PREM_TYP_DESC', 'SUSP_SEX', 'SUSP_RACE', 'VIC_AGE_GROUP', 'VIC_RACE', 'VIC_SEX', 'Latitude', 'Longitude')
 df_select <- df[, cols]
 ```
+Not all columns in original dataset are useful for our analysis. So we selected 13 columns we may used for following researchs.
