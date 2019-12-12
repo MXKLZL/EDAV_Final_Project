@@ -33,7 +33,7 @@ vis_miss(df)
 From the plot above, we see that majority of missing data came from the columns: "SUSP_AGE_GEOUP", "SUSP_SEX", "SUSP_RACE", "VIC_AGE_GROUP", "VIC_RACE", "Latitude", and "Longitude". We also see that "Latitude", and "Longitude" are always missing together. 
 
 We can further investigate the missing row patterns by using the missing_data.frame function.
-```{r echo=FALSE}
+```{r include=FALSE}
 df$CMPLNT_FR_DT <- as.character(df$CMPLNT_FR_DT)
 df$CMPLNT_FR_TM <- as.character(df$CMPLNT_FR_TM)
 names(df) <- df_cols
@@ -41,13 +41,14 @@ x <- missing_data.frame(df)
 summary(x@patterns) 
 ```
 
-Here, we found out that there are 30 different row missing patterns. Some of the patterns only have one or two occurrences and 20 of them have 10 occurrences or below.
+We have found out that there are 30 different row missing patterns. Some of the patterns only have one or two occurrences and 20 of them have 10 occurrences or below.
 
 We can check how many times each of the row missing pattern appears in the data set by the following and also visualize these row missing patterns with visna function.
 
 ```{r fig.height = 4, echo=FALSE}
 visna(df, sort='r')
 ```
+(Note that in the above plot, the columns represent the seven variables and the rows the missing patterns. The cells for the variables with missing values in ta pattern are drawn in blue.)
 
 By using the visna function, we observed the following missing row patterns:
 
@@ -56,7 +57,7 @@ By using the visna function, we observed the following missing row patterns:
 
 Since the objective of our project is to analyze the safety issue, when doing the interactive part of the project, we will need to use the location information. So we have to drop all the data with Longitude and Latitude missing. This might affect the distribution of the crime, so we plotted the following diagram to compare the distribution of crime type before and after the missing location data is removed.
 
-```{r fig.height = 4, fig.width = 4, echo=FALSE}
+```{r fig.height = 4, fig.width = 8, echo=FALSE}
 p1 <- ggplot(df_select, aes(x=OFNS_DESC, y=..count..)) +
   geom_bar(fill="lightblue") + 
   xlab("Crime Type") +
