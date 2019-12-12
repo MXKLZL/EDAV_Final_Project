@@ -80,7 +80,7 @@ leaf %>%
 
 ```
 
-Different person may have different rank of dangerousness of the crime types. For Female, they may afraid of Rape more and want to choose address with no or extremely low Rape rate. For Male, they may want to live in place have less burglary and robberry. There are several check boxes on the top right corner and user may choose the subset of crime type to choose the exactly address in each borough based on there own crime rank. Same as the graph above, You can click the circle continuesly to zoom into smaller scope and click the pin push, it will show you the exact crime time, victim age group, victim sex, and victim race.  
+Different people may have a different rank in the dangerousness of the crime types. For females, they may afraid of Rape more and want to choose address with no or extremely low Rape rate. For Male, they may want to live in place have less burglary and robbery. There are several checkboxes on the top right corner and users may choose the subset of crime type to choose the exact address in each borough based on their own crime rank. Same as the graph above, You can click the circle continuously to zoom into a smaller scope and click the pin push, it will show you the exact crime time, victim age group, victim sex, and victim race.  
 
 ```{r echo=FALSE}
 TYPE <- split(df, df$OFNS_DESC)
