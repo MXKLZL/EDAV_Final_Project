@@ -2,7 +2,7 @@
 
 
 
-```{r load library, eval=TRUE, message=FALSE}
+```{r eval=TRUE, message=FALSE}
 library(tidyverse)
 library(leaflet)
 library(htmltools)

@@ -59,30 +59,30 @@ l %>%
 ```{r}
 
 
-map <- leaflet(df) %>% 
-  addTiles() %>% 
-  addCircleMarkers(~Longitude, ~Latitude, 2, group=~timerange, color=~color, opacity=0.3, label =  ~OFNS_DESC, clusterOptions = markerClusterOptions()) %>% 
-  addLayersControl(
-    overlayGroups= c("07am - 11am", "15pm - 19pm", "19pm - 23pm"), 
-    options = layersControlOptions(collapsed = FALSE),
-    
-  )
-map
+# map <- leaflet(df) %>% 
+#   addTiles() %>% 
+#   addCircleMarkers(~Longitude, ~Latitude, 2, group=~timerange, color=~color, opacity=0.3, label =  ~OFNS_DESC, clusterOptions = markerClusterOptions()) %>% 
+#   addLayersControl(
+#     overlayGroups= c("07am - 11am", "15pm - 19pm", "19pm - 23pm"), 
+#     options = layersControlOptions(collapsed = FALSE),
+#     
+#   )
+# map
 ```
 
 
 ```{r}
-df <- df_select %>% drop_na(Latitude, Longitude)
-
-map <- leaflet(df) %>% 
-  addTiles() %>% 
-  addCircles(~Longitude, ~Latitude, 10, group=~timerange, color=~color, opacity=0.3, label =  ~OFNS_DESC) %>% 
-  addLayersControl(
-    overlayGroups= c("07am - 11am", "15pm - 19pm", "19pm - 23pm"), 
-    options = layersControlOptions(collapsed = FALSE),
-    
-  )
-map
+# df <- df_select %>% drop_na(Latitude, Longitude)
+# 
+# map <- leaflet(df) %>% 
+#   addTiles() %>% 
+#   addCircles(~Longitude, ~Latitude, 10, group=~timerange, color=~color, opacity=0.3, label =  ~OFNS_DESC) %>% 
+#   addLayersControl(
+#     overlayGroups= c("07am - 11am", "15pm - 19pm", "19pm - 23pm"), 
+#     options = layersControlOptions(collapsed = FALSE),
+#     
+#   )
+# map
 ```
 
 ```{r}
@@ -135,17 +135,17 @@ leaf %>%
 
 ```{r}
 
-df <- df_select %>% drop_na(Latitude, Longitude)
-
-map <- leaflet(df) %>% 
-  addTiles() %>% 
-  addCircles(~Longitude, ~Latitude, 10, group=~OFNS_DESC, color=~crime_color, opacity=1, label =  ~OFNS_DESC) %>% 
-  addLayersControl(
-    overlayGroups= c('BURGLARY'), 
-    options = layersControlOptions(collapsed = FALSE),
-    
-  )
-map
+# df <- df_select %>% drop_na(Latitude, Longitude)
+# 
+# map <- leaflet(df) %>% 
+#   addTiles() %>% 
+#   addCircles(~Longitude, ~Latitude, 10, group=~OFNS_DESC, color=~crime_color, opacity=1, label =  ~OFNS_DESC) %>% 
+#   addLayersControl(
+#     overlayGroups= c('BURGLARY'), 
+#     options = layersControlOptions(collapsed = FALSE),
+#     
+#   )
+# map
 ```
 
 
