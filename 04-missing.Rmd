@@ -58,7 +58,7 @@ Therefore we observed the following missing row patterns:
 1. The pattern that occurs the most frequently is missing both Latitude and Longitude, which is about 92% of the data.
 2. The information on the suspect is missing such as age, sex, and race tends to be missing along with some other variables.
 
-Since the objective of our project is to analyze the safety issue, when doing the interactive part of the project, we will need to use the location information. So we have to drop all the data with Longitude and Latitude missing. This might affect the distribution of the crime, so we plotted the following diagram to compare the distribution of crime type before and after the missing location data is removed.
+Since the objective of our project is to analyze the safety issue, when doing the interactive part of the project, we will need to use the location information. So we have to drop all the data with Longitude and Latitude missing. This might affect the distribution of the crime, so we plotted the following diagram to compare the distribution of crime types before and after the missing location data is removed.
 
 ```{r fig.height = 4, fig.width = 8, echo=FALSE}
 p1 <- ggplot(df_select, aes(x=OFNS_DESC, y=..count..)) +
