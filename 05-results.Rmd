@@ -31,7 +31,7 @@ For the convenience of the later researches, we drop 5 types of crime from our d
 MURDER related data has great amount of missing data for latitude and longitude, also ARSON, MURDER and KIDNAPPING contain very few useful pieces of data, which is difficult to conduct instructive analysis. We drop FRAUD because this could be avoided effectively. For DRUG, although it is very common, usually it is the indirect reason for other crimes like offence or murder, the crime DRUG itself usually doesn't cause great harm to the society.
 
 ```{r}
-dangerous <-c('BURGLARY','OFFENSE','RAPE','ROBBERY','THIEF','WEAPON')
+dangerous <-c('BURGLARY','OFFENSE','RAPE','ROBBERY','THEFT','WEAPON')
 df_select <- df_select %>% mutate(OFNS_DESC = ifelse(OFNS_DESC %in% dangerous, OFNS_DESC, NA)) %>% drop_na(OFNS_DESC)
 df_select <- drop_na(df_select, BORO_NM)
 ```
