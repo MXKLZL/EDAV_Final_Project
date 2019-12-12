@@ -94,9 +94,9 @@ county_choropleth(ChorDF,
                   county_zoom = nyc_county_fips$region)
 ``` 
 
-After we selected the six most related crime to us, we take the population of each county into account and calculate the the crime rate of selected crime in five counties. The higher crime rate start from brooklyn along mahanttan to  bronx whereas queens and staten island have lower crime rate. The suprsing thing is that, in our mind, brooklyn is always considered as a more dangerous county than mahanttan. 
+After selecting the six crime types that most related to us, we take the population of each borough into account and calculate the crime rate of selected crime in five boroughs.  The higher crime rate starts from Brooklyn along Mahanttan to  Bronx, whereas Queens and Staten Island have lower crime rate. The suprsing thing is that, in our mind, brooklyn is always considered as a more dangerous county than mahanttan. 
 
-However,we cannot judge which county is more dangerous for us and which county is more safe from this graph. Since different person may have different rank for the dangerousness of the crime types. 
+However,we cannot judge which county is more dangerous for us and which county is safer from this graph. Since different person may have different ranks for the dangerousness of the crime types. 
 
 As full-time students, we go out more frequently from Monday to Friday rather than weekends. Therefore we want to know the days with the most and least frequent number of crime events for each borough, and the plot is as following: 
 
@@ -105,16 +105,16 @@ library(chron)
 library(ggplot2)
 ggplot(df_select, aes(factor(weekdays(CMPLNT_FR_DT,abbreviate =TRUE), levels=c("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"))))+
   geom_bar(fill="lightblue")+
-  xlab("Weekdays")+
+  xlab("Weekdays and Weekends")+
   ggtitle("The Number of Crime Events in Weekdays by Borough in New York City")+
   facet_wrap("BORO_NM", scale="free")
 ```
 
 
-Based on the above plot, the weekdays pattern is similar for each borough, where in the weekends the occurance of crime events is relatively infrequently compare to weekdays. Moreover, it seems that Staten Island is the best place to live if only safety is considered.
+Based on the above plot, the weekdays pattern is similar for each borough, where in the weekends the occurance of crime events is relatively infrequent compare to weekdays. Moreover, it seems that Staten Island is the best place to live if only safety is considered.
 
 
-We want to figure out if there are special time of the year where more crimes happen. So we build the following graph for recognizing time series patterns. 
+We want to figure out if there is special time in the year where more crimes happen. So we build the following graph for recognizing time series patterns. 
 
 ```{r}
 df2 <- data.frame(df_select[,1:2])
@@ -131,7 +131,7 @@ ggplot(df2, aes(as.Date(CMPLNT_FR_DT), y = Freq)) +
   ylim(0, 900) +
   labs(x = "Time", y = "Total amount", title = "Time series pattern in 2019")
 ```
-As shown in the graph, more crimes happened in the early Janaury and summer. Early Jauaury, especially during the new year celebration time, since more people went out for celebration, the raise of crime amount is reasonable. Besides, summer time is another period for more crimes. It may due to the relation between temperature and people's moods.
+As shown in the graph, more crimes happened in the early Janaury and summer in 2019. Early Jauaury, especially during the new year celebration time, since more people went out for celebration, the raise of crime amount is reasonable. Besides, summer time is another period for more crimes. It may due to the relation between temperature and people's moods.
 
 Since this research is aimed to find the suitable and safe region for university students to live, we want to see the time series pattern in each borough.
 ```{r fig.height = 5, fig.width = 5}
@@ -165,7 +165,7 @@ ggplot(df3, aes(as.Date(CMPLNT_FR_DT), y = Freq)) +
 
 
 ```
-Among 5 boroughs, only MANHATTAN doesn't show a decline trend. For MANHATTAN, Other boroughs all show the decline trend after September.
+Among 5 boroughs, There is a decline trend after September in all Boroughs except Manhattan.
 
 
 ```{r}
@@ -199,7 +199,7 @@ ggplot(cleveland,aes(Freq,fct_reorder2(BORO_NM,
   labs(title = 'Crime rate for each type by Boroughs ',color = "Crime Type")+
   theme_dotplot
 ```
-The above graph showing the exactly crime rate for each type in five counties. The most frequent crime are Offense and thief for all counties. As we discuss above, the cost of theft is the lowest and definiton of offense is broadly defined which shoube be the reason for high frequency of this two crime type. 
+The above graph shows the exactly crime rate for each type in five counties. The most frequent crime are Offense and thief for all counties. As we discuss above, the cost of theft is the lowest and definiton of offense is broadly defined which shoube be the reason for high frequency of this two crime type. 
 
 Therefore, we focus on other four types. It is interesting that Brooklyn have highest crime rate for all four serious cirme types(Rape,Robbery,weapon,burglary) but the total crime rate for brooklyn actually lower than manhattan. It seem like that the crimes happened in brookyln are more likely to be some serious crimes.
 
