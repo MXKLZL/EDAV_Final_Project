@@ -94,11 +94,11 @@ county_choropleth(ChorDF,
                   county_zoom = nyc_county_fips$region)
 ``` 
 
-After selecting the six crime types that most related to us, we take the population of each borough into account and calculate the crime rate of selected crime in five boroughs.  The higher crime rate starts from Brooklyn along Mahanttan to  Bronx, whereas Queens and Staten Island have lower crime rate. The suprsing thing is that, in our mind, brooklyn is always considered as a more dangerous county than mahanttan. 
+After selecting the six crime types that most related to us, we take the population of each borough into account and calculate the crime rate of selected crime in five boroughs. The Boroughs with top three highest crime rate are Mahanttan, Bronx and Brooklyn, whereas Queens and Staten Island have lower crime rate, and this forms a spatial pattern in the graph. We are surprised about the finding, because it breaks our "stereotype" that Brooklyn is the most dangerous borough in New York City. 
 
 However,we cannot judge which county is more dangerous for us and which county is safer from this graph. Since different person may have different ranks for the dangerousness of the crime types. 
 
-As full-time students, we go out more frequently from Monday to Friday rather than weekends. Therefore we want to know the days with the most and least frequent number of crime events for each borough, and the plot is as following: 
+As full-time students, we go out more frequently from Monday to Friday rather than weekends. Therefore we want to find a borough with lowest frequency of crime events in weekdays, and the plot is as following: 
 
 ```{r}
 library(chron)
@@ -131,9 +131,11 @@ ggplot(df2, aes(as.Date(CMPLNT_FR_DT), y = Freq)) +
   ylim(0, 900) +
   labs(x = "Time", y = "Total amount", title = "Time series pattern in 2019")
 ```
-As shown in the graph, more crimes happened in the early Janaury and summer in 2019. Early Jauaury, especially during the new year celebration time, since more people went out for celebration, the raise of crime amount is reasonable. Besides, summer time is another period for more crimes. It may due to the relation between temperature and people's moods.
+
+As shown in the graph, more crimes happened in the early Janaury and summer in 2019. Early Jauaury, especially during the new year celebration time, since more people went out for celebration, the raise of crime amount is reasonable. Besides, summer time is another period for more crimes. It may due to the relation between weather and people's moods.
 
 Since this research is aimed to find the suitable and safe region for university students to live, we want to see the time series pattern in each borough.
+
 ```{r fig.height = 5, fig.width = 5}
 
 df2 <- data.frame(df_select[,1:2])
@@ -165,6 +167,7 @@ ggplot(df3, aes(as.Date(CMPLNT_FR_DT), y = Freq)) +
 
 
 ```
+
 Among 5 boroughs, There is a decline trend after September in all Boroughs except Manhattan.
 
 
