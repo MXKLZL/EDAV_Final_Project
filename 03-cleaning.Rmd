@@ -52,7 +52,7 @@ df <- df %>% mutate(OFNS_DESC = ifelse(OFNS_DESC %in% kidnapping, "KIDNAPPING", 
 df <- df %>% mutate(OFNS_DESC = ifelse(OFNS_DESC %in% picked, OFNS_DESC, NA)) %>% drop_na(OFNS_DESC)
 ```
 
-Not all columns in original dataset are useful for our analysis. So we selected 13 columns we may used for following researchs.
+Not all columns in original dataset are useful for our analysis. So we selected 13 columns we may used for following researchs which include the location, time, suspect information, victim information and the crime infomration.
 ```{r}
 cols <- c('BORO_NM', 'CMPLNT_FR_DT','CMPLNT_FR_TM','OFNS_DESC', 'SUSP_AGE_GROUP', 'PREM_TYP_DESC', 'SUSP_SEX', 'SUSP_RACE', 'VIC_AGE_GROUP', 'VIC_RACE', 'VIC_SEX', 'Latitude', 'Longitude')
 df_select <- df[, cols]
