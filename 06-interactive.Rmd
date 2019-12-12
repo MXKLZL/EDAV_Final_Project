@@ -8,10 +8,8 @@ library(leaflet.extras)
 library(viridis)
 ```
 
+
 As we discussed in the previous chapters, Queens and Manhattan should be the two best boroughs for us. However, the best choice is based on our criteria, and we don't compare the safety level of the specific address in each borough. The following two interactive graphs provide several choices for both the time periods and crime types for people with different preferences and help people identify the most safety address in each borough.
-
-
-
 
 
 ## Select Your Schedule
