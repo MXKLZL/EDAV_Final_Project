@@ -186,32 +186,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="results" class="section level1">
 <h1><span class="header-section-number">Chapter 5</span> Results</h1>
-<p>In section 3, we have dropped some trivial crime types like “CRIMINAL MISCHIEF” and now we only pay attention to the common crime types of events happening in NYC. There are 11 crime types in total and we can see the frequency rank of them in the following graph.
-<img src="EDAVfinalproj_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
-<p>As we can see, THIEF is the most common crime in NYC and we deduce that this phenomenon may result from the low cost of theft. The offense also appears very common, because there are many different types of crime that could be classified as OFFENCE. ARSON, MURDER, and KIDNAPPING are the least common crime types in the dataset.</p>
+<p>In section 3, we have dropped some trivial crime types like “CRIMINAL MISCHIEF”, and now we only pay attention to the common crime types of events happening in NYC. There are 11 crime types in total, and we can see the frequency rank of them in the following graph.</p>
+<p><img src="EDAVfinalproj_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p>As we can see, THIEF is the most common crime in NYC, then we deduce that this phenomenon may result from the low cost of theft. Offense also appears very common, because there are many different types of crime that could be classified as OFFENCE. ARSON, MURDER, and KIDNAPPING are the least common crime types in the dataset.</p>
 <p>For the convenience of the later researches, we drop 5 types of crime from our dataset: ARSON, MURDER, KIDNAPPING, DRUG, and FRAUD.</p>
-<p>MURDER related data has a great amount of missing data for latitude and longitude, also ARSON, MURDER, and KIDNAPPING contain very few useful pieces of data, which is difficult to conduct instructive analysis. We drop FRAUD because this could be avoided effectively. For DRUG, although it is very common, usually it is the indirect reason for other crimes like offense or murder, the crime DRUG itself usually doesn’t cause great harm to society.</p>
+<p>MURDER related data has a great amount of missing data for latitude and longitude, also ARSON, MURDER, and KIDNAPPING contain very few useful pieces of data, which is difficult to conduct instructive analysis. We drop FRAUD because this could be avoided effectively. For DRUG, although it is very common, it is the indirect reason for other crimes like offense or murder, the crime DRUG itself usually doesn’t cause great harm to society explicitly.</p>
 <div id="whcih-crime-types-are-more-common-in-each-borough" class="section level2">
 <h2><span class="header-section-number">5.1</span> Whcih Crime Types Are More Common in Each Borough?</h2>
 <pre><code>## Scale for &#39;fill&#39; is already present. Adding another scale for &#39;fill&#39;,
 ## which will replace the existing scale.</code></pre>
-<p><img src="EDAVfinalproj_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
-<p>After selecting the six crime types that most related to us, we take the population of each borough into account and calculate the crime rate of selected crime in five boroughs. The Boroughs with the top three highest crime rates are Manhattan, Bronx, and Brooklyn, whereas Queens and Staten Island have a lower crime rate, and this forms a spatial pattern in the graph. We are surprised about the finding because it breaks our “stereotype” that Brooklyn is the most dangerous borough in New York City.</p>
-<p>However, we cannot judge which county is more dangerous for us and which county is safer from this graph. Since a different person may have different ranks for the dangerousness of the crime types.</p>
-<p><img src="EDAVfinalproj_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
-<p>The above graph shows the exact crime rate for each type in five boroughs. The most frequent crime types are OFFENSE and THEFT for all boroughs. As we discussed above, the cost of theft is the lowest and the definition of the offense is broadly defined which could be the reason for the high frequency of these two crime types.</p>
-<p>Therefore, we focus on the other four crime types. Interestingly, Brooklyn has the highest crime rate for all four severe crime types(Rape, Robbery, weapon, burglary) but the total crime rate of Brooklyn is actually lower than that of Manhattan. It seems that the crimes that happened in Brooklyn are more likely to be some severe crimes.</p>
+<p><img src="EDAVfinalproj_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p>After selecting the six crime types that most related to us, we take the population of each borough into account and calculate the crime rate of selected crimes in five boroughs. The Boroughs with the top three highest crime rates are Manhattan, Bronx, and Brooklyn, whereas Queens and Staten Island have lower crime rates, and this forms a spatial pattern in the graph. We are surprised about the finding because it breaks our “stereotype” that Brooklyn is the most dangerous borough in New York City.</p>
+<p>However, we cannot judge which borough is more dangerous for us and which borough is safer from this graph. Since a different person may have different ranks for the dangerousness of these crime types.</p>
+<p><img src="EDAVfinalproj_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p>The above graph shows the exact crime rate for each type in five boroughs. The most frequent crime types are OFFENSE and THEFT for all boroughs. As we discussed above, the cost of theft is the lowest and the definition of the offense is broadly defined, which could be the reason for the high frequency of these two crime types.</p>
+<p>Therefore, we focus on the other four crime types. Interestingly, Brooklyn has the highest crime rate for all four severe crime types(rape, robbery, weapon, burglary), but the total crime rate of Brooklyn is actually lower than that of Manhattan. It seems that the crimes happened in Brooklyn are more likely to be severe crimes.</p>
 <p>Bronx has the second highest total crime rate and also the second highest rate for all severe crime types. Therefore neither Bronx nor Brooklyn is a good choice for a student like us to live concerning safety.</p>
 <p>For Staten Island, the frequency of all crime types is significantly lower than those of the other four boroughs. From the safety concern, Staten Island may be a good choice for moving to. However, the commute time should also be taken into account for final decision making.</p>
 </div>
 <div id="which-borough-is-safer-based-on-crime-time" class="section level2">
 <h2><span class="header-section-number">5.2</span> Which Borough is Safer Based on Crime Time?</h2>
-<p>First, We want to figure out if there is a special time in the year where more crimes happen. So we build the following graph for recognizing time series patterns.</p>
-<p><img src="EDAVfinalproj_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
-<p>As shown in the graph, more crimes happened in early January and summer in 2019. Early January, especially during the new year celebration time, since more people went out for celebrations, the raise in crime amount is reasonable. Besides, summertime is another period for more crimes. It may due to the relation between weather and people’s moods.</p>
+<p>We want to figure out if there is a special time in 2019 that more crimes happened. So we build the following graph for recognizing time series patterns.</p>
+<p><img src="EDAVfinalproj_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p>As shown in the graph, more crimes happened in early January and summer in 2019. Early January, especially during the new year celebration time, since more people went out for celebrations, the raise in crime amount is reasonable. Besides, summer time is another period for more crimes. It is may because of the relation between weather and people’s moods.</p>
 <p>Since this research is aimed to find a suitable and safe region for university students to live, we want to see the time series pattern in each borough.</p>
-<p><img src="EDAVfinalproj_files/figure-html/unnamed-chunk-19-1.png" width="480" /></p>
-<p>Among 5 boroughs, There are small decline trends after August in all Boroughs except Manhattan which means the crime rate for all Boroughs except Manhattan may continue to decline after September. Since many lease periods begin around September, Queens may be a better choice to living than Manhattan from the plots above.</p>
+<p><img src="EDAVfinalproj_files/figure-html/unnamed-chunk-15-1.png" width="480" /></p>
+<p>Among 5 boroughs, There are small decline trends after August in all Boroughs except Manhattan, which means the crime rate for all Boroughs except Manhattan probabably will continue to decline after September. Since many lease periods begin around September, Queens may be a better choice to living than Manhattan from the plots above.</p>
 <p>As a student, we rent an apartment because we need to go to school or work. So it is very important to avoid the places that have a higher chance of crime when we are walking to school, or coming back home. Therefore, we have broken down the time periods that the crime happened into four ranges:</p>
 <ol style="list-style-type: decimal">
 <li>7 am - 11 am</li>
@@ -221,19 +221,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ol>
 <p>The period we care most about is the following:</p>
 <ol style="list-style-type: decimal">
-<li>7 am - 11 am (the time when we go to school or work)</li>
-<li>3 pm - 7 pm (the time we go back to home )</li>
-<li>7 pm - 11 pm (the time we go back to home when we have night class)</li>
+<li>7 am - 11 am (the time going to school or work)</li>
+<li>3 pm - 7 pm (the time going back home )</li>
+<li>7 pm - 11 pm (the time going back home when we have night class)</li>
 </ol>
-<p><img src="EDAVfinalproj_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+<p><img src="EDAVfinalproj_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
 <p>From the graph above, there is the same pattern for every borough. The descending order of number of crimes is 3pm -7pm, 11am - 3pm, 7pm - 11pm, and 7am - 11am. Separating the time period doesn’t help us figure out which borough has an apparent advantage to live. However, we can adjust our schedule base on the graph above. For example, if you live in Manhattan, going out before 11 am and back home after 7 pm can help you avoid more crimes.</p>
-<p>As full-time students, the frequency we go outside depends on days: we go out more frequently from Monday to Friday rather than weekends. Therefore we want to find a borough with a lower frequency of crime events in weekdays, and the plot is as follows:</p>
-<p><img src="EDAVfinalproj_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
-<p>Based on the above plot, the weekdays’ pattern is similar for each borough, whereas the weekends the occurrence of crime events is relatively infrequent compared to weekdays. Since we will go outside more during weekdays, the graph above doesn’t help us find out the most suitable borough. However, the graph reminded us that we should try to choose safer periods to go outside on Friday.</p>
+<p>As full-time students, the frequency we go outside depends on days: we go out more frequently from Monday to Friday rather than weekends. Therefore we want to find a borough with a lower frequency of crime events in weekdays, and the plot is as follow:</p>
+<p><img src="EDAVfinalproj_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<p>Based on the above plot, the weekdays’ pattern is similar for each borough, whereas for weekends the occurrence of crime events is relatively infrequent compared to weekdays. Since we will go outside more during weekdays, the graph above doesn’t help us find out the most suitable borough. However, the graph remind us that we should try to choose safer periods to go outside on Friday.</p>
 </div>
 <div id="which-borough-is-safer-for-student-age-groups" class="section level2">
 <h2><span class="header-section-number">5.3</span> Which Borough is Safer for Student Age Groups?</h2>
-<p>Since most of the full-time students are in the age group 18-24, and we want to find how these students including us are related to the victims of crime events, so we extract the 18-24 group of each borough and draw the following barplot:</p>
+<p>Since most of the full-time students are in the age group 18-24, and we want to find how these students including us are related to the victims of crime events, we extract the data of victims in 18-24 age group for each borough and draw the following barplot:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">df_age &lt;-<span class="st"> </span><span class="kw">subset</span>(df_select, <span class="kw">as.character</span>(VIC_AGE_GROUP) <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;&lt;18&quot;</span>, <span class="st">&quot;18-24&quot;</span>, <span class="st">&quot;25-44&quot;</span>, <span class="st">&quot;45-64&quot;</span>,<span class="st">&quot;65+&quot;</span>) )</a>
 <a class="sourceLine" id="cb3-2" data-line-number="2">df_age2&lt;-<span class="kw">subset</span>(df_age, <span class="kw">as.character</span>(VIC_AGE_GROUP)<span class="op">==</span><span class="st">&quot;18-24&quot;</span>)</a>
 <a class="sourceLine" id="cb3-3" data-line-number="3"><span class="co">#df_age2 &lt;- df_age2$VIC_AGE_GROUP</span></a>
@@ -249,7 +249,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb3-13" data-line-number="13"><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Boroughs&quot;</span>)<span class="op">+</span></a>
 <a class="sourceLine" id="cb3-14" data-line-number="14"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="kw">paste</span>(<span class="st">&quot;The Number of Victims per 100000 People&quot;</span>, <span class="st">&quot;in 18-24 Age Group by Boroughs in New York City&quot;</span>, <span class="dt">sep=</span><span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>))<span class="op">+</span></a>
 <a class="sourceLine" id="cb3-15" data-line-number="15"><span class="st">  </span><span class="kw">theme_grey</span>(<span class="dv">16</span>)</a></code></pre></div>
-<p><img src="EDAVfinalproj_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+<p><img src="EDAVfinalproj_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
 <p>For the plot above, we convert the count of crime events to crime rate per 100000 people, and we can see clearly that Manhattan has the largest crime rate for the age group 18-24, while Staten Island and Queens have the smallest crime rate. Combining with the result from crime types part(Manhattan and Queens are two best choices), Queens should be a better choice for full-time student than Manhattan.</p>
 
 </div>
