@@ -41,9 +41,9 @@ x <- missing_data.frame(df)
 summary(x@patterns) 
 ```
 
-Here, we found out that there are 30 different row missing patterns. Some of the patterns only have one or two ocurrences and 20 of them have 10 ocurrences or below.
+Here, we found out that there are 30 different row missing patterns. Some of the patterns only have one or two occurrences and 20 of them have 10 occurrences or below.
 
-We can check how many time each of the row missing pattern appears in the data set by the following and also visualize these row missing patterns with visna function.
+We can check how many times each of the row missing pattern appears in the data set by the following and also visualize these row missing patterns with visna function.
 
 ```{r fig.height = 4, echo=FALSE}
 visna(df, sort='r')
@@ -52,9 +52,9 @@ visna(df, sort='r')
 By using the visna function, we observed the following missing row patterns:
 
 1. The pattern that occurs the most is missing both Latitude and Longitude, which is about 92% of the data.
-2. The information of the suspect are missing such as age, sex, and race tends to be missing along with some other variables.
+2. The information on the suspect is missing such as age, sex, and race tends to be missing along with some other variables.
 
-Since the objective of our project is to analysis the safty issue, when doing the interative part of the project, we will need to use the location information. So we have to drop all the data with Longitude and Latitude missing when we do that. This might affect the distribution of the crime, so we plotted the following diagram to compare the distribution of crime type before and after when location is removed.
+Since the objective of our project is to analyze the safety issue, when doing the interactive part of the project, we will need to use the location information. So we have to drop all the data with Longitude and Latitude missing. This might affect the distribution of the crime, so we plotted the following diagram to compare the distribution of crime type before and after the missing location data is removed.
 
 ```{r fig.height = 4, fig.width = 4, echo=FALSE}
 p1 <- ggplot(df_select, aes(x=OFNS_DESC, y=..count..)) +
@@ -77,4 +77,4 @@ p2 <- ggplot(df_locationNA_dropped, aes(x=OFNS_DESC, y=..count..)) +
 grid.arrange(p1, p2, ncol = 1)
 ```
 
-Base on the above two plots, we see that after we have removed all the data that are missing location, the distribution of the crime type is unchanged. So, the missing of location is somewhat random and we are safe to remove it when doing the interactive part. However, before the interactive part, we will keep the records without longtitude and latitude in order to preserve more information of our dataset.
+Base on the above two plots, we see that after we have removed all the data that are missing location, the distribution of the crime type is unchanged. So, the missing location is somewhat random and we are safe to remove it when doing the interactive part. However, before the interactive part, we will keep the records without longitude and latitude in order to preserve more information of our dataset.
