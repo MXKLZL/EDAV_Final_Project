@@ -32,7 +32,7 @@ MURDER related data has great amount of missing data for latitude and longitude,
 
 
 
-## Whcih Crime types Are More Common in Each Borough?
+## Whcih Crime Types Are More Common in Each Borough?
 
 ```{r}
 dangerous <-c('BURGLARY','OFFENSE','RAPE','ROBBERY','THEFT','WEAPON')
@@ -148,7 +148,7 @@ For the Staten Island, the frepuency of all crime types are signifnatly lower th
 
 
 
-## Whcih Crime types Are More Common in Each Borough?
+## Which Borough is Safer Based on Crime Time?
 
 First, We want to figure out if there is special time in the year where more crimes happen. So we build the following graph for recognizing time series patterns.
 
@@ -246,7 +246,14 @@ df_select <- df_select %>% mutate(timerange = ifelse(timerange %in% picked_time,
 df_select$timerange <- factor(df_select$timerange, levels = c("7am - 11am","11am - 3pm","3pm - 7pm","7pm - 11pm"))
 ```
 
-As a student, we rent an apartment because we need to go to school or work. So it is very important to avoid the places that have a higher chance of crime when we are walking to school, or coming back to home. Therefore, we have broken down the time periods that the crime happened into the ranges that we care most about, which are as following:
+As a student, we rent an apartment because we need to go to school or work. So it is very important to avoid the places that have a higher chance of crime when we are walking to school, or coming back to home. Therefore, we have broken down the time periods that the crime happened into four ranges:
+
+1. 7am - 11am 
+2. 11am - 3pm
+3. 3pm - 7pm 
+4. 7pm - 11pm
+
+The period we care most about are following:
 
 1. 7am - 11am (the time when we go to school or work)
 2. 3pm - 7pm (the time we go back to home )
@@ -259,27 +266,33 @@ ggplot(df_select, aes(x=BORO_NM, ..count.., fill=timerange) )+
   geom_bar(position="dodge")+
   xlab("")+
   ylab("Number of Crimes")+
-  theme(legend.title = element_blank())+theme_grey(16)
-  #scale_fill_manual(values=c("tomato2", "deepskyblue", "slateblue4",'yellow1'))
+  ggtitle("The Distribution of Crime Events in Each Time Periods by Boroughs")+
+  theme(legend.title = element_blank())+
+  theme_grey(16)+
+  theme(legend.title = element_blank())
+  
 
 ```
-From the graph above, there is same pattern for every borough. The desceding order of numebr of crimes is 3pm -7pm, 11am - 3pm, 7pm - 11pm, and 7am - 11am. Seperating the time period doesn't help us figure out which borough has apprant advantage to live. However we can adjust our schdule base on the graph above. For example, if you live in Manhattan, going out before 11am and back to home after 7pm can help you avoid more crimes.   
+From the graph above, there is same pattern for every borough. The desceding order of numebr of crimes is 3pm -7pm, 11am - 3pm, 7pm - 11pm, and 7am - 11am. Seperating the time period doesn't help us figure out which borough has apprant advantage to live. However we can adjust our schedule base on the graph above. For example, if you live in Manhattan, going out before 11am and back to home after 7pm can help you avoid more crimes.   
 
 
-
-As full-time students, we go out more frequently from Monday to Friday rather than weekends. Therefore we want to find a borough with lower frequency of crime events in weekdays, and the plot is as following: 
+As full-time students, the frequency we go outside depends on days: we go out more frequently from Monday to Friday rather than weekends. Therefore we want to find a borough with lower frequency of crime events in weekdays, and the plot is as following: 
 ```{r}
 library(chron)
 library(ggplot2)
 ggplot(df_select, aes(factor(weekdays(CMPLNT_FR_DT,abbreviate =TRUE), levels=c("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"))))+
   geom_bar(fill="lightblue")+
   xlab("Weekdays and Weekends")+
-  ggtitle("The Number of Crime Events in Weekdays by Borough in New York City")+
+  ggtitle("The Number of Crime Events in Weekdays by Boroughs in New York City")+
   facet_wrap("BORO_NM",scale="free")+
   theme_grey(16)
 ```
 
 Based on the above plot, the weekdays pattern is similar for each borough, where in the weekends the occurance of crime events is relatively infrequent compare to weekdays. Since we will go outside more during weekdays, the graph above dones't help us find out the most suitable borough. However, the graph reminder us that we should try to choose safer periods to go outside in Friday. 
+
+
+
+## Which Borough is Safer for Student Age Groups?
 
 
 Since most of full time students are in the age group 18-24, and we want to find how these students including us are related to the victims of crime events,so we extract the 18-24 group of each borough and draw the following barplot:
@@ -298,7 +311,8 @@ names(df_age2)[2] <- "Rate"
 ggplot(df_age2, aes(x=reorder(Borough, -Rate), y=Rate))+
   geom_bar(stat = "identity",fill="lightblue")+
   xlab("Boroughs")+
-  ggtitle("The Number of Victims per 100000 People in 18-24 Age Group by Borough in New York City")
+  ggtitle("The Number of Victims per 100000 People in 18-24 Age Group by Boroughs in New York City")+
+  theme_grey(16)
 ```
-For the plotn above, we convert the count of crime events to crime rate per 100000 people, and we can see clearly that Manhattan has the largest crime rate for age group 18-24, while Staten Island and Queens have the smallest crime rate. Combining with the result from crime types part(Manhattan and Queens are two best choice), Queens should be better choice for full time student than Manhattan.
+For the plot above, we convert the count of crime events to crime rate per 100000 people, and we can see clearly that Manhattan has the largest crime rate for age group 18-24, while Staten Island and Queens have the smallest crime rate. Combining with the result from crime types part(Manhattan and Queens are two best choice), Queens should be better choice for full time student than Manhattan.
 
