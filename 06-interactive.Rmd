@@ -1,6 +1,6 @@
 # Interactive component
 
-```{r eval=TRUE, message=FALSE}
+```{r eval=TRUE, message=FALSE, include=FALSE}
 library(tidyverse)
 library(leaflet)
 library(htmltools)
