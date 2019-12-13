@@ -195,7 +195,7 @@ for(i in 1:1340){
 ggplot(df3, aes(as.Date(CMPLNT_FR_DT), y = Freq)) +
   geom_line(color="orange") + 
   facet_wrap(~BORO_NM, scales="free",ncol = 2)+
-  labs(x = "Time", y = "Crime Rate", title = paste("Time series pattern in 2019"+"in different boroughs",sep='\n'))+
+  labs(x = "Time", y = "Crime Rate", title = paste("Time series pattern in 2019","in different boroughs",sep='\n'))+
   theme_grey(16)
 
 
