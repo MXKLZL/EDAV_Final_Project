@@ -47,7 +47,7 @@ We find out that there are 30 different row missing patterns. Some of the patter
 
 We can check how many times each of the row missing pattern appears in the data set by the following visualization.
 
-```{r fig.height = 4, echo=FALSE}
+```{r fig.height = 4, echo=FALSE, message=FALSE}
 visna(df, sort='r')
 ```
 
@@ -60,7 +60,7 @@ Therefore we observe the following missing row patterns:
 
 Since the objective of our project is to analyze the safety issue, when doing the interactive part of the project, we will need to use the location information. So we have to drop all the data with Longitude and Latitude missing. This might affect the distribution of the crime, so we plot the following diagram to compare the distribution of crime types before and after the missing location data is removed.
 
-```{r fig.height = 6, fig.width = 10, echo=FALSE}
+```{r fig.height = 8, fig.width = 10, echo=FALSE}
 p1 <- ggplot(df_select, aes(x=OFNS_DESC, y=..count..)) +
   geom_bar(fill="lightblue") + 
   xlab("Crime Type") +

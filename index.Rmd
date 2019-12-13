@@ -1,7 +1,7 @@
 --- 
 title: |
   | Recommended Boroughs and Places for Full-Time Student to Live in
-  | <font size="2"> Examination of Selected Crime Rate in New York City </font>
+  | <font size="8"> Examination of Selected Crime Rate in New York City </font>
 author: "Yichi Zhang, Zelin Li, Huayun Xu, Mingfang Chang"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
