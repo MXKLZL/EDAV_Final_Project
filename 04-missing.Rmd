@@ -47,7 +47,7 @@ We find out that there are 30 different row missing patterns. Some of the patter
 
 We can check how many times each of the row missing pattern appears in the data set by the following visualization.
 
-```{r fig.height = 4, echo=FALSE, warning=FALSE}
+```{r fig.height = 9, echo=FALSE, warning=FALSE}
 visna(df, sort='r')
 ```
 

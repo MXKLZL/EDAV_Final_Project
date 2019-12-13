@@ -92,7 +92,7 @@ nyc_county_fips = county.regions %>%
   filter(state.name == "new york" & county.name %in% nyc_county_names) %>%
   select(region)
 county_choropleth(ChorDF,
-                  title = paste("Number of Selected Crime per 100000 Population", "for Five Boroughof NYC", sep="\n"),
+                  title = paste("Number of Selected Crime per 100000 Population for","Five Boroughof NYC", sep="\n"),
                   legend = "Crime Rate",
                   num_colors = 1,
                   county_zoom = nyc_county_fips$region)
@@ -195,7 +195,7 @@ for(i in 1:1340){
 ggplot(df3, aes(as.Date(CMPLNT_FR_DT), y = Freq)) +
   geom_line(color="orange") + 
   facet_wrap(~BORO_NM, scales="free",ncol = 2)+
-  labs(x = "Time", y = "Crime Rate", title = paste("Time series pattern in 2019","in different boroughs",sep='\n'))+
+  labs(x = "Time", y = "Crime Rate", title = "Time series pattern in 2019 in different boroughs")+
   theme_grey(16)
 
 
@@ -251,16 +251,17 @@ The period we care most about is the following:
 2. 3 pm - 7 pm (the time going back home )
 3. 7 pm - 11 pm (the time going back home when we have night class)
 
-```{r fig.height = 7, fig.width = 7,echo=FALSE}
+```{r fig.height = 7, fig.width = 10,echo=FALSE}
 
 ggplot(df_select, aes(x=BORO_NM, ..count.., fill=timerange) )+ 
   geom_bar(position="dodge")+
-  xlab("")+
+  xlab("Boroughs")+
   ylab("Number of Crimes")+
   ggtitle(paste("The Distribution of Crime Events", "in Each Time Periods by Boroughs", sep="\n"))+
   theme(legend.title = element_blank())+
   theme_grey(16)+
-  theme(legend.title = element_blank())
+  theme(legend.title = element_blank())+
+  theme(axis.text.x=element_text(size=10))
   
 
 ```
@@ -279,7 +280,8 @@ ggplot(df_select, aes(factor(weekdays(CMPLNT_FR_DT,abbreviate =TRUE), levels=c("
   ggtitle(paste("The Number of Crime Events in Weekdays", "by Boroughs in New York City", sep="\n"))+
   facet_wrap("BORO_NM",scale="free")+
   theme(axis.text.x=element_text(size=6))+
-  theme_grey(16)
+  theme_grey(16)+
+  ylab("Number of Crimes")
 ```
 
 Based on the above plot, the weekdays' pattern is similar for each borough, whereas for weekends the occurrence of crime events is relatively infrequent compared to weekdays. Since we will go outside more during weekdays, the graph above doesn't help us find out the most suitable borough. However, the graph remind us that we should try to choose safer periods to go outside on Friday. 
@@ -288,7 +290,7 @@ Based on the above plot, the weekdays' pattern is similar for each borough, wher
 
 Since most of the full-time students are in the age group 18-24, and we want to find how these students including us are related to the victims of crime events, we extract the data of victims in 18-24 age group for each borough and draw the following barplot:
 
-```{r}
+```{r echo=FALSE}
 df_age <- subset(df_select, as.character(VIC_AGE_GROUP) %in% c("<18", "18-24", "25-44", "45-64","65+") )
 df_age2<-subset(df_age, as.character(VIC_AGE_GROUP)=="18-24")
 #df_age2 <- df_age2$VIC_AGE_GROUP

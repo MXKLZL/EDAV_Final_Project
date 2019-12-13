@@ -1,6 +1,6 @@
 --- 
-title: Recommended Boroughs and Places for Full-Time Student to Live in <br >
-   <font size="5" color = "grey"> Examination of Selected Crime Rate in New York City </font>
+title: Recommended Boroughs and Places for Full-Time Student to Live in 
+   <br /><font size="5" color = "grey"> Examination of Selected Crime Rate in New York City </font>
 author: "Yichi Zhang, Zelin Li, Huayun Xu, Mingfang Chang"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
