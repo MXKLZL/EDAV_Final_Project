@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 5 Results | EDAVfinalproj.utf8</title>
   <meta name="description" content="Recommended Boroughs and Places for Full-Time Student to Live in<br />
-<font size="8"> Examination of Selected Crime Rate in New York City </font></div>" />
+<font size="5" color = "grey"> Examination of Selected Crime Rate in New York City </font></div>" />
   <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 5 Results | EDAVfinalproj.utf8" />
@@ -181,7 +181,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         <div class="book-header" role="navigation">
           <h1>
             <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><div class="line-block">Recommended Boroughs and Places for Full-Time Student to Live in<br />
-<font size="8"> Examination of Selected Crime Rate in New York City </font></div></a>
+<font size="5" color = "grey"> Examination of Selected Crime Rate in New York City </font></div></a>
           </h1>
         </div>
 
@@ -198,8 +198,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>MURDER related data has a great amount of missing data for latitude and longitude, also ARSON, MURDER, and KIDNAPPING contain very few useful pieces of data, which is difficult to conduct instructive analysis. We drop FRAUD because this could be avoided effectively. For DRUG, although it is very common, it is the indirect reason for other crimes like offense or murder, the crime DRUG itself usually doesn’t cause great harm to society explicitly.</p>
 <div id="whcih-crime-types-are-more-common-in-each-borough" class="section level2">
 <h2><span class="header-section-number">5.1</span> Whcih Crime Types Are More Common in Each Borough?</h2>
-<pre><code>## Scale for &#39;fill&#39; is already present. Adding another scale for &#39;fill&#39;,
-## which will replace the existing scale.</code></pre>
 <p><img src="EDAVfinalproj_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 <p>After selecting the six crime types that most related to us, we take the population of each borough into account and calculate the crime rate of selected crimes in five boroughs. The Boroughs with the top three highest crime rates are Manhattan, Bronx, and Brooklyn, whereas Queens and Staten Island have lower crime rates, and this forms a spatial pattern in the graph. We are surprised about the finding because it breaks our “stereotype” that Brooklyn is the most dangerous borough in New York City.</p>
 <p>However, we cannot judge which borough is more dangerous for us and which borough is safer from this graph. Since a different person may have different ranks for the dangerousness of these crime types.</p>
@@ -239,21 +237,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="which-borough-is-safer-for-student-age-groups" class="section level2">
 <h2><span class="header-section-number">5.3</span> Which Borough is Safer for Student Age Groups?</h2>
 <p>Since most of the full-time students are in the age group 18-24, and we want to find how these students including us are related to the victims of crime events, we extract the data of victims in 18-24 age group for each borough and draw the following barplot:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">df_age &lt;-<span class="st"> </span><span class="kw">subset</span>(df_select, <span class="kw">as.character</span>(VIC_AGE_GROUP) <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;&lt;18&quot;</span>, <span class="st">&quot;18-24&quot;</span>, <span class="st">&quot;25-44&quot;</span>, <span class="st">&quot;45-64&quot;</span>,<span class="st">&quot;65+&quot;</span>) )</a>
-<a class="sourceLine" id="cb3-2" data-line-number="2">df_age2&lt;-<span class="kw">subset</span>(df_age, <span class="kw">as.character</span>(VIC_AGE_GROUP)<span class="op">==</span><span class="st">&quot;18-24&quot;</span>)</a>
-<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="co">#df_age2 &lt;- df_age2$VIC_AGE_GROUP</span></a>
-<a class="sourceLine" id="cb3-4" data-line-number="4">df_age2 &lt;-df_age2<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="st">  </span><span class="kw">group_by</span>(df_age2<span class="op">$</span>BORO_NM) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">count=</span><span class="kw">n</span>())<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="st">  </span><span class="kw">ungroup</span>()</a>
-<a class="sourceLine" id="cb3-8" data-line-number="8"><span class="kw">names</span>(df_age2)[<span class="dv">1</span>] &lt;-<span class="st"> &quot;Borough&quot;</span></a>
-<a class="sourceLine" id="cb3-9" data-line-number="9">df_age2<span class="op">$</span>count &lt;-<span class="st"> </span>df_age2<span class="op">$</span>count<span class="op">/</span>ChorDF<span class="op">$</span>Population<span class="op">*</span><span class="dv">100000</span></a>
-<a class="sourceLine" id="cb3-10" data-line-number="10"><span class="kw">names</span>(df_age2)[<span class="dv">2</span>] &lt;-<span class="st"> &quot;Rate&quot;</span></a>
-<a class="sourceLine" id="cb3-11" data-line-number="11"><span class="kw">ggplot</span>(df_age2, <span class="kw">aes</span>(<span class="dt">x=</span><span class="kw">reorder</span>(Borough, <span class="op">-</span>Rate), <span class="dt">y=</span>Rate))<span class="op">+</span></a>
-<a class="sourceLine" id="cb3-12" data-line-number="12"><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">stat =</span> <span class="st">&quot;identity&quot;</span>,<span class="dt">fill=</span><span class="st">&quot;lightblue&quot;</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb3-13" data-line-number="13"><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Boroughs&quot;</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb3-14" data-line-number="14"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="kw">paste</span>(<span class="st">&quot;The Number of Victims per 100000 People&quot;</span>, <span class="st">&quot;in 18-24 Age Group by Boroughs in New York City&quot;</span>, <span class="dt">sep=</span><span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>))<span class="op">+</span></a>
-<a class="sourceLine" id="cb3-15" data-line-number="15"><span class="st">  </span><span class="kw">theme_grey</span>(<span class="dv">16</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">df_age &lt;-<span class="st"> </span><span class="kw">subset</span>(df_select, <span class="kw">as.character</span>(VIC_AGE_GROUP) <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;&lt;18&quot;</span>, <span class="st">&quot;18-24&quot;</span>, <span class="st">&quot;25-44&quot;</span>, <span class="st">&quot;45-64&quot;</span>,<span class="st">&quot;65+&quot;</span>) )</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">df_age2&lt;-<span class="kw">subset</span>(df_age, <span class="kw">as.character</span>(VIC_AGE_GROUP)<span class="op">==</span><span class="st">&quot;18-24&quot;</span>)</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="co">#df_age2 &lt;- df_age2$VIC_AGE_GROUP</span></a>
+<a class="sourceLine" id="cb2-4" data-line-number="4">df_age2 &lt;-df_age2<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="st">  </span><span class="kw">group_by</span>(df_age2<span class="op">$</span>BORO_NM) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb2-6" data-line-number="6"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">count=</span><span class="kw">n</span>())<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb2-7" data-line-number="7"><span class="st">  </span><span class="kw">ungroup</span>()</a>
+<a class="sourceLine" id="cb2-8" data-line-number="8"><span class="kw">names</span>(df_age2)[<span class="dv">1</span>] &lt;-<span class="st"> &quot;Borough&quot;</span></a>
+<a class="sourceLine" id="cb2-9" data-line-number="9">df_age2<span class="op">$</span>count &lt;-<span class="st"> </span>df_age2<span class="op">$</span>count<span class="op">/</span>ChorDF<span class="op">$</span>Population<span class="op">*</span><span class="dv">100000</span></a>
+<a class="sourceLine" id="cb2-10" data-line-number="10"><span class="kw">names</span>(df_age2)[<span class="dv">2</span>] &lt;-<span class="st"> &quot;Rate&quot;</span></a>
+<a class="sourceLine" id="cb2-11" data-line-number="11"><span class="kw">ggplot</span>(df_age2, <span class="kw">aes</span>(<span class="dt">x=</span><span class="kw">reorder</span>(Borough, <span class="op">-</span>Rate), <span class="dt">y=</span>Rate))<span class="op">+</span></a>
+<a class="sourceLine" id="cb2-12" data-line-number="12"><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">stat =</span> <span class="st">&quot;identity&quot;</span>,<span class="dt">fill=</span><span class="st">&quot;lightblue&quot;</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb2-13" data-line-number="13"><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Boroughs&quot;</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb2-14" data-line-number="14"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="kw">paste</span>(<span class="st">&quot;The Number of Victims per 100000 People&quot;</span>, <span class="st">&quot;in 18-24 Age Group by Boroughs in New York City&quot;</span>, <span class="dt">sep=</span><span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>))<span class="op">+</span></a>
+<a class="sourceLine" id="cb2-15" data-line-number="15"><span class="st">  </span><span class="kw">theme_grey</span>(<span class="dv">16</span>)</a></code></pre></div>
 <p><img src="EDAVfinalproj_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
 <p>For the plot above, we convert the count of crime events to crime rate per 100000 people, and we can see clearly that Manhattan has the largest crime rate for the age group 18-24, while Staten Island and Queens have the smallest crime rate. Combining with the result from crime types part(Manhattan and Queens are two best choices), Queens should be a better choice for full-time student than Manhattan.</p>
 
