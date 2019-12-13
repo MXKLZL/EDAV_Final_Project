@@ -47,7 +47,7 @@ We find out that there are 30 different row missing patterns. Some of the patter
 
 We can check how many times each of the row missing pattern appears in the data set by the following visualization.
 
-```{r fig.height = 4, echo=FALSE, warning==FALSE}
+```{r fig.height = 4, echo=FALSE, warning=FALSE}
 visna(df, sort='r')
 ```
 
@@ -66,7 +66,8 @@ p1 <- ggplot(df_select, aes(x=OFNS_DESC, y=..count..)) +
   xlab("Crime Type") +
   ylab("Number of Crimes") +
   labs(title="Count by Crime Type") + 
-  theme_grey(16)
+  theme_grey(16)+
+  theme(axis.text.x=element_text(size=9))
 
 df_locationNA_dropped <- df_select %>% drop_na(Latitude)
 p2 <- ggplot(df_locationNA_dropped, aes(x=OFNS_DESC, y=..count..)) +
@@ -74,7 +75,8 @@ p2 <- ggplot(df_locationNA_dropped, aes(x=OFNS_DESC, y=..count..)) +
   xlab("Crime Type") +
   ylab("Number of Crimes") +
   labs(title="Count by Crime Type with Location NA Dropped") + 
-  theme_grey(16)
+  theme_grey(16)+
+  theme(axis.text.x=element_text(size=9))
 
 grid.arrange(p1, p2, ncol = 1)
 ```
