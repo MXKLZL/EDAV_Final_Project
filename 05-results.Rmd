@@ -168,7 +168,7 @@ As shown in the graph, more crimes happened in early January and summer in 2019.
 
 Since this research is aimed to find a suitable and safe region for university students to live, we want to see the time series pattern in each borough.
 
-```{r fig.height = 5, fig.width = 5, echo=FALSE}
+```{r fig.height = 5, fig.width = 7, echo=FALSE}
 
 df2 <- data.frame(df_select[,1:2])
 df2['count'] <- 1
@@ -195,7 +195,7 @@ for(i in 1:1340){
 ggplot(df3, aes(as.Date(CMPLNT_FR_DT), y = Freq)) +
   geom_line(color="orange") + 
   facet_wrap(~BORO_NM, scales="free",ncol = 2)+
-  labs(x = "Time", y = "Crime Rate", title = "Time series pattern in 2019 in different boroughs")+
+  labs(x = "Time", y = "Crime Rate", title = paste("Time series pattern in 2019"+"in different boroughs",sep='\n'))+
   theme_grey(16)
 
 
@@ -278,6 +278,7 @@ ggplot(df_select, aes(factor(weekdays(CMPLNT_FR_DT,abbreviate =TRUE), levels=c("
   xlab("Weekdays and Weekends")+
   ggtitle(paste("The Number of Crime Events in Weekdays", "by Boroughs in New York City", sep="\n"))+
   facet_wrap("BORO_NM",scale="free")+
+  theme(axis.text.x=element_text(size=6))+
   theme_grey(16)
 ```
 
