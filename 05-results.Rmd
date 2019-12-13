@@ -168,7 +168,7 @@ As shown in the graph, more crimes happened in early January and summer in 2019.
 
 Since this research is aimed to find a suitable and safe region for university students to live, we want to see the time series pattern in each borough.
 
-```{r fig.height = 5, fig.width = 7, echo=FALSE}
+```{r fig.height = 8, fig.width = 10, echo=FALSE}
 
 df2 <- data.frame(df_select[,1:2])
 df2['count'] <- 1
@@ -251,7 +251,7 @@ The period we care most about is the following:
 2. 3 pm - 7 pm (the time going back home )
 3. 7 pm - 11 pm (the time going back home when we have night class)
 
-```{r echo=FALSE}
+```{r fig.height = 7, fig.width = 7,echo=FALSE}
 
 ggplot(df_select, aes(x=BORO_NM, ..count.., fill=timerange) )+ 
   geom_bar(position="dodge")+
@@ -270,7 +270,7 @@ From the graph above, there is the same pattern for every borough. The descendin
 
 As full-time students, the frequency we go outside depends on days: we go out more frequently from Monday to Friday rather than weekends. Therefore we want to find a borough with a lower frequency of crime events in weekdays, and the plot is as follow: 
 
-```{r echo=FALSE}
+```{r fig.height = 8, fig.width = 10,echo=FALSE}
 library(chron)
 library(ggplot2)
 ggplot(df_select, aes(factor(weekdays(CMPLNT_FR_DT,abbreviate =TRUE), levels=c("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"))))+
