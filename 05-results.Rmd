@@ -95,7 +95,7 @@ county_choropleth(ChorDF,
                   title = paste("Number of Selected Crime per 100000 Population", "for Five Boroughof NYC", sep="\n"),
                   legend = "Crime Rate",
                   num_colors = 1,
-                  county_zoom = nyc_county_fips$region)+scale_fill_viridis_c()
+                  county_zoom = nyc_county_fips$region)
 ``` 
 
 After selecting the six crime types that most related to us, we take the population of each borough into account and calculate the crime rate of selected crimes in five boroughs. The Boroughs with the top three highest crime rates are Manhattan, Bronx, and Brooklyn, whereas Queens and Staten Island have lower crime rates, and this forms a spatial pattern in the graph. We are surprised about the finding because it breaks our "stereotype" that Brooklyn is the most dangerous borough in New York City. 
@@ -115,9 +115,9 @@ cleveland <- cleveland %>%
   ungroup()
 
 
-theme_dotplot <- theme_bw(14) +
-    theme(axis.text.y = element_text(size = rel(.55)),
-          axis.text.x = element_text(size = rel(.70)),
+theme_dotplot <- theme_bw(16) +
+    theme(axis.text.y = element_text(size = rel(1)),
+          axis.text.x = element_text(size = rel(1)),
         axis.ticks.y = element_blank(),
         axis.title.x = element_text(size = rel(.70)),
         axis.title.y = element_text(size = rel(.70)),
@@ -125,14 +125,14 @@ theme_dotplot <- theme_bw(14) +
         panel.grid.major.y = element_line(size = 0.5),
         panel.grid.minor.x = element_blank())
 
+
 ggplot(cleveland,aes(Freq,fct_reorder2(BORO_NM,
    OFNS_DESC == 'THIEF',Freq, .desc = FALSE),color = OFNS_DESC))+
   geom_point()+
   ylab('Boroughs')+
   xlab('Crime Rate')+
   labs(title = 'Crime rate for each type by Boroughs ',color = "Crime Type")+
-  theme_dotplot+
-  theme_grey(16)
+  theme_dotplot
 ```
 
 The above graph shows the exact crime rate for each type in five boroughs. The most frequent crime types are OFFENSE and THEFT for all boroughs. As we discussed above, the cost of theft is the lowest and the definition of the offense is broadly defined, which could be the reason for the high frequency of these two crime types. 
