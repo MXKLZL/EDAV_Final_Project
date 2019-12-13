@@ -4,11 +4,12 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 2 Data sources | NYC Crime Analysis</title>
-  <meta name="description" content="Chapter 2 Data sources | NYC Crime Analysis" />
+  <title>Chapter 2 Data sources | EDAVfinalproj.utf8</title>
+  <meta name="description" content="Recommended Boroughs and Places for Full-Time Student to Live in<br />
+<font size="8"> Examination of Selected Crime Rate in New York City </font></div>" />
   <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 2 Data sources | NYC Crime Analysis" />
+  <meta property="og:title" content="Chapter 2 Data sources | EDAVfinalproj.utf8" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +17,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 2 Data sources | NYC Crime Analysis" />
+  <meta name="twitter:title" content="Chapter 2 Data sources | EDAVfinalproj.utf8" />
   
   
   
@@ -159,11 +160,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.2" data-path="results.html"><a href="results.html#which-borough-is-safer-based-on-crime-time"><i class="fa fa-check"></i><b>5.2</b> Which Borough is Safer Based on Crime Time?</a></li>
 <li class="chapter" data-level="5.3" data-path="results.html"><a href="results.html#which-borough-is-safer-for-student-age-groups"><i class="fa fa-check"></i><b>5.3</b> Which Borough is Safer for Student Age Groups?</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="interactive-component.html"><a href="interactive-component.html"><i class="fa fa-check"></i><b>6</b> Interactive component</a></li>
-<li class="chapter" data-level="7" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>7</b> Conclusion</a></li>
-<li class="chapter" data-level="8" data-path="leaflet.html"><a href="leaflet.html"><i class="fa fa-check"></i><b>8</b> Interactive Geographic Data</a><ul>
-<li class="chapter" data-level="8.1" data-path="leaflet.html"><a href="leaflet.html#overview"><i class="fa fa-check"></i><b>8.1</b> Overview</a></li>
-<li class="chapter" data-level="8.2" data-path="leaflet.html"><a href="leaflet.html#brief-description-about-dataset"><i class="fa fa-check"></i><b>8.2</b> Brief Description about Dataset</a></li>
+<li class="chapter" data-level="6" data-path="interactive-component.html"><a href="interactive-component.html"><i class="fa fa-check"></i><b>6</b> Interactive component</a><ul>
+<li class="chapter" data-level="6.1" data-path="interactive-component.html"><a href="interactive-component.html#select-your-schedule"><i class="fa fa-check"></i><b>6.1</b> Select Your Schedule</a></li>
+<li class="chapter" data-level="6.2" data-path="interactive-component.html"><a href="interactive-component.html#select-crimes-you-concern-most"><i class="fa fa-check"></i><b>6.2</b> Select Crimes You Concern Most</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>7</b> Conclusion</a><ul>
+<li class="chapter" data-level="7.1" data-path="conclusion.html"><a href="conclusion.html#boroughs-we-recommend"><i class="fa fa-check"></i><b>7.1</b> Boroughs We Recommend</a></li>
+<li class="chapter" data-level="7.2" data-path="conclusion.html"><a href="conclusion.html#specific-places-for-selected-borough"><i class="fa fa-check"></i><b>7.2</b> Specific Places for Selected Borough</a></li>
+<li class="chapter" data-level="7.3" data-path="conclusion.html"><a href="conclusion.html#limitation"><i class="fa fa-check"></i><b>7.3</b> Limitation</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -176,7 +180,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">NYC Crime Analysis</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><div class="line-block">Recommended Boroughs and Places for Full-Time Student to Live in<br />
+<font size="8"> Examination of Selected Crime Rate in New York City </font></div></a>
           </h1>
         </div>
 
@@ -188,8 +193,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">Chapter 2</span> Data sources</h1>
 <div id="nypd-complaint-data" class="section level2">
 <h2><span class="header-section-number">2.1</span> NYPD Complaint Data</h2>
-<p>We got the data of crime events to be researched from NYC Open Data, and here is the <a href="https://data.cityofnewyork.us/Public-Safety/NYPD-Complaint-Data-Current-Year-To-Date-/5uac-w243/data">link</a>.</p>
-<p>This dataset includes all valid felony, misdemeanor, and violation crimes reported to the New York City Police Department (NYPD) for all complete quarters so far this year (2019). Because we found the data at the end of October, the data is up to September 2019. Then we downloaded the dataset as a CSV file, and we also downloaded the explanation of each column name as a pdf file found from “About” on the right side of the website.</p>
+<p>We obtain the data of crime events to be researched from NYC Open Data, and here is the <a href="https://data.cityofnewyork.us/Public-Safety/NYPD-Complaint-Data-Current-Year-To-Date-/5uac-w243/data">link</a>.</p>
+<p>This dataset includes all valid felony, misdemeanor, and violation crimes reported to the New York City Police Department (NYPD) for all complete quarters so far this year (2019). Because we find the data at the end of October, the data is up to September 2019. Then we have download the dataset as a CSV file, and we also have download the explanation of each column name as a pdf file found from “About” on the right side of the website.</p>
 <p>There are 347074 observations with 35 variables in this dataset. These variables include information about the victim, suspect, location, date of crime, type of crime, description of crime and more. All crimes are divided into 62 different types. The problem is that this dataset is quite sparse, and some spatial and suspect information is missing. There is also some wrong information, for example, some crimes are reported in the year of 1018.</p>
 <p>We are interested in some of the variables and will pick them out in the cleaning section:</p>
 <p><strong>BORO_NM</strong>: The name of the borough in which the incident occurred</p>
@@ -210,7 +215,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">2.2</span> United States Census Bureau Quick Facts</h2>
 <p>Another dataset we will use is the report of the population in each of 5 boroughs in New York City at the end of 2018 from the U.S. Census, which is downloaded from this <a href="https://www.census.gov/quickfacts/fact/table/newyorkcountymanhattanboroughnewyork,bronxcountybronxboroughnewyork,queenscountyqueensboroughnewyork,kingscountybrooklynboroughnewyork,richmondcountystatenislandboroughnewyork,newyorkcitynewyork/HSG010218">link</a>.</p>
 <p>Because currently we are in 2019 and there is no data of the population at the end of 2019, we will use this dataset to calculate the crime rate for each borough in the later research.</p>
-<p>Dataset reading is shown in a later chapter.</p>
 
 </div>
 </div>

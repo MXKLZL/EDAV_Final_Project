@@ -4,11 +4,12 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 4 Missing values | NYC Crime Analysis</title>
-  <meta name="description" content="Chapter 4 Missing values | NYC Crime Analysis" />
+  <title>Chapter 4 Missing values | EDAVfinalproj.utf8</title>
+  <meta name="description" content="Recommended Boroughs and Places for Full-Time Student to Live in<br />
+<font size="8"> Examination of Selected Crime Rate in New York City </font></div>" />
   <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 4 Missing values | NYC Crime Analysis" />
+  <meta property="og:title" content="Chapter 4 Missing values | EDAVfinalproj.utf8" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +17,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 4 Missing values | NYC Crime Analysis" />
+  <meta name="twitter:title" content="Chapter 4 Missing values | EDAVfinalproj.utf8" />
   
   
   
@@ -159,11 +160,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.2" data-path="results.html"><a href="results.html#which-borough-is-safer-based-on-crime-time"><i class="fa fa-check"></i><b>5.2</b> Which Borough is Safer Based on Crime Time?</a></li>
 <li class="chapter" data-level="5.3" data-path="results.html"><a href="results.html#which-borough-is-safer-for-student-age-groups"><i class="fa fa-check"></i><b>5.3</b> Which Borough is Safer for Student Age Groups?</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="interactive-component.html"><a href="interactive-component.html"><i class="fa fa-check"></i><b>6</b> Interactive component</a></li>
-<li class="chapter" data-level="7" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>7</b> Conclusion</a></li>
-<li class="chapter" data-level="8" data-path="leaflet.html"><a href="leaflet.html"><i class="fa fa-check"></i><b>8</b> Interactive Geographic Data</a><ul>
-<li class="chapter" data-level="8.1" data-path="leaflet.html"><a href="leaflet.html#overview"><i class="fa fa-check"></i><b>8.1</b> Overview</a></li>
-<li class="chapter" data-level="8.2" data-path="leaflet.html"><a href="leaflet.html#brief-description-about-dataset"><i class="fa fa-check"></i><b>8.2</b> Brief Description about Dataset</a></li>
+<li class="chapter" data-level="6" data-path="interactive-component.html"><a href="interactive-component.html"><i class="fa fa-check"></i><b>6</b> Interactive component</a><ul>
+<li class="chapter" data-level="6.1" data-path="interactive-component.html"><a href="interactive-component.html#select-your-schedule"><i class="fa fa-check"></i><b>6.1</b> Select Your Schedule</a></li>
+<li class="chapter" data-level="6.2" data-path="interactive-component.html"><a href="interactive-component.html#select-crimes-you-concern-most"><i class="fa fa-check"></i><b>6.2</b> Select Crimes You Concern Most</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>7</b> Conclusion</a><ul>
+<li class="chapter" data-level="7.1" data-path="conclusion.html"><a href="conclusion.html#boroughs-we-recommend"><i class="fa fa-check"></i><b>7.1</b> Boroughs We Recommend</a></li>
+<li class="chapter" data-level="7.2" data-path="conclusion.html"><a href="conclusion.html#specific-places-for-selected-borough"><i class="fa fa-check"></i><b>7.2</b> Specific Places for Selected Borough</a></li>
+<li class="chapter" data-level="7.3" data-path="conclusion.html"><a href="conclusion.html#limitation"><i class="fa fa-check"></i><b>7.3</b> Limitation</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -176,7 +180,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">NYC Crime Analysis</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><div class="line-block">Recommended Boroughs and Places for Full-Time Student to Live in<br />
+<font size="8"> Examination of Selected Crime Rate in New York City </font></div></a>
           </h1>
         </div>
 
@@ -186,11 +191,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="missing-values" class="section level1">
 <h1><span class="header-section-number">Chapter 4</span> Missing values</h1>
-<p>We have randomly sampled 1000 data to analyze the missing value patterns of the dataset after cleaning the data. We also changed the “UNKNOWN” entry to NA for convenience.</p>
+<p>We randomly sample 1000 data to analyze the missing value patterns of the dataset after cleaning the data. We also change the “UNKNOWN” entry to NA for convenience.</p>
 <p><img src="EDAVfinalproj_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <p>From the plot above, we see that majority of missing data is from the columns: “SUSP_AGE_GEOUP”, “SUSP_SEX”, “SUSP_RACE”, “VIC_AGE_GROUP”, “VIC_RACE”, “Latitude” and “Longitude”. We also see that “Latitude” and “Longitude” are always missing together.</p>
 <p>We can further investigate the missing row patterns by missing_data.frame function.</p>
-<p>We have found out that there are 30 different row missing patterns. Some of the patterns only have one or two occurrences and 20 of them have 10 occurrences or below.</p>
+<p>We find out that there are 30 different row missing patterns. Some of the patterns only have one or two occurrences and 20 of them have 10 occurrences or below.</p>
 <p>We can check how many times each of the row missing pattern appears in the data set by the following visualization.</p>
 <pre><code>## Warning in melt(as.data.frame(xs), ncol(xs)): The melt generic in
 ## data.table has been passed a data.frame and will attempt to redirect to the
@@ -201,13 +206,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## this warning will become an error.</code></pre>
 <p><img src="EDAVfinalproj_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <p>(Note that in the above plot, the columns represent the seven variables and the rows the missing patterns. The cells for the variables with missing values in the pattern are drawn in blue.)</p>
-<p>Therefore we observed the following missing row patterns:</p>
+<p>Therefore we observe the following missing row patterns:</p>
 <ol style="list-style-type: decimal">
 <li>The pattern that occurs the most frequently is missing both Latitude and Longitude, which is about 92% of the data.</li>
 <li>The information on the suspect is missing such as age, sex, and race tends to be missing along with some other variables.</li>
 </ol>
-<p>Since the objective of our project is to analyze the safety issue, when doing the interactive part of the project, we will need to use the location information. So we have to drop all the data with Longitude and Latitude missing. This might affect the distribution of the crime, so we plotted the following diagram to compare the distribution of crime types before and after the missing location data is removed.</p>
-<p><img src="EDAVfinalproj_files/figure-html/unnamed-chunk-8-1.png" width="768" /></p>
+<p>Since the objective of our project is to analyze the safety issue, when doing the interactive part of the project, we will need to use the location information. So we have to drop all the data with Longitude and Latitude missing. This might affect the distribution of the crime, so we plot the following diagram to compare the distribution of crime types before and after the missing location data is removed.</p>
+<p><img src="EDAVfinalproj_files/figure-html/unnamed-chunk-8-1.png" width="960" /></p>
 <p>Base on the above two plots, we see that after the data with missing location is removed, the distribution of crime types is unchanged. So, the missing location is somewhat random and we are safe to remove it when doing the interactive part. However, before the interactive part, we will keep the records without longitude and latitude in order to preserve more information of our dataset.</p>
 
 </div>
