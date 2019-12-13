@@ -60,7 +60,7 @@ Therefore we observe the following missing row patterns:
 
 Since the objective of our project is to analyze the safety issue, when doing the interactive part of the project, we will need to use the location information. So we have to drop all the data with Longitude and Latitude missing. This might affect the distribution of the crime, so we plot the following diagram to compare the distribution of crime types before and after the missing location data is removed.
 
-```{r fig.height = 6, fig.width = 6, echo=FALSE}
+```{r fig.height = 6, fig.width = 10, echo=FALSE}
 p1 <- ggplot(df_select, aes(x=OFNS_DESC, y=..count..)) +
   geom_bar(fill="lightblue") + 
   xlab("Crime Type") +
